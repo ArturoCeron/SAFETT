@@ -61,6 +61,14 @@
                     <p class="vacantDate">05 Nov Tijuana</p>
                 </div>
                 {{/datos}}
+
+                {{#datosPerfil}}
+                    <input type="text" class="form-control" disable value="Organizacion: {{companyName}}" name="companyName">
+                    <input type="text" class="form-control" disable value="Giro: {{companyBusiness}}" name="companyBusiness">
+                    <input type="text" class="form-control" disable value="Actividad Principal: {{mainRole}}" name="mainRole">
+                    <input type="text" class="form-control" disable value="Numero Empleados: {{quantityEmployees}}" name="quantityEmployees">
+                    <input type="text" class="form-control" disable value="Pagina web: {{webPage}}" name="webPage">
+                {{/datosPerfil}}
             </div>
         </div>
     </div>

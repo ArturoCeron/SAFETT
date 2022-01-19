@@ -43,24 +43,26 @@
                                 <form action="vacante" method="get">
                                     <button class="buttonSolid btn btn-outline-success btn-wide buttonSmall">Ver más</button>
                                 </form>
-                                <button class="buttonSolid buttonWarning btn btn-outline-success btn-wide buttonSmall" type="button" onclick="" style="margin-top: 16px;">Eliminar</button>
+                                <form action="vacants/delete/{{_id}}?_method=delete" method="POST">
+                                    <button class="buttonSolid buttonWarning btn btn-outline-success btn-wide buttonSmall" style="margin-top: 16px;">Eliminar</button>
+                                </form>
                             </div>
                         </div>
                     </div>
                 {{/datos}}
+
+                <!-- {{#datos}}    
+                    <input type="text" class="form-control" disable value="Nombre de la vacante: {{name}}" name="name">
+                    <input type="text" class="form-control" disable value="Nombre de empresa: {{companyName}}" name="companyName">
+                    <input type="text" class="form-control" disable value="Detalles: {{details}}" name="details">
+                    <input type="text" class="form-control" disable value="Requerimientos: {{requirements}}" name="requirements">
+                    <input type="text" class="form-control" disable value="Area: {{area}}" name="area">
+                    <input type="text" class="form-control" disable value="Tipo Contrato: {{typeContract}}" name="typeContract">
+                    <input type="text" class="form-control" disable value="Horario: {{schedule}}" name="schedule">
+                    <input type="text" class="form-control" disable value="Cantidad vacantes: {{quantityVacants}}" name="quantityVacants">
+                    <input type="text" class="form-control" disable value="Salario: {{salary}}" name="salary"><br>
+                {{/datos}}-->
             </div>
         </div>
     </div>
 </div>
-
-{{#datos}}    
-    <input type="text" class="form-control" disable value="Nombre de la vacante: {{name}}" name="name">
-    <input type="text" class="form-control" disable value="Nombre de empresa: {{companyName}}" name="companyName">
-    <input type="text" class="form-control" disable value="Detalles: {{details}}" name="details">
-    <input type="text" class="form-control" disable value="Requerimientos: {{requirements}}" name="requirements">
-    <input type="text" class="form-control" disable value="Area: {{area}}" name="area">
-    <input type="text" class="form-control" disable value="Tipo Contrato: {{typeContract}}" name="typeContract">
-    <input type="text" class="form-control" disable value="Horario: {{schedule}}" name="schedule">
-    <input type="text" class="form-control" disable value="Cantidad vacantes: {{quantityVacants}}" name="quantityVacants">
-    <input type="text" class="form-control" disable value="Salario: {{salary}}" name="salary"><br>
-{{/datos}}

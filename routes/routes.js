@@ -61,6 +61,7 @@ router.get('/perfilAspirante', (req, res) => {
 //Perfil de Empresa
 const companyUser = require("../models/companyUser");
 const companyVacant = require('../models/vacants');
+const Company = require('../models/empresas');
 router.get('/perfilEmpresa', (req, res) => {
     let idUser = req.session;
     companyUser.find(idUser, (err, userData)=>{
@@ -77,8 +78,16 @@ router.get('/perfilEmpresa', (req, res) => {
             if (!vacantData) return res.status(404).send({
                 message: 'El usuario no existe'
             });
-            console.log(vacantData[0]);
-            res.render('companyProfile', {datos: vacantData});
+            Company.find({"companyName": userData[0].companyName}, (err, profileData) => {
+                if (err) return res.status(500).send({
+                    message: `Error al realizar la petición ${err}`
+                });
+                if (!profileData) return res.status(404).send({
+                    message: 'El usuario no existe'
+                });
+                console.log(vacantData[0]);
+                res.render('companyProfile', {datos: vacantData, datosPerfil: profileData});
+            }).lean();
         }).lean();
     }).lean();
 });
@@ -122,6 +131,10 @@ router.get('/vacante', (req, res) => {
 router.get('/nuevaVacante', (req, res) => {
     res.render('newVacant');
 });
+
+//DELETE VACANT
+const deleteVacant = require('../controllers/deleteVacant');
+router.delete('/vacants/delete/:vacantId', deleteVacant);
 
 //Registrar Vacante
 const storeVacantController = require('../controllers/storeVacant');
