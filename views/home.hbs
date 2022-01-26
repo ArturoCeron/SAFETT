@@ -1,22 +1,26 @@
-<div id="main-banner" class="container-fluid">
-    <div class="container">
-        <div class="col">
-            <div id="homeSearchBar" class="row justify-content-center">
-                <div class="col-4">
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text"><i id="searchIcon" class="material-icons">search</i></span>
+<form action="/home" method="POST">
+    <div id="main-banner" class="container-fluid">
+        <div class="container">
+            <div class="col">
+                <div id="homeSearchBar" class="row justify-content-center">
+                    <div class="col-4">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i id="searchIcon"
+                                        class="material-icons">search</i></span>
+                            </div>
+                            <input type="text" id="buscarEmpresa" class="form-control" placeholder="Puesto o empresa"
+                                name="search">
                         </div>
-                        <input type="text" id="buscarEmpresa" class="form-control" placeholder="Puesto o empresa">
                     </div>
-                </div>
-                <div class="col-auto">
-                    <button class="buttonBorder btn btn-outline-success" type="submit">Buscar</button>
+                    <div class="col-auto">
+                        <button class="buttonBorder btn btn-outline-success">Buscar</button>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
+</form>
 
 <div id="containerCompany" class="container">
     <div class="d-flex justify-content-around">
@@ -46,12 +50,42 @@
         <div class="col-7">
             <p class="homeTitle">¡Bienvenido a la Feria del Empleo Virtual!</p>
             <p class="homeParagraph">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam eu lacus sed tellus fringilla tincidunt. Aenean dui mi, consectetur non turpis vitae, maximus tempor lectus. Praesent luctus egestas feugiat. Sed ac fermentum elit. Nunc sit amet pellentesque nunc. Etiam velit odio, porttitor tempor cursus sed, luctus egestas neque. Pellentesque pulvinar mi sit amet diam iaculis, eu lobortis felis fringilla. Morbi maximus augue neque, eget dapibus nunc mollis at.
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam eu lacus sed tellus fringilla tincidunt. Aenean dui mi, consectetur non turpis vitae, maximus tempor lectus. Praesent luctus egestas feugiat. Sed ac fermentum elit. Nunc sit amet pellentesque nunc. Etiam velit odio, porttitor tempor cursus sed, luctus egestas neque. Pellentesque pulvinar mi sit amet diam iaculis, eu lobortis felis fringilla. Morbi maximus augue neque, eget dapibus nunc mollis at.
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam eu lacus sed tellus fringilla tincidunt.
+                Aenean dui mi, consectetur non turpis vitae, maximus tempor lectus. Praesent luctus egestas feugiat. Sed
+                ac fermentum elit. Nunc sit amet pellentesque nunc. Etiam velit odio, porttitor tempor cursus sed,
+                luctus egestas neque. Pellentesque pulvinar mi sit amet diam iaculis, eu lobortis felis fringilla. Morbi
+                maximus augue neque, eget dapibus nunc mollis at.
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam eu lacus sed tellus fringilla tincidunt.
+                Aenean dui mi, consectetur non turpis vitae, maximus tempor lectus. Praesent luctus egestas feugiat. Sed
+                ac fermentum elit. Nunc sit amet pellentesque nunc. Etiam velit odio, porttitor tempor cursus sed,
+                luctus egestas neque. Pellentesque pulvinar mi sit amet diam iaculis, eu lobortis felis fringilla. Morbi
+                maximus augue neque, eget dapibus nunc mollis at.
             </p>
         </div>
         <div class="col-5">
             <img class="homeImage" src="img/person1.png">
         </div>
+        <h1> Empresas </h1>
+        {{#companies}}
+        <input type="text" class="form-control" disable value="Organizacion: {{companyName}}" name="companyName">
+        <input type="text" class="form-control" disable value="Giro: {{companyBusiness}}" name="companyBusiness">
+        <input type="text" class="form-control" disable value="Actividad Principal: {{mainRole}}" name="mainRole">
+        <input type="text" class="form-control" disable value="Numero Empleados: {{quantityEmployees}}"
+            name="quantityEmployees">
+        <input type="text" class="form-control" disable value="Pagina web: {{webPage}}" name="webPage">
+        {{/companies}}
+
+        <h1> Vacantes </h1>
+        {{#vacants}}    
+                    <input type="text" class="form-control" disable value="Nombre de la vacante: {{name}}" name="name">
+                    <input type="text" class="form-control" disable value="Nombre de empresa: {{companyName}}" name="companyName">
+                    <input type="text" class="form-control" disable value="Detalles: {{details}}" name="details">
+                    <input type="text" class="form-control" disable value="Requerimientos: {{requirements}}" name="requirements">
+                    <input type="text" class="form-control" disable value="Area: {{area}}" name="area">
+                    <input type="text" class="form-control" disable value="Tipo Contrato: {{typeContract}}" name="typeContract">
+                    <input type="text" class="form-control" disable value="Horario: {{schedule}}" name="schedule">
+                    <input type="text" class="form-control" disable value="Cantidad vacantes: {{quantityVacants}}" name="quantityVacants">
+                    <input type="text" class="form-control" disable value="Salario: {{salary}}" name="salary"><br>
+        {{/vacants}}
     </div>
 </div>

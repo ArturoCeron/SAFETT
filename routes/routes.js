@@ -30,8 +30,12 @@ router.use((req, res, next) =>{
 //Página home
 router.get('/', (req,res) =>{
     console.log(req.session);
-    res.render('home');
+    res.render('home', {vacants: undefined, companies: undefined});
 });
+
+//POST SEARCH BAR
+const searchValues = require('../controllers/search');
+router.post('/home', searchValues);
 
 //Metodo GET para logout
 const logoutController = require('../controllers/logout');
@@ -41,6 +45,7 @@ router.get('/auth/logout', logoutController);
 const loginController = require('../controllers/login');
 router.get('/auth/login', redirectIfAuth, loginController);
 
+//Pagina de inicio de usuarios
 const loginUserController = require('../controllers/loginUser');
 router.post('/users/login', redirectIfAuth, loginUserController);
 
