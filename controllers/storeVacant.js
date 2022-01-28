@@ -21,14 +21,13 @@ module.exports = (req, res)=>{
             message: `Error al realizar la petición ${err}`
         });
         if (!userData) return res.status(404).send({
-            message: 'El usuario no existe'
+            message: `El usuario ${idUser} no existe`
         });
         vacante.companyName = userData[0].companyName;
         vacante.save( (error, vacante) =>{
-            if (error) {
-                return res.redirect('nuevaVacante');
-                message: `Error al realizar la petición ${err}`
-            }
+            if (error) return res.status(404).send({
+                message: `El usuario ${idUser} no existe`
+            });
             res.redirect('/');
         });
     }).lean();

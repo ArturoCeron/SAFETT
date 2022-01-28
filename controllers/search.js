@@ -11,14 +11,14 @@ module.exports = (req, res)=>{
                 message: `Error al realizar la petición ${err}`
             });
             if (!vacantData) return res.status(404).send({
-                message: 'El usuario no existe'
+                message: `La vacante ${req.body.search} no existe`
             });
             Companies.find({ 'companyName' : { '$regex' : req.body.search, '$options' : 'i' } }, (err, companyData)=>{
                 if (err) return res.status(500).send({
                     message: `Error al realizar la petición ${err}`
                 });
                 if (!companyData) return res.status(404).send({
-                    message: 'El usuario no existe'
+                    message: `La empresa ${req.body.search} no existe`
                 });
                 res.render('home', {vacants: vacantData, companies: companyData});
             }).lean();

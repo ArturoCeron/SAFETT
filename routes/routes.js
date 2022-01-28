@@ -1,6 +1,6 @@
 /*jshint esversion: 6 */
 
-//Módulos
+//MODULES
 const { resolveSoa } = require('dns');
 const express = require('express');
 const path = require('path');
@@ -8,6 +8,24 @@ const expressSession = require('express-session');
 const authMid = require('../middleware/authMiddleware');
 const redirectIfAuth = require('../middleware/redirectIfAuth');
 
+//MODELS
+const companyUser = require("../models/companyUser");
+const companyVacant = require('../models/vacants');
+const Company = require('../models/empresas');
+const postulations = require('../models/postulations');
+const usersInfo = require('../models/user');
+
+//CONTROLLERS
+const searchValues = require('../controllers/search');
+const logoutController = require('../controllers/logout');
+const loginController = require('../controllers/login');
+const loginUserController = require('../controllers/loginUser');
+const newUser = require('../controllers/newUser');
+const deleteVacant = require('../controllers/deleteVacant');
+const newUserController = require('../controllers/storeUser');
+const storeVacantController = require('../controllers/storeVacant');
+const newCompanyController = require('../controllers/storeCompany');
+const postulateStudent = require('../controllers/storePostulation');
 //Crear objeto router
 const router = express.Router();
 
@@ -34,39 +52,40 @@ router.get('/', (req,res) =>{
 });
 
 //POST SEARCH BAR
-const searchValues = require('../controllers/search');
 router.post('/home', searchValues);
 
 //Metodo GET para logout
-const logoutController = require('../controllers/logout');
 router.get('/auth/logout', logoutController);
 
 //Página login
-const loginController = require('../controllers/login');
 router.get('/auth/login', redirectIfAuth, loginController);
 
 //Pagina de inicio de usuarios
-const loginUserController = require('../controllers/loginUser');
 router.post('/users/login', redirectIfAuth, loginUserController);
 
 //Pagina para registro de usuarios
-const newUser = require('../controllers/newUser');
 router.get('/users/register', redirectIfAuth, newUser);
 
 //Post para el registro
-const newUserController = require('../controllers/storeUser');
 const { isBuffer } = require('util');
 router.post('/users/register', redirectIfAuth, newUserController);
 
 //Perfil de Alumno
 router.get('/perfilAspirante', (req, res) => {
-    res.render('applicantProfile');
+    let idUser = req.session;
+    usersInfo.find(idUser, (err, userData)=>{
+        if (err) return res.status(500).send({
+            message: `Error al realizar la petición ${err}`
+        });
+        if (!userData) return res.status(404).send({
+            message: `El usuario ${idUser} no existe`
+        });
+        res.render('applicantProfile', {userProfile: userData});
+    }).lean();
 });
 
 //Perfil de Empresa
-const companyUser = require("../models/companyUser");
-const companyVacant = require('../models/vacants');
-const Company = require('../models/empresas');
+
 router.get('/perfilEmpresa', (req, res) => {
     let idUser = req.session;
     companyUser.find(idUser, (err, userData)=>{
@@ -74,21 +93,21 @@ router.get('/perfilEmpresa', (req, res) => {
             message: `Error al realizar la petición ${err}`
         });
         if (!userData) return res.status(404).send({
-            message: 'El usuario no existe'
+            message: `El usuario ${idUser} no existe`
         });
         companyVacant.find({"companyName": userData[0].companyName}, (err, vacantData)=>{
             if (err) return res.status(500).send({
                 message: `Error al realizar la petición ${err}`
             });
             if (!vacantData) return res.status(404).send({
-                message: 'El usuario no existe'
+                message: `La empresa ${userData[0].companyName} no existe`
             });
             Company.find({"companyName": userData[0].companyName}, (err, profileData) => {
                 if (err) return res.status(500).send({
                     message: `Error al realizar la petición ${err}`
                 });
                 if (!profileData) return res.status(404).send({
-                    message: 'El usuario no existe'
+                    message: `La empresa ${userData[0].companyName} no existe`
                 });
                 console.log(vacantData[0]);
                 res.render('companyProfile', {datos: vacantData, datosPerfil: profileData});
@@ -99,12 +118,18 @@ router.get('/perfilEmpresa', (req, res) => {
 
 //Vacantes
 router.get('/empleos', (req, res) => {
-    res.render('vacants');
+    companyVacant.find({}, (err, vacantsData)=>{
+        if (err) return res.status(500).send({
+            message: `Error al realizar la petición ${err}`
+        });
+        if (!vacantsData) return res.status(404).send({
+            message: `La vacante no existe`
+        });
+        res.render('vacants', {vacantsData: vacantsData});
+    }).lean();
 });
 
 //Vacantes de la compañia
-//const companyUser = require("../models/companyUser");
-//const companyVacant = require('../models/vacants');
 router.get('/misVacantes', (req, res) => {
     let idUser = req.session;
     companyUser.find(idUser, (err, userData)=>{
@@ -112,14 +137,14 @@ router.get('/misVacantes', (req, res) => {
             message: `Error al realizar la petición ${err}`
         });
         if (!userData) return res.status(404).send({
-            message: 'El usuario no existe'
+            message: `El usuario ${idUser} no existe`
         });
         companyVacant.find({"companyName": userData[0].companyName}, (err, vacantData)=>{
             if (err) return res.status(500).send({
                 message: `Error al realizar la petición ${err}`
             });
             if (!vacantData) return res.status(404).send({
-                message: 'El usuario no existe'
+                message: `La empresa ${userData[0].companyName} no existe`
             });
             console.log(vacantData[0]);
             res.render('myVacants', {datos: vacantData});
@@ -128,9 +153,28 @@ router.get('/misVacantes', (req, res) => {
 });
 
 //Vacante Especifica
-router.get('/vacante', (req, res) => {
-    res.render('job');
+router.get('/vacante/:vacantId', (req, res) => {
+    let vacantId = req.params.vacantId;
+    companyVacant.findById(vacantId, (err, vacantValues)=>{
+        if (err) return res.status(500).send({
+            message: `Error al realizar la petición ${err}`
+        });
+        if (!vacantValues) return res.status(404).send({
+            message: `La vacante ${vacantId} no existe`
+        });
+        postulations.find({"idVacant": vacantId}, (err, postValues)=>{
+            if (err) return res.status(500).send({
+                message: `Error al realizar la petición ${err}`
+            });
+            if (!postValues) return res.status(404).send({
+                message: `La vacante ${vacantId} no existe`
+            });
+            res.render('job', {vacantVals: vacantValues, postVals: postValues});
+        }).lean();
+    }).lean();
 });
+
+router.post('/vacants/postulate/:vacantId', postulateStudent);
 
 //Nueva Vacante
 router.get('/nuevaVacante', (req, res) => {
@@ -138,13 +182,10 @@ router.get('/nuevaVacante', (req, res) => {
 });
 
 //DELETE VACANT
-const deleteVacant = require('../controllers/deleteVacant');
 router.delete('/vacants/delete/:vacantId', deleteVacant);
 
 //Registrar Vacante
-const storeVacantController = require('../controllers/storeVacant');
 router.post('/vacants/register', storeVacantController);
-
 
 //RENDER TEMPORAL
 //REGISTER COMPANY
@@ -153,7 +194,6 @@ router.get('/company/register', (req, res) => {
 });
 
 //POST REGISTER COMPANY
-const newCompanyController = require('../controllers/storeCompany');
 router.post('/company/register', redirectIfAuth, newCompanyController);
 
 //Página home

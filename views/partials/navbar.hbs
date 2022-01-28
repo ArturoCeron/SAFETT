@@ -3,7 +3,7 @@
     <!--
     #if companyLogged
     -->
-    {{#if true}}
+    {{#if companyLogged}}
         <nav id="navbar_top" class="navbar navbar-expand-lg navbar-dark bg-primary">
             <div class="container">
                 <ul class="navbar-nav ms-auto">
@@ -21,7 +21,7 @@
                 </div>
             </div>
         </nav>
-    {{else if adminLogged}}
+    <!-- {{else if adminLogged}} -->
 
     {{else}}
         <nav id="navbar_top" class="navbar navbar-expand-lg navbar-dark bg-primary">
@@ -37,7 +37,7 @@
                         {{#unless loggedIn}}<li class="nav-item"><a class="nav-link" href="/auth/login"> Ingresa </a></li>
                         <a href="/users/register"><button class="buttonBorder btn btn-outline-success" type="submit">Crea una cuenta</button></a>{{/unless}}                    
                         {{#if loggedIn}}
-                        <li class="nav-item"><a class="nav-link" href="/auth/logout"> Perfil </a></li>
+                        <li class="nav-item"><a class="nav-link" href="/perfilAspirante"> Perfil </a></li>
                         <li class="nav-item"><a class="nav-link" href="/auth/logout"> Cerrar sesión </a></li>
                         {{/if}}
                     </ul>

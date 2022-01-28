@@ -86,6 +86,9 @@
                     <input type="text" class="form-control" disable value="Horario: {{schedule}}" name="schedule">
                     <input type="text" class="form-control" disable value="Cantidad vacantes: {{quantityVacants}}" name="quantityVacants">
                     <input type="text" class="form-control" disable value="Salario: {{salary}}" name="salary"><br>
+                    <form action="vacante/{{_id}}" method="get">
+                                    <button class="buttonSolid btn btn-outline-success btn-wide buttonSmall">Ver más</button>
+                    </form>
         {{/vacants}}
     </div>
 </div>

@@ -16,7 +16,6 @@ module.exports = (req, res)=>{
                 }
                 else{
                     res.redirect('/auth/login');
-                    console.log("Salida 1");
                 }
             });
         }
@@ -30,13 +29,11 @@ module.exports = (req, res)=>{
                         }
                         else{
                             res.redirect('/auth/login');
-                            console.log("Salida 2");
                         }
                     });
                 }
                 else{
                     res.redirect('/auth/login');
-                    console.log("Salida 3");
                 }
             });
         }

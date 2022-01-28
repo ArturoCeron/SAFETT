@@ -37,10 +37,15 @@
         <div class="row justify-content-center">
             <div class="col-4">
                 <button class="buttonSolid btn btn-outline-success btn-wide" type="button" onclick="showCurriculum()">Abrir CV</button>
-                <div id="pdfContainer">
-                    
+                <div id="pdfContainer"> 
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+{{#userProfile}} 
+    <input type="text" class="form-control" disable value="Correo: {{username}}" name="username">
+    <input type="text" class="form-control" disable value="Nombre: {{name}}" name="name">
+    <input type="text" class="form-control" disable value="Apellidos: {{lastName}}" name="lastName">
+{{/userProfile}}

@@ -13,7 +13,6 @@ module.exports = (req, res)=>{
         if (error) {
             return res.redirect('/users/register');
         }
-        
         res.redirect('/');
     });
 };

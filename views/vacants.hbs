@@ -91,5 +91,18 @@
                 <button id="btnShowMore" class="buttonSolid btn btn-outline-success" type="submit">Mostrar más empleos</button>
             </div>
         </div>
+
+        
+{{#vacantsData}} 
+    <input type="text" class="form-control" disable value="Nombre de la vacante: {{name}}" name="name">
+    <input type="text" class="form-control" disable value="Nombre de empresa: {{companyName}}" name="companyName">
+    <input type="text" class="form-control" disable value="Detalles: {{details}}" name="details">
+    <input type="text" class="form-control" disable value="Requerimientos: {{requirements}}" name="requirements">
+    <input type="text" class="form-control" disable value="Area: {{area}}" name="area">
+    <input type="text" class="form-control" disable value="Tipo Contrato: {{typeContract}}" name="typeContract">
+    <input type="text" class="form-control" disable value="Horario: {{schedule}}" name="schedule">
+    <input type="text" class="form-control" disable value="Cantidad vacantes: {{quantityVacants}}" name="quantityVacants">
+    <input type="text" class="form-control" disable value="Salario: {{salary}}" name="salary">
+{{/vacantsData}}
     </div>
 </div>

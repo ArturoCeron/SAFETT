@@ -12,7 +12,7 @@
         </div>
     </div>
 </div>
-
+{{#vacantVals}} 
 <div class="container">
     <div class="row">
         <div id="companyInformationSection" class="col-3">
@@ -59,11 +59,33 @@
             </div>
             <div class="col-12 d-flex justify-content-end">
                 <div class="col-3">
-                    {{#unless companyLogged}}
-                    <button class="buttonSolid btn btn-outline-success btn-wide" type="button" onclick="">Solicitar puesto</button>
-                    {{/unless}}
+                    <!-- {{#unless companyLogged}} -->
+                    <form action="/vacants/postulate/{{_id}}" method="POST">
+                        <button class="buttonSolid btn btn-outline-success btn-wide">Solicitar puesto</button>
+                    </form>
+                    <!--{{/unless}}-->
                 </div>
             </div>
         </div>
+
+           
+        <input type="text" class="form-control" disable value="Nombre de la vacante: {{name}}" name="name">
+        <input type="text" class="form-control" disable value="Nombre de empresa: {{companyName}}" name="companyName">
+        <input type="text" class="form-control" disable value="Detalles: {{details}}" name="details">
+        <input type="text" class="form-control" disable value="Requerimientos: {{requirements}}" name="requirements">
+        <input type="text" class="form-control" disable value="Area: {{area}}" name="area">
+        <input type="text" class="form-control" disable value="Tipo Contrato: {{typeContract}}" name="typeContract">
+        <input type="text" class="form-control" disable value="Horario: {{schedule}}" name="schedule">
+        <input type="text" class="form-control" disable value="Cantidad vacantes: {{quantityVacants}}" name="quantityVacants">
+        <input type="text" class="form-control" disable value="Salario: {{salary}}" name="salary"><br>
+        
     </div>
+    {{/vacantVals}}
+    <h1> Postulados </h1>
+    {{#postVals}}
+        <input type="text" class="form-control" disable value="Nombre de la vacante: {{vacantName}}" name="name">
+        <input type="text" class="form-control" disable value="Nombre de empresa: {{companyName}}" name="companyName">
+        <input type="text" class="form-control" disable value="Nombre del estudiante: {{studentName}}" name="studentName">
+        <input type="text" class="form-control" disable value="Correo del estudiante: {{studentEmail}}" name="studentEmail">
+    {{/postVals}}
 </div>
