@@ -38,3 +38,8 @@
 .sectionHidden{
     display: none;
 }
+
+.hyperlinkSection{
+    text-decoration: none; 
+    color: var(--color-black);
+}

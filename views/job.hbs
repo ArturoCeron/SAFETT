@@ -1,18 +1,19 @@
+{{#vacantVals}} 
 <div id="companyIdentityBanner" class="container-fluid d-flex">
     <div class="container">
         <div class="row">
             <div class="col-3"></div>
             <div class="col-9" style="padding: 30px 0px 0px 22px;">
                 <div id="companyIdentity">
-                    <p id="companyName">Practicante de Soporte Tecnico</p>
-                    <p id="companyDescription">Medtronic México, S. de R.L. de C.V. (El Lago)</p>
+                    <p id="companyName">{{name}}</p>
+                    <p id="companyDescription">{{companyName}}</p>
                     <hr class="companySectionDivider">
                 </div>
             </div>
         </div>
     </div>
 </div>
-{{#vacantVals}} 
+
 <div class="container">
     <div class="row">
         <div id="companyInformationSection" class="col-3">
@@ -20,27 +21,27 @@
             <hr class="infoSectionDivider">
             <div class="infoSection">
                 <p class="infoTitle">Número de vacantes:</p>
-                <p class="infoParagraph">1</p>
+                <p class="infoParagraph">{{quantityVacants}}</p>
             </div>
             <hr class="infoSectionDivider">
             <div class="infoSection">
                 <p class="infoTitle">Área</p>
-                <p class="infoParagraph">Sistemas</p>
+                <p class="infoParagraph">{{area}}</p>
             </div>
             <hr class="infoSectionDivider">
             <div class="infoSection">
                 <p class="infoTitle">Salario</p>
-                <p class="infoParagraph">No especificado</p>
+                <p class="infoParagraph">{{salary}}</p>
             </div>
             <hr class="infoSectionDivider">
             <div class="infoSection">
                 <p class="infoTitle">Contrato</p>
-                <p class="infoParagraph">Temporal</p>
+                <p class="infoParagraph">{{typeContract}}</p>
             </div>
             <hr class="infoSectionDivider">
             <div class="infoSection">
                 <p class="infoTitle">Horario</p>
-                <p class="infoParagraph">Lunes a Viernes (07:00 a 17:06)</p>
+                <p class="infoParagraph">{{schedule}}</p>
             </div>
             <hr class="infoSectionDivider">
         </div>
@@ -48,14 +49,10 @@
             <div class="contentSection">
                 <p class="contentTitle">Descripción y detalle de las actividades</p>
                 <hr class="contentDivider">
-                <p class="contentParagraph">-Instalacion de software, hardware, reparaciones e instalaciones.<br>
-                                            -Resolver problemas de telefonia, configuracion de video conferencias. <br>
-                                            -Soporte tecnico general.<br>
-                                            -Contribucion en diferentes proyectos con el equipo de trabajo.</p>
+                <p class="contentParagraph">{{details}}</p>
                 <p class="contentTitle">Requisitos</p>
                 <hr class="contentDivider">
-                <p class="contentParagraph">-Ser estudiante de 7mo semestre en adelante, de la carrera de Ing en sistemas, informatica, etc<br>
-                                            -Experiencia no indispensable</p>
+                <p class="contentParagraph">{{requirements}}</p>
             </div>
             <div class="col-12 d-flex justify-content-end">
                 <div class="col-3">
@@ -68,7 +65,7 @@
             </div>
         </div>
 
-           
+        <!--
         <input type="text" class="form-control" disable value="Nombre de la vacante: {{name}}" name="name">
         <input type="text" class="form-control" disable value="Nombre de empresa: {{companyName}}" name="companyName">
         <input type="text" class="form-control" disable value="Detalles: {{details}}" name="details">
@@ -78,9 +75,10 @@
         <input type="text" class="form-control" disable value="Horario: {{schedule}}" name="schedule">
         <input type="text" class="form-control" disable value="Cantidad vacantes: {{quantityVacants}}" name="quantityVacants">
         <input type="text" class="form-control" disable value="Salario: {{salary}}" name="salary"><br>
-        
+        -->
     </div>
     {{/vacantVals}}
+    <!--
     <h1> Postulados </h1>
     {{#postVals}}
         <input type="text" class="form-control" disable value="Nombre de la vacante: {{vacantName}}" name="name">
@@ -88,4 +86,5 @@
         <input type="text" class="form-control" disable value="Nombre del estudiante: {{studentName}}" name="studentName">
         <input type="text" class="form-control" disable value="Correo del estudiante: {{studentEmail}}" name="studentEmail">
     {{/postVals}}
+    -->
 </div>

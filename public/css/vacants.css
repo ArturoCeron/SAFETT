@@ -53,3 +53,13 @@
     margin: 48px 0px;
     width: 50%;
 }
+
+.vacantElement{
+    transition: 0.3s;
+    padding: 8px;
+    border-radius: 4px;
+}
+
+.vacantElement:hover{
+    background-color: var(--color-grey-main);
+}

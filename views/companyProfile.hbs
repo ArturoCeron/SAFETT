@@ -1,11 +1,12 @@
+{{#datosPerfil}}
 <div id="companyIdentityBanner" class="container-fluid d-flex">
     <div class="container">
         <div class="row">
             <div class="col-3"></div>
             <div class="col-9" style="padding: 30px 0px 0px 22px;">
                 <div id="companyIdentity">
-                    <p id="companyName">Medtronic México, S. de R.L. de C.V. (El Lago)</p>
-                    <p id="companyDescription">Manufactura de productos médicos.</p>
+                    <p id="companyName">{{companyName}}</p>
+                    <p id="companyDescription">{{mainRole}}</p>
                     <hr class="companySectionDivider">
                 </div>
             </div>
@@ -20,55 +21,50 @@
             <hr class="infoSectionDivider">
             <div class="infoSection">
                 <p class="infoTitle">Organización</p>
-                <p class="infoParagraph">Medtronic México, S. de R.L. de C.V. (El Lago)</p>
+                <p class="infoParagraph">{{companyName}}</p>
             </div>
             <hr class="infoSectionDivider">
             <div class="infoSection">
                 <p class="infoTitle">Giro</p>
-                <p class="infoParagraph">Maquiladora (Export.)</p>
+                <p class="infoParagraph">{{companyBusiness}}</p>
             </div>
             <hr class="infoSectionDivider">
             <div class="infoSection">
                 <p class="infoTitle">Actividad principal</p>
-                <p class="infoParagraph">Manufactura de productos médicos.</p>
+                <p class="infoParagraph">{{mainRole}}</p>
             </div>
             <hr class="infoSectionDivider">
             <div class="infoSection">
                 <p class="infoTitle">Número de empleados</p>
-                <p class="infoParagraph">5500</p>
+                <p class="infoParagraph">{{quantityEmployees}}</p>
             </div>
             <hr class="infoSectionDivider">
             <div class="infoSection">
                 <p class="infoTitle">Sitio Web</p>
-                <p class="infoParagraph">https://www.medtronic.com/</p>
+                <p class="infoParagraph">{{webPage}}</p>
             </div>
             <hr class="infoSectionDivider">
         </div>
         <div class="col-9" style="padding: 0;">
             <div class="contentSection">
                 <p class="contentTitle">Información</p>
-                <p class="contentParagraph">Medtronic ha invertido en la creación de productos para pacientes y médicos del mundo. la compañía está presente en todos los mercados y dirige centros de investigación y desarrollo y plantas de producción en todo el mundo.
-                    <br><br>La sede corporativa de Minneapolis, Minnesota usa, se amplió en 2001 anticipándose al crecimiento continuo previsto por la compañía para los próximos 5 a 10 años. Alberga un moderno centro de investigación, así como un centro de formación y capacitación que recibe más de 5.000 visitas cada año de los médicos con más prestigio internacional.
-                    <br><br>Medtronic is the world leader in medical technology providing lifelong solutions for people with chronic disease. we offer products, therapies and services that enhance or extend the lives of millions of people. each year, 2.5 million patients benefit from medtronic`s technology, used to treat conditions such as heart disease, neurological disorders, and vascular illnesses.</p>
+                <p class="contentParagraph">{{description}}</p>
                     
+    {{/datosPerfil}}
                 <p class="contentTitle">Vacantes</p>
                 <hr class="contentDivider">
                 {{#datos}}    
-                 <div class="vacantElement flex">
-                    <p class="vacantName">{{name}}</p>
-                    <p class="vacantSalary">${{salary}}</p>
-                    <p class="vacantDescription">{{details}}</p>
-                    <p class="vacantDate">05 Nov Tijuana</p>
-                </div>
+                <form id="form{{_id}}" action="vacante/{{_id}}" method="get">
+                <a class="hyperlinkSection" href="#" onclick="document.getElementById('form{{_id}}').submit()">
+                    <div class="vacantElement flex">
+                        <p class="vacantName">{{name}}</p>
+                        <p class="vacantSalary">${{salary}}</p>
+                        <p class="vacantDescription">{{details}}</p>
+                        <p class="vacantDate">{{schedule}}</p>
+                    </div>
+                </a>
+                </form>
                 {{/datos}}
-
-                {{#datosPerfil}}
-                    <input type="text" class="form-control" disable value="Organizacion: {{companyName}}" name="companyName">
-                    <input type="text" class="form-control" disable value="Giro: {{companyBusiness}}" name="companyBusiness">
-                    <input type="text" class="form-control" disable value="Actividad Principal: {{mainRole}}" name="mainRole">
-                    <input type="text" class="form-control" disable value="Numero Empleados: {{quantityEmployees}}" name="quantityEmployees">
-                    <input type="text" class="form-control" disable value="Pagina web: {{webPage}}" name="webPage">
-                {{/datosPerfil}}
             </div>
         </div>
     </div>

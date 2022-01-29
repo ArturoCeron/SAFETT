@@ -24,85 +24,31 @@
     <div class="row">
         <div class="col-11">
             <div class="row justify-content-center">
-                <div class="col-2">
-                    <img id="vacantLogo" src="img/logoMedtronic.png">
-                </div>
-                <div class="col-9">
-					<div class="vacantElement flex">
-                        <p class="vacantName">Ingeniero en Software II para area de Calidad</p>
-                        <p class="vacantSalary">$15,000 mensual</p>
-                        <p class="vacantCompany">Medtronic México, S. de R.L. de C.V. (El Lago)</p>
-                        <p class="vacantDescription max-lines">Desarrolla, modifica, aplica y mantiene estándares y protocolos de calidad para procesar materiales en productos de materiales terminados o parcialmente terminados. Colabora con las funciones de ingeniería y fabricación para garantizar que se cumplan los estándares de calidad.</p>
-                        <p class="vacantDate">18 Nov Tijuana</p>
+                {{#vacantsData}} 
+                <form id="form{{_id}}" action="vacante/{{_id}}" method="get">
+                <a class="hyperlinkSection" href="#" onclick="document.getElementById('form{{_id}}').submit()">
+                    <div class="vacantElement">
+                        <div class="row justify-content-center">
+                            <div class="col-2">
+                                <img id="vacantLogo" src="img/logoMedtronic.png">
+                            </div>
+                            <div class="col-9">
+                                <div class="flex">
+                                    <p class="vacantName">{{name}}</p>
+                                    <p class="vacantSalary">${{salary}}</p>
+                                    <p class="vacantCompany">{{companyName}}</p>
+                                    <p class="vacantDescription max-lines">{{details}}</p>
+                                    <p class="vacantDate">{{schedule}}</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                </div>
+                </a>
+                </form>
                 <hr class="vacantsDivider">
-                <div class="col-2">
-                    <img id="vacantLogo" src="img/logoMedtronic.png">
-                </div>
-                <div class="col-9">
-					<div class="vacantElement flex">
-                        <p class="vacantName">Ingeniero en Software II para area de Calidad</p>
-                        <p class="vacantSalary">$15,000 mensual</p>
-                        <p class="vacantCompany">Medtronic México, S. de R.L. de C.V. (El Lago)</p>
-                        <p class="vacantDescription max-lines">Desarrolla, modifica, aplica y mantiene estándares y protocolos de calidad para procesar materiales en productos de materiales terminados o parcialmente terminados. Colabora con las funciones de ingeniería y fabricación para garantizar que se cumplan los estándares de calidad.</p>
-                        <p class="vacantDate">18 Nov Tijuana</p>
-                    </div>
-                </div>
-                <hr class="vacantsDivider">
-                <div class="col-2">
-                    <img id="vacantLogo" src="img/logoMedtronic.png">
-                </div>
-                <div class="col-9">
-					<div class="vacantElement flex">
-                        <p class="vacantName">Ingeniero en Software II para area de Calidad</p>
-                        <p class="vacantSalary">$15,000 mensual</p>
-                        <p class="vacantCompany">Medtronic México, S. de R.L. de C.V. (El Lago)</p>
-                        <p class="vacantDescription max-lines">Desarrolla, modifica, aplica y mantiene estándares y protocolos de calidad para procesar materiales en productos de materiales terminados o parcialmente terminados. Colabora con las funciones de ingeniería y fabricación para garantizar que se cumplan los estándares de calidad.</p>
-                        <p class="vacantDate">18 Nov Tijuana</p>
-                    </div>
-                </div>
-                <hr class="vacantsDivider">
-                <div class="col-2">
-                    <img id="vacantLogo" src="img/logoMedtronic.png">
-                </div>
-                <div class="col-9">
-					<div class="vacantElement flex">
-                        <p class="vacantName">Ingeniero en Software II para area de Calidad</p>
-                        <p class="vacantSalary">$15,000 mensual</p>
-                        <p class="vacantCompany">Medtronic México, S. de R.L. de C.V. (El Lago)</p>
-                        <p class="vacantDescription max-lines">Desarrolla, modifica, aplica y mantiene estándares y protocolos de calidad para procesar materiales en productos de materiales terminados o parcialmente terminados. Colabora con las funciones de ingeniería y fabricación para garantizar que se cumplan los estándares de calidad.</p>
-                        <p class="vacantDate">18 Nov Tijuana</p>
-                    </div>
-                </div>
-                <hr class="vacantsDivider">
-                <div class="col-2">
-                    <img id="vacantLogo" src="img/logoMedtronic.png">
-                </div>
-                <div class="col-9">
-					<div class="vacantElement flex">
-                        <p class="vacantName">Ingeniero en Software II para area de Calidad</p>
-                        <p class="vacantSalary">$15,000 mensual</p>
-                        <p class="vacantCompany">Medtronic México, S. de R.L. de C.V. (El Lago)</p>
-                        <p class="vacantDescription max-lines">Desarrolla, modifica, aplica y mantiene estándares y protocolos de calidad para procesar materiales en productos de materiales terminados o parcialmente terminados. Colabora con las funciones de ingeniería y fabricación para garantizar que se cumplan los estándares de calidad.</p>
-                        <p class="vacantDate">18 Nov Tijuana</p>
-                    </div>
-                </div>
+                {{/vacantsData}}
                 <button id="btnShowMore" class="buttonSolid btn btn-outline-success" type="submit">Mostrar más empleos</button>
             </div>
         </div>
-
-        
-{{#vacantsData}} 
-    <input type="text" class="form-control" disable value="Nombre de la vacante: {{name}}" name="name">
-    <input type="text" class="form-control" disable value="Nombre de empresa: {{companyName}}" name="companyName">
-    <input type="text" class="form-control" disable value="Detalles: {{details}}" name="details">
-    <input type="text" class="form-control" disable value="Requerimientos: {{requirements}}" name="requirements">
-    <input type="text" class="form-control" disable value="Area: {{area}}" name="area">
-    <input type="text" class="form-control" disable value="Tipo Contrato: {{typeContract}}" name="typeContract">
-    <input type="text" class="form-control" disable value="Horario: {{schedule}}" name="schedule">
-    <input type="text" class="form-control" disable value="Cantidad vacantes: {{quantityVacants}}" name="quantityVacants">
-    <input type="text" class="form-control" disable value="Salario: {{salary}}" name="salary">
-{{/vacantsData}}
     </div>
 </div>
