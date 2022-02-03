@@ -4,7 +4,6 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const postulaciones = new Schema({
-
     idVacant: {
         type: String,
         required: true,
@@ -19,8 +18,7 @@ const postulaciones = new Schema({
     },
     studentId: {
         type: String,
-        required: true,
-        unique: true
+        required: true
     },
     studentName: {
         type: String,
@@ -31,7 +29,6 @@ const postulaciones = new Schema({
         required: true
     }
 });
-
 
 //export model
 const postulacionEstudiante = mongoose.model('postulacionEstudiante', postulaciones);

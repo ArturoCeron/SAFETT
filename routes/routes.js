@@ -5,7 +5,9 @@ const { resolveSoa } = require('dns');
 const express = require('express');
 const path = require('path');
 const expressSession = require('express-session');
-const authMid = require('../middleware/authMiddleware');
+const authUser = require('../middleware/authUser');
+const authCompany = require('../middleware/authCompany');
+const authAccount = require('../middleware/authAccount');
 const redirectIfAuth = require('../middleware/redirectIfAuth');
 
 //MODELS
@@ -42,6 +44,9 @@ router.use(expressSession({
 // Variables Globales
 router.use((req, res, next) =>{
     res.locals.loggedIn = req.session.username || null;
+    res.locals.companyLogged = req.session.role || null;
+    res.locals.userLogged = req.session.logged || null;
+    res.locals.adminLogged = true;
     next();
 });
 
@@ -71,7 +76,7 @@ const { isBuffer } = require('util');
 router.post('/users/register', redirectIfAuth, newUserController);
 
 //Perfil de Alumno
-router.get('/perfilAspirante', (req, res) => {
+router.get('/perfilAspirante', authAccount, (req, res) => {
     let idUser = req.session;
     usersInfo.find(idUser, (err, userData)=>{
         if (err) return res.status(500).send({
@@ -86,7 +91,7 @@ router.get('/perfilAspirante', (req, res) => {
 
 //Perfil de Empresa
 
-router.get('/perfilEmpresa', (req, res) => {
+router.get('/perfilEmpresa', authAccount, (req, res) => {
     let idUser = req.session;
     companyUser.find(idUser, (err, userData)=>{
         if (err) return res.status(500).send({
@@ -109,7 +114,7 @@ router.get('/perfilEmpresa', (req, res) => {
                 if (!profileData) return res.status(404).send({
                     message: `La empresa ${userData[0].companyName} no existe`
                 });
-                console.log(vacantData[0]);
+                //console.log(vacantData);
                 res.render('companyProfile', {datos: vacantData, datosPerfil: profileData});
             }).lean();
         }).lean();
@@ -130,7 +135,7 @@ router.get('/empleos', (req, res) => {
 });
 
 //Vacantes de la compañia
-router.get('/misVacantes', (req, res) => {
+router.get('/misVacantes', authCompany, (req, res) => {
     let idUser = req.session;
     companyUser.find(idUser, (err, userData)=>{
         if (err) return res.status(500).send({
@@ -146,35 +151,56 @@ router.get('/misVacantes', (req, res) => {
             if (!vacantData) return res.status(404).send({
                 message: `La empresa ${userData[0].companyName} no existe`
             });
-            console.log(vacantData[0]);
+            //console.log(vacantData);
             res.render('myVacants', {datos: vacantData});
         }).lean();
     }).lean();
 });
 
 //Vacante Especifica
-router.get('/vacante/:vacantId', (req, res) => {
+router.get('/vacante/:vacantId', authAccount, (req, res) => {
     let vacantId = req.params.vacantId;
-    companyVacant.findById(vacantId, (err, vacantValues)=>{
+    companyVacant.find({"_id": vacantId}, (err, vacantValues)=>{
         if (err) return res.status(500).send({
             message: `Error al realizar la petición ${err}`
         });
         if (!vacantValues) return res.status(404).send({
             message: `La vacante ${vacantId} no existe`
         });
-        postulations.find({"idVacant": vacantId}, (err, postValues)=>{
-            if (err) return res.status(500).send({
-                message: `Error al realizar la petición ${err}`
-            });
-            if (!postValues) return res.status(404).send({
-                message: `La vacante ${vacantId} no existe`
-            });
-            res.render('job', {vacantVals: vacantValues, postVals: postValues});
-        }).lean();
+        if(res.locals.companyLogged){
+            companyUser.find({"username" : req.session.username}, (err, email) => {
+                if (err) return res.status(500).send({
+                    message: `Error al realizar la petición ${err}`
+                });
+                if (!email) return res.status(404).send({
+                    message: `La vacante ${vacantId} no existe`
+                });
+                if(email[0].companyName == vacantValues[0].companyName){
+                    postulations.find({"idVacant": vacantId}, (err, postValues)=>{
+                        if (err) return res.status(500).send({
+                            message: `Error al realizar la petición ${err}`
+                        });
+                        if (!postValues) return res.status(404).send({
+                            message: `La vacante ${vacantId} no existe`
+                        });
+                        console.log("Posts: ", postValues);
+                        res.render('job', {vacantVals: vacantValues, postVals: postValues});
+                    }).lean();
+                }
+                else{
+                    console.log("company view");
+                    res.render('job', {vacantVals: vacantValues, postVals: undefined});
+                }
+            }).lean();
+        }
+        else{
+            console.log("user view");
+            res.render('job', {vacantVals: vacantValues, postVals: undefined});
+        }
     }).lean();
 });
 
-router.post('/vacants/postulate/:vacantId', postulateStudent);
+router.post('/vacants/postulate/:vacantId', authAccount, postulateStudent);
 
 //Nueva Vacante
 router.get('/nuevaVacante', (req, res) => {
@@ -182,10 +208,10 @@ router.get('/nuevaVacante', (req, res) => {
 });
 
 //DELETE VACANT
-router.delete('/vacants/delete/:vacantId', deleteVacant);
+router.delete('/vacants/delete/:vacantId', authCompany, deleteVacant);
 
 //Registrar Vacante
-router.post('/vacants/register', storeVacantController);
+router.post('/vacants/register', authCompany, storeVacantController);
 
 //RENDER TEMPORAL
 //REGISTER COMPANY

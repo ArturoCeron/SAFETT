@@ -13,6 +13,7 @@ module.exports = (req, res)=>{
     user.lastName = req.body.lastName;
     user.phoneNumber = req.body.phoneNumber;
     user.title = req.body.title;
+    user.role = "company";
     user.save( (error, user) =>{
         if (error) {
             console.log("Error en usuario")
