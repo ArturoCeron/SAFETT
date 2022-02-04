@@ -28,6 +28,7 @@ const newUserController = require('../controllers/storeUser');
 const storeVacantController = require('../controllers/storeVacant');
 const newCompanyController = require('../controllers/storeCompany');
 const postulateStudent = require('../controllers/storePostulation');
+const userPostulations = require('../controllers/userPostulations');
 //Crear objeto router
 const router = express.Router();
 
@@ -221,6 +222,8 @@ router.get('/company/register', (req, res) => {
 
 //POST REGISTER COMPANY
 router.post('/company/register', redirectIfAuth, newCompanyController);
+
+router.get('/myPosts', authUser, userPostulations);
 
 //Página home
 router.use((req,res) =>{

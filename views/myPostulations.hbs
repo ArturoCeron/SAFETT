@@ -1,0 +1,43 @@
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-10" style="padding: 0;">
+            <div class="contentSection">   
+                <p class="contentTitle">Mis aplicaciones</p>
+                <hr class="contentDivider">
+                {{#datos}}    
+                    <div class="row">
+                        <div class="col-11">
+                            <div class="flex">
+                                <p class="vacantName">{{vacantName}}</p>
+                                <p class="vacantSalary">{{companyName}}</p>
+                            </div>
+                        </div>
+                        <div class="col-1 d-flex">
+                            <div class="my-auto mx-auto">
+                                <form action="vacante/{{idVacant}}" method="get">
+                                    <button class="buttonSolid btn btn-outline-success btn-wide buttonSmall">Ver más</button>
+                                </form>
+                                <!-- 
+                                <form action="vacants/delete/{{_id}}?_method=delete" method="POST">
+                                    <button class="buttonSolid buttonWarning btn btn-outline-success btn-wide buttonSmall" style="margin-top: 16px;">Eliminar</button>
+                                </form> -->
+                            </div>
+                        </div>
+                    </div>
+                {{/datos}}
+
+                <!-- {{#datos}}    
+                    <input type="text" class="form-control" disable value="Nombre de la vacante: {{name}}" name="name">
+                    <input type="text" class="form-control" disable value="Nombre de empresa: {{companyName}}" name="companyName">
+                    <input type="text" class="form-control" disable value="Detalles: {{details}}" name="details">
+                    <input type="text" class="form-control" disable value="Requerimientos: {{requirements}}" name="requirements">
+                    <input type="text" class="form-control" disable value="Area: {{area}}" name="area">
+                    <input type="text" class="form-control" disable value="Tipo Contrato: {{typeContract}}" name="typeContract">
+                    <input type="text" class="form-control" disable value="Horario: {{schedule}}" name="schedule">
+                    <input type="text" class="form-control" disable value="Cantidad vacantes: {{quantityVacants}}" name="quantityVacants">
+                    <input type="text" class="form-control" disable value="Salario: {{salary}}" name="salary"><br>
+                {{/datos}}-->
+            </div>
+        </div>
+    </div>
+</div>
