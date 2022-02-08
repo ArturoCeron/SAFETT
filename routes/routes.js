@@ -252,6 +252,11 @@ router.post('/company/register', redirectIfAuth, newCompanyController);
 
 router.get('/myPosts', authUser, userPostulations);
 
+//Contacto
+router.get('/contacto',(req, res) => {
+    res.render('contact');
+});
+
 //Página home
 router.use((req,res) =>{
     res.render('notfound');
