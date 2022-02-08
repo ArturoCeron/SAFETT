@@ -1,0 +1,53 @@
+<div id="mini-banner" class="container-fluid">
+    <div class="container">
+        <div class="col">
+            <div id="vacantsSearchBar" class="row">
+                <div class="col-4">
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i id="searchIcon" class="material-icons">search</i></span>
+                        </div>
+                        <input type="text" id="buscarEmpresa" class="form-control" placeholder="Puesto o empresa">
+                    </div>
+                </div>
+                <div class="col-auto">
+                    <button class="buttonBorder btn btn-outline-success" type="submit">Buscar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <p id="searchMatches"><b>19</b> empresas de <b>software development</b></p>
+    <hr id="searchDivider" class="contentDivider">
+    <div class="row">
+        <div class="col-11">
+            <div class="row justify-content-center">
+                {{#companiesData}} 
+                <form id="form{{_id}}" action="vacante/{{_id}}" method="get">
+                <a class="hyperlinkSection" href="#" onclick="document.getElementById('form{{_id}}').submit()">
+                    <div class="vacantElement">
+                        <div class="row justify-content-center">
+                            <div class="col-2">
+                                <img id="vacantLogo" src="img/logoMedtronic.png">
+                            </div>
+                            <div class="col-9">
+                                <div class="flex">
+                                    <p class="companyName">{{companyName}}</p>
+                                    <p class="Business">{{companyBusiness}}</p>
+                                    <p class="branch">{{branchName}}</p>
+                                    <p class="quantityEmploye">{{state}}, {{city}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+                </form>
+                <hr class="vacantsDivider">
+                {{/companiesData}}
+                <button id="btnShowMore" class="buttonSolid btn btn-outline-success" type="submit">Mostrar más empresas</button>
+            </div>
+        </div>
+    </div>
+</div>

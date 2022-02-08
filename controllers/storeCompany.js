@@ -1,7 +1,7 @@
 /*jshint esversion: 6 */
 
 const User = require('../models/companyUser');
-const Company = require('../models/empresas');
+const Company = require('../models/companies');
 const path = require('path');
 
 module.exports = (req, res)=>{
