@@ -9,8 +9,10 @@ module.exports = (req, res)=>{
     user.password = req.body.password;
     user.name = req.body.name;
     user.lastName = req.body.lastName;
+    user.role = "user";
     user.save( (error, user) =>{
         if (error) {
+            console.log(error);
             return res.redirect('/users/register');
         }
         res.redirect('/');
