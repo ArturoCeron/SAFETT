@@ -1,3 +1,4 @@
+{{#userProfile}} 
 <div class="container-fluid">
     <div class="row justify-content-end">
         <div class="col-10" id="applicantInfoSection">
@@ -6,7 +7,7 @@
                     <img id="applicantPhoto" src="../img/defaultUser.jpg">
                 </div>
                 <div id="applicantIdentity" class="col-8 my-auto">
-                    <p id="applicantName">David E. Becerra Ramírez</p>
+                    <p id="applicantName">{{name}} {{lastName}}</p>
                     <div class="row">
                         <div class="col">
                             <p id="applicantDegree">Estudiante de Ingeniería en Sistemas Computacionales</p>
@@ -43,9 +44,4 @@
         </div>
     </div>
 </div>
-
-{{#userProfile}} 
-    <input type="text" class="form-control" disable value="Correo: {{username}}" name="username">
-    <input type="text" class="form-control" disable value="Nombre: {{name}}" name="name">
-    <input type="text" class="form-control" disable value="Apellidos: {{lastName}}" name="lastName">
 {{/userProfile}}
