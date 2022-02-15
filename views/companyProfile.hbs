@@ -49,11 +49,10 @@
             <div class="contentSection">
                 <p class="contentTitle">Información</p>
                 <p class="contentParagraph">{{description}}</p>
-                    
     {{/datosPerfil}}
                 <p class="contentTitle">Vacantes</p>
                 <hr class="contentDivider">
-                {{#datos}}    
+                {{#vacantData}}    
                 <form id="form{{_id}}" action="vacante/{{_id}}" method="get">
                 <a class="hyperlinkSection" href="#" onclick="document.getElementById('form{{_id}}').submit()">
                     <div class="vacantElement flex">
@@ -64,7 +63,7 @@
                     </div>
                 </a>
                 </form>
-                {{/datos}}
+                {{/vacantData}}
             </div>
         </div>
     </div>

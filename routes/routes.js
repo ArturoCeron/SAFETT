@@ -93,14 +93,22 @@ router.get('/perfilAspirante', authAccount, (req, res) => {
 //Prefil de Empresa visto desde alumno
 router.get('/empresa/:companyId', authAccount, (req, res) => {
     let companyId = req.params.companyId;
-    Company.find({"_id": companyId}, (err, datosPerfil)=>{
+    Company.findById(companyId, (err, datosPerfil)=>{
         if (err) return res.status(500).send({
             message: `Error al realizar la petición ${err}`
         });
         if (!datosPerfil) return res.status(404).send({
             message: `El la empresa ${companyId} no existe`
         });
-        res.render('companyProfile', {datosPerfil});
+        companyVacant.find({"companyName": datosPerfil.companyName}, (err, vacantData)=>{
+            if (err) return res.status(500).send({
+                message: `Error al realizar la petición ${err}`
+            });
+            if (!vacantData) return res.status(404).send({
+                message: `La empresa ${userData[0].companyName} no existe`
+            });
+            res.render('companyProfile', {datosPerfil, vacantData});
+        }).lean();
     }).lean();
 });
 
@@ -135,6 +143,8 @@ router.get('/perfilEmpresa', authAccount, (req, res) => {
         }).lean();
     }).lean();
 });
+
+
 
 //Vacantes
 router.get('/empleos', (req, res) => {
