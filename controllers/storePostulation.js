@@ -26,16 +26,29 @@ module.exports = (req, res)=>{
             if (!userData) return res.status(404).send({
                 message: `El usuario ${idUser} no existe`
             });
-            postVacant.studentId = userData._id;
-            postVacant.studentName = userData.name;
-            postVacant.studentEmail = userData.username;
-            console.log("Postulacion: ", postVacant);
-            postVacant.save( (err, postVacant) =>{
+            postulation.find({"idVacant": vacantId, "studentEmail": req.session.username}, (err, postData)=>{
                 if (err) return res.status(500).send({
                     message: `Error al realizar la petición ${err}`
                 });
-                res.redirect('/');
-            });
+                if (!postData) return res.status(404).send({
+                    message: `El usuario ${idUser} no existe`
+                });
+                if(postData.length >= 1){
+                    res.redirect("/");
+                }
+                else{
+                    postVacant.studentId = userData._id;
+                    postVacant.studentName = userData.name;
+                    postVacant.studentEmail = userData.username;
+                    console.log("Postulacion: ", postVacant);
+                    postVacant.save( (err, postVacant) =>{
+                        if (err) return res.status(500).send({
+                            message: `Error al realizar la petición ${err}`
+                        });
+                        res.redirect("/");
+                    });
+                }
+            }).lean();
         }).lean();
     }).lean();
 };

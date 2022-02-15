@@ -198,22 +198,24 @@ router.get('/misVacantes', authCompany, (req, res) => {
 //Vacante Especifica
 router.get('/vacante/:vacantId', authAccount, (req, res) => {
     let vacantId = req.params.vacantId;
-    companyVacant.find({"_id": vacantId}, (err, vacantValues)=>{
+    companyVacant.findById(vacantId, (err, vacantValues)=>{
         if (err) return res.status(500).send({
             message: `Error al realizar la petición ${err}`
         });
         if (!vacantValues) return res.status(404).send({
             message: `La vacante ${vacantId} no existe`
         });
+        console.log(vacantValues);
         if(res.locals.companyLogged){
-            companyUser.find({"username" : req.session.username}, (err, email) => {
+            companyUser.findOne({"username" : req.session.username}, (err, email) => {
                 if (err) return res.status(500).send({
                     message: `Error al realizar la petición ${err}`
                 });
                 if (!email) return res.status(404).send({
                     message: `La vacante ${vacantId} no existe`
                 });
-                if(email[0].companyName == vacantValues[0].companyName){
+                console.log(email);
+                if(email.companyName == vacantValues.companyName){
                     postulations.find({"idVacant": vacantId}, (err, postValues)=>{
                         if (err) return res.status(500).send({
                             message: `Error al realizar la petición ${err}`
@@ -222,18 +224,30 @@ router.get('/vacante/:vacantId', authAccount, (req, res) => {
                             message: `La vacante ${vacantId} no existe`
                         });
                         console.log("Posts: ", postValues);
-                        res.render('job', {vacantVals: vacantValues, postVals: postValues});
+                        res.render('job', {vacantVals: vacantValues, postVals: postValues, post: undefined});
                     }).lean();
                 }
                 else{
                     console.log("company view");
-                    res.render('job', {vacantVals: vacantValues, postVals: undefined});
+                    res.render('job', {vacantVals: vacantValues, postVals: undefined, post: undefined});
                 }
             }).lean();
         }
         else{
-            console.log("user view");
-            res.render('job', {vacantVals: vacantValues, postVals: undefined});
+            postulations.find({"idVacant": vacantId, "studentEmail": req.session.username}, (err, postData)=>{
+                if (err) return res.status(500).send({
+                    message: `Error al realizar la petición ${err}`
+                });
+                if (!postData) return res.status(404).send({
+                    message: `El usuario ${idUser} no existe`
+                });
+                if(postData.length >= 1){
+                    res.render("job", {vacantVals: vacantValues, postVals: undefined, post: false});
+                }
+                else{
+                    res.render('job', {vacantVals: vacantValues, postVals: undefined, post: true});
+                }
+            }).lean();   
         }
     }).lean();
 });

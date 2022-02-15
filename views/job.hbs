@@ -55,7 +55,7 @@
                 <p class="contentParagraph">{{requirements}}</p>
             </div>
  {{/vacantVals}}
-            {{#if userLogged}}
+            {{#if userLogged}}{{#if post}}
             <div class="col-12 d-flex justify-content-end">
                 <div class="col-3">
                      {{#vacantVals}}
@@ -67,7 +67,7 @@
     
                 </div>
             </div>
-            {{/if}}
+            {{/if}}{{/if}}
         </div>
 
         <!--
@@ -92,4 +92,5 @@
             <input type="text" class="form-control" disable value="Correo del estudiante: {{studentEmail}}" name="studentEmail">
         {{/postVals}}
     {{/if}}
+    
 </div>
