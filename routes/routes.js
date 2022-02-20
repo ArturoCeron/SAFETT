@@ -9,6 +9,7 @@ const authUser = require('../middleware/authUser');
 const authCompany = require('../middleware/authCompany');
 const authAccount = require('../middleware/authAccount');
 const redirectIfAuth = require('../middleware/redirectIfAuth');
+const { isBuffer } = require('util');
 
 //MODELS
 const companyUser = require("../models/companyUser");
@@ -29,6 +30,9 @@ const storeVacantController = require('../controllers/storeVacant');
 const newCompanyController = require('../controllers/storeCompany');
 const postulateStudent = require('../controllers/storePostulation');
 const userPostulations = require('../controllers/userPostulations');
+const searchVacants = require('../controllers/searchVacants');
+const searchCompanies = require('../controllers/searchCompanies');
+
 //Crear objeto router
 const router = express.Router();
 
@@ -51,14 +55,14 @@ router.use((req, res, next) =>{
     next();
 });
 
+
+// -------------------------------------------------- ROUTER.GET SECTION ------------------------------------------------------------
+
 //Página home
 router.get('/', (req,res) =>{
     console.log(req.session);
     res.render('home', {vacants: undefined, companies: undefined});
 });
-
-//POST SEARCH BAR
-router.post('/home', searchValues);
 
 //Metodo GET para logout
 router.get('/auth/logout', logoutController);
@@ -66,15 +70,13 @@ router.get('/auth/logout', logoutController);
 //Página login
 router.get('/auth/login', redirectIfAuth, loginController);
 
-//Pagina de inicio de usuarios
-router.post('/users/login', redirectIfAuth, loginUserController);
-
 //Pagina para registro de usuarios
 router.get('/users/register', redirectIfAuth, newUser);
 
-//Post para el registro
-const { isBuffer } = require('util');
-router.post('/users/register', redirectIfAuth, newUserController);
+//Nueva Vacante
+router.get('/nuevaVacante', (req, res) => {
+    res.render('newVacant');
+});
 
 //Perfil de Alumno
 router.get('/perfilAspirante', authAccount, (req, res) => {
@@ -144,8 +146,6 @@ router.get('/perfilEmpresa', authAccount, (req, res) => {
     }).lean();
 });
 
-
-
 //Vacantes
 router.get('/empleos', (req, res) => {
     companyVacant.find({}, (err, vacantsData)=>{
@@ -155,7 +155,8 @@ router.get('/empleos', (req, res) => {
         if (!vacantsData) return res.status(404).send({
             message: `La vacante no existe`
         });
-        res.render('vacants', {vacantsData: vacantsData});
+        console.log(vacantsData.length);
+        res.render('vacants', {vacantsData: vacantsData, numVacants: vacantsData.length, search: undefined});
     }).lean();
 });
 
@@ -168,7 +169,7 @@ router.get('/empresas', (req, res) => {
         if (!companiesData) return res.status(404).send({
             message: `La vacante no existe`
         });
-        res.render('companies', {companiesData});
+        res.render('companies', {companiesData: companiesData, numCompanies: companiesData.length, search: undefined});
     }).lean();
 });
 
@@ -252,27 +253,11 @@ router.get('/vacante/:vacantId', authAccount, (req, res) => {
     }).lean();
 });
 
-router.post('/vacants/postulate/:vacantId', authAccount, postulateStudent);
-
-//Nueva Vacante
-router.get('/nuevaVacante', (req, res) => {
-    res.render('newVacant');
-});
-
-//DELETE VACANT
-router.delete('/vacants/delete/:vacantId', authCompany, deleteVacant);
-
-//Registrar Vacante
-router.post('/vacants/register', authCompany, storeVacantController);
-
 //RENDER TEMPORAL
 //REGISTER COMPANY
 router.get('/company/register', (req, res) => {
     res.render('companyRegister');
 });
-
-//POST REGISTER COMPANY
-router.post('/company/register', redirectIfAuth, newCompanyController);
 
 router.get('/myPosts', authUser, userPostulations);
 
@@ -280,6 +265,33 @@ router.get('/myPosts', authUser, userPostulations);
 router.get('/contacto',(req, res) => {
     res.render('contact');
 });
+
+// -------------------------------------------------- ROUTER.POST SECTION ------------------------------------------------------------
+
+//POST SEARCH BAR
+router.post('/home', searchValues);
+
+//Pagina de inicio de usuarios
+router.post('/users/login', redirectIfAuth, loginUserController);
+
+//Post para el registro
+router.post('/users/register', redirectIfAuth, newUserController);
+
+router.post('/vacants/postulate/:vacantId', authAccount, postulateStudent);
+
+router.post('/empleos', searchVacants);
+
+router.post('/empresas', searchCompanies);
+//Registrar Vacante
+router.post('/vacants/register', authCompany, storeVacantController);
+
+//POST REGISTER COMPANY
+router.post('/company/register', redirectIfAuth, newCompanyController);
+
+// -------------------------------------------------- ROUTER.DELETE SECTION ------------------------------------------------------------
+
+//DELETE VACANT
+router.delete('/vacants/delete/:vacantId', authCompany, deleteVacant);
 
 //Página home
 router.use((req,res) =>{

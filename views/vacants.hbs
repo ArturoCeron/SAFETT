@@ -1,25 +1,28 @@
-<div id="mini-banner" class="container-fluid">
-    <div class="container">
-        <div class="col">
-            <div id="vacantsSearchBar" class="row">
-                <div class="col-4">
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text"><i id="searchIcon" class="material-icons">search</i></span>
+<form action="/empleos" method="POST">
+    <div id="mini-banner" class="container-fluid">
+        <div class="container">
+            <div class="col">
+                <div id="vacantsSearchBar" class="row">
+                    <div class="col-4">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i id="searchIcon"
+                                        class="material-icons">search</i></span>
+                            </div>
+                            <input type="text" id="buscarEmpresa" class="form-control" placeholder="Puesto o empresa" name="search">
                         </div>
-                        <input type="text" id="buscarEmpresa" class="form-control" placeholder="Puesto o empresa">
                     </div>
-                </div>
-                <div class="col-auto">
-                    <button class="buttonBorder btn btn-outline-success" type="submit">Buscar</button>
+                    <div class="col-auto">
+                        <button class="buttonBorder btn btn-outline-success">Buscar</button>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
+</form>
 
 <div class="container">
-    <p id="searchMatches"><b>19</b> empleos de <b>software development</b></p>
+    <p id="searchMatches"><b>{{numVacants}}</b> empleos {{#if search}} de <b>{{search}}</b>{{/if}} encontrados</p>
     <hr id="searchDivider" class="contentDivider">
     <div class="row">
         <div class="col-11">

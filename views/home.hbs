@@ -1,4 +1,4 @@
-<form action="/home" method="POST">
+<form action="/empleos" method="POST">
     <div id="main-banner" class="container-fluid">
         <div class="container">
             <div class="col">
@@ -9,8 +9,7 @@
                                 <span class="input-group-text"><i id="searchIcon"
                                         class="material-icons">search</i></span>
                             </div>
-                            <input type="text" id="buscarEmpresa" class="form-control" placeholder="Puesto o empresa"
-                                name="search">
+                            <input type="text" id="buscarEmpresa" class="form-control" placeholder="Encontrar vacantes" name="search">
                         </div>
                     </div>
                     <div class="col-auto">
@@ -65,32 +64,5 @@
         <div class="col-5">
             <img class="homeImage" src="img/person1.png">
         </div>
-        <!--
-        <h1> Empresas </h1>
-        {{#companies}}
-        <input type="text" class="form-control" disable value="Organizacion: {{companyName}}" name="companyName">
-        <input type="text" class="form-control" disable value="Giro: {{companyBusiness}}" name="companyBusiness">
-        <input type="text" class="form-control" disable value="Actividad Principal: {{mainRole}}" name="mainRole">
-        <input type="text" class="form-control" disable value="Numero Empleados: {{quantityEmployees}}"
-            name="quantityEmployees">
-        <input type="text" class="form-control" disable value="Pagina web: {{webPage}}" name="webPage">
-        {{/companies}}
-
-        <h1> Vacantes </h1>
-        {{#vacants}}    
-                    <input type="text" class="form-control" disable value="Nombre de la vacante: {{name}}" name="name">
-                    <input type="text" class="form-control" disable value="Nombre de empresa: {{companyName}}" name="companyName">
-                    <input type="text" class="form-control" disable value="Detalles: {{details}}" name="details">
-                    <input type="text" class="form-control" disable value="Requerimientos: {{requirements}}" name="requirements">
-                    <input type="text" class="form-control" disable value="Area: {{area}}" name="area">
-                    <input type="text" class="form-control" disable value="Tipo Contrato: {{typeContract}}" name="typeContract">
-                    <input type="text" class="form-control" disable value="Horario: {{schedule}}" name="schedule">
-                    <input type="text" class="form-control" disable value="Cantidad vacantes: {{quantityVacants}}" name="quantityVacants">
-                    <input type="text" class="form-control" disable value="Salario: {{salary}}" name="salary"><br>
-                    <form action="vacante/{{_id}}" method="get">
-                                    <button class="buttonSolid btn btn-outline-success btn-wide buttonSmall">Ver más</button>
-                    </form>
-        {{/vacants}}
-        -->
     </div>
 </div>
