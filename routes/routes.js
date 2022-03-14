@@ -8,6 +8,7 @@ const expressSession = require('express-session');
 const authUser = require('../middleware/authUser');
 const authCompany = require('../middleware/authCompany');
 const authAccount = require('../middleware/authAccount');
+const authAdmin = require('../middleware/authAdmin');
 const redirectIfAuth = require('../middleware/redirectIfAuth');
 const { isBuffer } = require('util');
 
@@ -17,6 +18,7 @@ const companyVacant = require('../models/vacants');
 const Company = require('../models/companies');
 const postulations = require('../models/postulations');
 const usersInfo = require('../models/user');
+const adminUser = require("../models/adminUsers");
 
 //CONTROLLERS
 const searchValues = require('../controllers/search');
@@ -28,6 +30,7 @@ const deleteVacant = require('../controllers/deleteVacant');
 const newUserController = require('../controllers/storeUser');
 const storeVacantController = require('../controllers/storeVacant');
 const newCompanyController = require('../controllers/storeCompany');
+const newAdminController = require('../controllers/storeAdmin');
 const postulateStudent = require('../controllers/storePostulation');
 const userPostulations = require('../controllers/userPostulations');
 const searchVacants = require('../controllers/searchVacants');
@@ -51,7 +54,7 @@ router.use((req, res, next) =>{
     res.locals.loggedIn = req.session.username || null;
     res.locals.companyLogged = req.session.role || null;
     res.locals.userLogged = req.session.logged || null;
-    res.locals.adminLogged = true;
+    res.locals.adminLogged = req.session.adminrole || null;
     next();
 });
 
@@ -76,6 +79,21 @@ router.get('/users/register', redirectIfAuth, newUser);
 //Nueva Vacante
 router.get('/nuevaVacante', (req, res) => {
     res.render('newVacant');
+});
+
+//Pagina de información de empresas Administrador
+router.get('/mainAdmin/empresas', (req, res) => {
+    Company.find({}, (err, companies) => {
+        if(err) return res.status(500).send({
+            message: `Error al realizar la petición ${err}`
+        });
+
+        if(!companies) return res.status(404).send({
+            message: 'No existen empresas'
+        });
+        
+        res.render('adminOptions/companiesAdmin', {companies});
+    }).lean();
 });
 
 //Perfil de Alumno
@@ -266,6 +284,11 @@ router.get('/contacto',(req, res) => {
     res.render('contact');
 });
 
+//register admin
+router.get('/admin/register', (req, res) => {
+    res.render('adminRegister');
+});
+
 // -------------------------------------------------- ROUTER.POST SECTION ------------------------------------------------------------
 
 //POST SEARCH BAR
@@ -282,6 +305,10 @@ router.post('/vacants/postulate/:vacantId', authAccount, postulateStudent);
 router.post('/empleos', searchVacants);
 
 router.post('/empresas', searchCompanies);
+
+//post register admin
+router.post('/admin/register', authAdmin, newAdminController);
+
 //Registrar Vacante
 router.post('/vacants/register', authCompany, storeVacantController);
 

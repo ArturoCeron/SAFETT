@@ -1,5 +1,7 @@
 <!-- Footer -->
 <footer>
+    {{#if adminLogged}}
+    {{else}}
     <div id="footerContainer" class="container-fluid">
         <div class="container">
             <div id="footerContent" class="row">
@@ -15,5 +17,6 @@
             </div>
         </div>
     </div>
+    {{/if}}
 </footer>
 <!-- Footer -->

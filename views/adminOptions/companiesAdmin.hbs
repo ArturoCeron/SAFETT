@@ -1,0 +1,41 @@
+<div class="container" style="margin-left:20%; width: 75%">
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Fecha</th>
+      <th scope="col">Empresa</th>
+      <th scope="col">Vacantes</th>
+      <th scope="col">Publicadas</th>
+      <th scope="col">Contacto</th>
+    </tr>
+  </thead>
+  <tbody>
+      {{#companies}}
+      <tr>
+        <td>{{companyName}}</td>
+        <td>{{companyName}}</td>
+        <td>{{companyName}}</td>
+        <td>{{companyName}}</td>
+        <td>{{companyName}}</td>
+        <td>{{contactName}}<br>
+            {{contactMail}}<br>
+            {{contactPhone}}</td>
+        <!--
+        <td>
+          <form action="/api/product/{{_id}}" method="GET">
+            <button type="submit" class="btn btn-primary">Editar</button>
+          </form>
+        </td>
+        
+        <td>
+          <form action="/api/product/{{_id}}" method="delete">
+            <button type="submit" class="btn btn-primary">Eliminar</button>-->
+            <!--<button type="submit" formaction="/api/product/{{products._id}}?_method=delete" method = "POST" class="btn btn-primary">Eliminar</button>-->
+          <!--</form>
+        </td>-->
+      </tr>
+      {{/companies}}
+    </tbody>
+</table>
+</div>
