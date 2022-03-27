@@ -27,7 +27,11 @@ const postulaciones = new Schema({
     studentEmail: {
         type: String,
         required: true
-    }
+    },
+    registerDate: {
+        type: String,
+        required: true
+    },
 });
 
 //export model

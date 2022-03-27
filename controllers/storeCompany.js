@@ -3,6 +3,7 @@
 const User = require('../models/companyUser');
 const Company = require('../models/companies');
 const path = require('path');
+var objDate = new Date();
 
 module.exports = (req, res)=>{
     let user = new User();
@@ -14,6 +15,7 @@ module.exports = (req, res)=>{
     user.phoneNumber = req.body.phoneNumber;
     user.title = req.body.title;
     user.role = "company";
+    user.registerDate = objDate.getDate() + "/" + (objDate.getMonth() + 1) + "/" + objDate.getFullYear();
     user.save( (error, user) =>{
         if (error) {
             console.log("Error en usuario")
@@ -38,6 +40,7 @@ module.exports = (req, res)=>{
     company.contactName = req.body.contactName;
     company.contactMail = req.body.contactMail;
     company.contactPhone = req.body.contactPhone;
+    company.registerDate = objDate.getDate() + "/" + (objDate.getMonth() + 1) + "/" + objDate.getFullYear();
     company.save( (error, company) =>{
         if (error) {
             console.log("Error en empresa")

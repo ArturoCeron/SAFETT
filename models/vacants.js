@@ -40,7 +40,11 @@ const vacantes = new Schema({
     schedule: {
         type: String,
         required: true
-    }
+    },
+    registerDate: {
+        type: String,
+        required: true
+    },
 });
 
 

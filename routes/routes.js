@@ -35,6 +35,7 @@ const postulateStudent = require('../controllers/storePostulation');
 const userPostulations = require('../controllers/userPostulations');
 const searchVacants = require('../controllers/searchVacants');
 const searchCompanies = require('../controllers/searchCompanies');
+//const getActualDate = require ('../controllers/getDateRegister');
 
 //Crear objeto router
 const router = express.Router();
@@ -91,8 +92,40 @@ router.get('/mainAdmin/empresas', (req, res) => {
         if(!companies) return res.status(404).send({
             message: 'No existen empresas'
         });
-        
-        res.render('adminOptions/companiesAdmin', {companies});
+        companyVacant.find({"companyName": companies.companyName}, (err, compVacant)=>{
+            if (err) return res.status(500).send({
+                message: `Error al realizar la petición ${err}`
+            });
+            if (!compVacant) return res.status(404).send({
+                message: `La empresa no existe`
+            });
+            res.render('adminOptions/companiesAdmin', {companies, compVacant});
+        }).lean();
+    }).lean();
+
+});
+
+//Pagina de información de vacantes Administrador
+router.get('/mainAdmin/vacantes', (req, res) => {
+    companyVacant.find({}, (err, vacants) => {
+        if(err) return res.status(500).send({
+            message: `Error al realizar la petición ${err}`
+        });
+
+        if(!vacants) return res.status(404).send({
+            message: 'No existen empresas'
+        });
+        console.log(vacants.length);
+        // companyVacant.find({"companyName": vacants.companyName}, (err, compVacant)=>{
+        //     if (err) return res.status(500).send({
+        //         message: `Error al realizar la petición ${err}`
+        //     });
+        //     if (!compVacant) return res.status(404).send({
+        //         message: `La empresa no existe`
+        //     });
+        //     res.render('adminOptions/vacantsAdmin', {vacants, compVacant});
+        // }).lean();
+        res.render('adminOptions/vacantsAdmin', {vacants: vacants, numVacants: vacants.length});
     }).lean();
 });
 

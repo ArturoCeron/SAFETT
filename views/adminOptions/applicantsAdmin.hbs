@@ -1,3 +1,9 @@
+<div class="container" style="margin-left:20%; width: 75%">
+<table class="table">
+  <thead>
+    <tr>
+      
+    </tr>
 <script>
   //Script check all checkboxes
   function toggle(source) {
@@ -33,22 +39,24 @@ $(document).ready(function(){
         </th>
         <th scope="col">#</th>
         <th scope="col">Fecha</th>
-        <th scope="col">Empresa</th>
-        <th scope="col">Vacantes</th>
-        <th scope="col">Contacto</th>
+        <th scope="col">Nombre</th>
+        <th scope="col">Grado de estudios</th>
+        <th scope="col">Carrera</th>
+        <th scope="col">Vacantes aplicadas</th>
       </tr>
     </thead>
     <tbody id="myTable">
-      {{#companies}}
+      
+      {{#applicants}}
       <tr>
         <td><input type="checkbox" name="check" /></td>
         <td></td>
         <td>{{registerDate}}</td>
+        <td>{{name}} {{lastName}}</td>
+        <td>{{area}}</td>
         <td>{{companyName}}</td>
-        <td>{{quantityVacants}}</td>
-        <td>{{contactName}}<br>
-          {{contactMail}}<br>
-          {{contactPhone}}</td>
+        <td>{{numVacants}}</td>
+        <td></td>
         <!--
         <td>
           <form action="/api/product/{{_id}}" method="GET">
@@ -63,7 +71,7 @@ $(document).ready(function(){
         <!--</form>
         </td>-->
       </tr>
-      {{/companies}}
+      {{/applicants}}
     </tbody>
   </table>
 </div>

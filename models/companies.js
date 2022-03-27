@@ -69,6 +69,14 @@ const empresasSchema = new Schema({
         type: String,
         required: true
     },
+    registerDate: {
+        type: String,
+        required: true
+    },
+    // quantityVacants: {
+    //     type: Number,
+    //     default: 0
+    // },
 });
 
 

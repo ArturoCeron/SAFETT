@@ -4,6 +4,7 @@ const companyVacant = require('../models/vacants');
 const postulation = require('../models/postulations');
 const users = require('../models/user');
 const path = require('path');
+var objDate = new Date();
 
 module.exports = (req, res)=>{
     let postVacant = new postulation();
@@ -19,6 +20,7 @@ module.exports = (req, res)=>{
         postVacant.idVacant = vacantData._id;
         postVacant.vacantName = vacantData.name;
         postVacant.companyName = vacantData.companyName;
+        postVacant.registerDate = objDate.getDate() + "/" + (objDate.getMonth() + 1) + "/" + objDate.getFullYear();
         users.findOne(idUser, (err, userData)=>{
             if (err) return res.status(500).send({
                 message: `Error al realizar la petición ${err}`

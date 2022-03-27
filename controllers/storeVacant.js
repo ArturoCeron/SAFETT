@@ -3,7 +3,7 @@
 const companyVacant = require('../models/vacants');
 const companyUser = require('../models/companyUser');
 const path = require('path');
-
+var objDate = new Date();
 
 module.exports = (req, res)=>{
     let vacante = new companyVacant();
@@ -15,6 +15,7 @@ module.exports = (req, res)=>{
     vacante.salary = req.body.salary;
     vacante.typeContract = req.body.contract;
     vacante.schedule = req.body.schedule;
+    vacante.registerDate = objDate.getDate() + "/" + (objDate.getMonth() + 1) + "/" + objDate.getFullYear();
     let idUser = req.session;
     companyUser.find(idUser, (err, userData)=>{
         if (err) return res.status(500).send({

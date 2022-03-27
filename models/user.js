@@ -27,6 +27,10 @@ const UserSchema = new Schema({
         type: String,
         required: true
     },
+    registerDate: {
+        type: String,
+        required: true
+    }
 });
 
 UserSchema.pre('save', function (next){
