@@ -8,62 +8,201 @@
   }
 </script>
 <script>
-//Script Search in table
-$(document).ready(function(){
-  $("#myInput").on("keyup", function() {
-    var value = $(this).val().toLowerCase();
-    $("#myTable tr").filter(function() {
-      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+  //Script Search in table
+  $(document).ready(function () {
+    $("#myInput").on("keyup", function () {
+      var value = $(this).val().toLowerCase();
+      $("#myTable tr").filter(function () {
+        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+      });
     });
   });
-});
+</script>
+
+{{!--
+<script>
+  function colFilter() {
+    var table = document.getElementById('myTable');
+    var num = document.getElementById("numFilter").value.toLowerCase();
+    var date = document.getElementById("dateFilter").value.toLowerCase();
+    var company = document.getElementById("compFilter").value.toLowerCase();
+    var vacants = document.getElementById("vacFilter").value.toLowerCase();
+    var contact = document.getElementById("contFilter").value.toLowerCase();
+    var col1 = [], col2 = [], col3 = [], col4 = [], col5 = [];
+
+    for (var i = 0; i < table.rows.length; i++) {
+      for (var j = 0; j < 5; j++) {
+        if (j == 0) { col1.push(table.rows[i].cells[j + 1].innerHTML.toLowerCase()); }
+        if (j == 1) { col2.push(table.rows[i].cells[j + 1].innerHTML.toLowerCase()); }
+        if (j == 2) { col3.push(table.rows[i].cells[j + 1].innerHTML.toLowerCase()); }
+        if (j == 3) { col4.push(table.rows[i].cells[j + 1].innerHTML.toLowerCase()); }
+        if (j == 4) { col5.push(table.rows[i].cells[j + 1].innerHTML.toLowerCase().replaceAll(/<br>/g, ", ")); }
+      }
+    }
+    console.log(col1);
+    console.log(col2);
+    console.log(col3);
+    console.log(col4);
+    console.log(col5);
+    const result = col1.filter(word => word.length == 6);
+  }
+</script> --}}
+
+<script>
+  $(document).ready(function () {
+
+    $('.filterable .filters input').keyup(function (e) {
+      /* Ignore tab key */
+      var code = e.keyCode || e.which;
+      if (code == '9') return;
+      /* Useful DOM data and selectors */
+      var $input = $(this),
+        inputContent = $input.val().toLowerCase(),
+        $panel = $input.parents('.filterable'),
+        column = $panel.find('.filters th').index($input.parents('th')),
+        $table = $panel.find('.table'),
+        $rows = $table.find('tbody tr');
+      /* Dirtiest filter function ever ;) */
+      var $filteredRows = $rows.filter(function () {
+        var value = $(this).find('td').eq(column).text().toLowerCase();
+        return value.indexOf(inputContent) === -1;
+      });
+      /* Clean previous no-result if exist */
+      $table.find('tbody .no-result').remove();
+      /* Show all rows, hide filtered ones (never do that outside of a demo ! xD) */
+      $rows.show();
+      $filteredRows.hide();
+      /* Prepend no-result row if all rows are filtered */
+      if ($filteredRows.length === $rows.length) {
+        $table.find('tbody').prepend($('<tr class="no-result text-center"><td colspan="' + $table.find('.filters th').length + '">No result found</td></tr>'));
+      }
+    });
+  });
+</script>
+
+
+
+
+
+
+<script type="text/javascript" src="https://unpkg.com/xlsx@0.15.1/dist/xlsx.full.min.js"></script>
+
+<script type="text/javascript">
+  function exportReportToExcel(type, fn, dl) {
+    var checks = document.getElementsByClassName('check');
+    var fullTable = document.getElementById('tableExport');
+    var elt = document.getElementById('myTable');
+    var head = document.getElementById('tableHead');
+    var element = document.getElementById("here");
+    var table = document.createElement("table");
+    var tblBody = document.createElement("tbody");
+    for (var i = 0; i < elt.rows.length; i++) {
+      if (i == 0) {
+        var tblHead = document.createElement("tr");
+        var num1 = head.rows[0].cells[1].innerHTML;
+        var date1 = head.rows[0].cells[2].innerHTML;
+        var company1 = head.rows[0].cells[3].innerHTML;
+        var vacants1 = head.rows[0].cells[4].innerHTML;
+        var contact1 = head.rows[0].cells[5].innerHTML;
+        var newthead = [num1, date1, company1, vacants1, contact1];
+
+        for (var CELL of newthead) {
+          var tblh = document.createElement("td");
+          var txtCell = document.createTextNode(CELL);
+          tblh.appendChild(txtCell);
+          tblHead.appendChild(tblh);
+        }
+        tblBody.appendChild(tblHead);
+        table.appendChild(tblBody);
+      }
+      if (checks.item(i).checked == true) {
+        var trow = document.createElement("tr");
+        var num2 = i + 1;
+        var date2 = elt.rows[i].cells[2].innerHTML;
+        var company2 = elt.rows[i].cells[3].innerHTML;
+        var vacants2 = elt.rows[i].cells[4].innerHTML;
+        var contact2 = elt.rows[i].cells[5].innerHTML;
+        contact2 = contact2.replaceAll(/<br>/g, ", ")
+        var newlist = [num2, date2, company2, vacants2, contact2];
+        for (var CELL of newlist) {
+          var tcell = document.createElement("td");
+          var txtCell = document.createTextNode(CELL);
+          tcell.appendChild(txtCell);
+          trow.appendChild(tcell);
+        }
+        tblBody.appendChild(trow);
+        table.appendChild(tblBody);
+      }
+
+    }
+    var wb = XLSX.utils.table_to_book(table, { sheet: "sheet1" });
+    return dl ?
+      XLSX.write(wb, { bookType: type, bookSST: true, type: 'base64' }) :
+      XLSX.writeFile(wb, fn || ('MySheetName.' + (type || 'xlsx')));
+  }
 </script>
 <br>
 <div class="container" style="margin-left:20%; width: 75%">
-  <div>
-    <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Buscar en todo">
+  <div class="row">
+    <div class="panel panel-primary filterable">
+      <div class="panel-heading">
+        <div class="pull-right">
+        </div>
+      </div>
+      <div class="row">
+        <br><br><br>
+        <h1>Empresas</h1>
+        <font size="2" style="color: #8994A0;">Pagina para admisión y Administración de empresas</font>
+        <br><br><br>
+        <div class="col">
+          <input type="text" id="myInput" placeholder="Buscar en todo">
+        </div>
+        <div class="col">
+          <button class="btn btn-success" style="float: right;" id="btnExport"
+            onclick="exportReportToExcel('xlsx')"><img
+              src="https://cdn.icon-icons.com/icons2/195/PNG/256/Excel_2013_23480.png"
+              style="margin-right:0.5em; width: 10%">Descargar(.xls)</button>
+        </div>
+      </div>
+      <table class="table" id="tableExport">
+        <thead id="tableHead">
+          <tr class="table filters" style="background-color: #3067A0">
+            <th>
+              <div class="container">
+                <input type="checkbox" onClick="toggle(this)" class="text-center" /><br />
+              </div>
+            </th>
+            <th style="color: #FFFFFF" scope="col">#<input type="text" id="numFilter" class="form-control"
+                placeholder="#" /></th>
+            <th style="color: #FFFFFF" scope="col">Fecha<input type="text" id="dateFilter" class="form-control"
+                placeholder="Fecha" /></th>
+            <th style="color: #FFFFFF" scope="col">Empresa<input type="text" id="compFilter" class="form-control"
+                placeholder="Empresa" />
+            </th>
+            <th style="color: #FFFFFF" scope="col">Vacantes<input type="text" id="vacFilter" class="form-control"
+                placeholder="Vacantes" />
+            </th>
+            <th style="color: #FFFFFF" scope="col">Contacto<input type="text" id="contFilter" class="form-control"
+                placeholder="Contacto" />
+            </th>
+          </tr>
+        </thead>
+        <tbody id="myTable">
+          {{#companies}}
+          <tr>
+            <td><input type="checkbox" name="check" class="check"></td>
+            <td id="number" onclick="window.location='/mainAdmin/empresa/{{_id}}';"></td>
+            <td id="date" onclick="window.location='/mainAdmin/empresa/{{_id}}';">{{registerDate}}</td>
+            <td id="company" onclick="window.location='/mainAdmin/empresa/{{_id}}';">{{companyName}}</td>
+            <td id="vacants" onclick="window.location='/mainAdmin/empresa/{{_id}}';">{{quantityVacants}}</td>
+            <td id="contact" onclick="window.location='/mainAdmin/empresa/{{_id}}';">{{contactName}}<br>
+              {{contactMail}}<br>
+              {{contactPhone}}</td>
+          </tr>
+          {{/companies}}
+        </tbody>
+      </table>
+      <br>
+    </div>
   </div>
-  <table class="table" border="1">
-    <thead>
-      <tr class="table-primary">
-        <th scope="col">
-          <div class="container">
-            <input type="checkbox" onClick="toggle(this)" class="text-center" /><br />
-          </div>
-        </th>
-        <th scope="col">#</th>
-        <th scope="col">Fecha</th>
-        <th scope="col">Empresa</th>
-        <th scope="col">Vacantes</th>
-        <th scope="col">Contacto</th>
-      </tr>
-    </thead>
-    <tbody id="myTable">
-      {{#companies}}
-      <tr>
-        <td><input type="checkbox" name="check" /></td>
-        <td></td>
-        <td>{{registerDate}}</td>
-        <td>{{companyName}}</td>
-        <td>{{quantityVacants}}</td>
-        <td>{{contactName}}<br>
-          {{contactMail}}<br>
-          {{contactPhone}}</td>
-        <!--
-        <td>
-          <form action="/api/product/{{_id}}" method="GET">
-            <button type="submit" class="btn btn-primary">Editar</button>
-          </form>
-        </td>
-        
-        <td>
-          <form action="/api/product/{{_id}}" method="delete">
-            <button type="submit" class="btn btn-primary">Eliminar</button>-->
-        <!--<button type="submit" formaction="/api/product/{{products._id}}?_method=delete" method = "POST" class="btn btn-primary">Eliminar</button>-->
-        <!--</form>
-        </td>-->
-      </tr>
-      {{/companies}}
-    </tbody>
-  </table>
 </div>

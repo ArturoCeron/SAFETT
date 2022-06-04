@@ -17,6 +17,10 @@ const empresasSchema = new Schema({
         type: Number,
         required: true
     },
+    quantityVacantsC: {
+        type: Number,
+        required: true
+    },
     mainRole: {
         type: String,
         required: true
@@ -61,11 +65,23 @@ const empresasSchema = new Schema({
         type: String,
         required: true
     },
+    contactLastname: {
+        type: String,
+        required: true
+    },
     contactMail: {
         type: String,
         required: true
     },
     contactPhone: {
+        type: String,
+        required: true
+    },
+    contactCharge: {
+        type: String,
+        required: true
+    },
+    contactExt: {
         type: String,
         required: true
     },

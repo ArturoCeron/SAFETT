@@ -5,6 +5,7 @@ const { resolveSoa } = require('dns');
 const express = require('express');
 const path = require('path');
 const expressSession = require('express-session');
+const methodOverride = require('method-override');
 const authUser = require('../middleware/authUser');
 const authCompany = require('../middleware/authCompany');
 const authAccount = require('../middleware/authAccount');
@@ -82,6 +83,8 @@ router.get('/nuevaVacante', (req, res) => {
     res.render('newVacant');
 });
 
+
+
 //Pagina de información de empresas Administrador
 router.get('/mainAdmin/empresas', (req, res) => {
     Company.find({}, (err, companies) => {
@@ -105,6 +108,27 @@ router.get('/mainAdmin/empresas', (req, res) => {
 
 });
 
+router.get('/mainAdmin/empresa/:companyId', (req, res) => {
+    let companyId = req.params.companyId;
+    Company.findById(companyId, (err, datosPerfil)=>{
+        if (err) return res.status(500).send({
+            message: `Error al realizar la petición ${err}`
+        });
+        if (!datosPerfil) return res.status(404).send({
+            message: `El la empresa ${companyId} no existe`
+        });
+        companyVacant.find({"companyName": datosPerfil.companyName}, (err, vacantData)=>{
+            if (err) return res.status(500).send({
+                message: `Error al realizar la petición ${err}`
+            });
+            if (!vacantData) return res.status(404).send({
+                message: `La empresa ${userData[0].companyName} no existe`
+            });
+            res.render('adminOptions/companiesEdit', {datosPerfil, vacantData});
+        }).lean();
+    }).lean();
+});
+
 //Pagina de información de vacantes Administrador
 router.get('/mainAdmin/vacantes', (req, res) => {
     companyVacant.find({}, (err, vacants) => {
@@ -116,17 +140,53 @@ router.get('/mainAdmin/vacantes', (req, res) => {
             message: 'No existen empresas'
         });
         console.log(vacants.length);
-        // companyVacant.find({"companyName": vacants.companyName}, (err, compVacant)=>{
-        //     if (err) return res.status(500).send({
-        //         message: `Error al realizar la petición ${err}`
-        //     });
-        //     if (!compVacant) return res.status(404).send({
-        //         message: `La empresa no existe`
-        //     });
-        //     res.render('adminOptions/vacantsAdmin', {vacants, compVacant});
-        // }).lean();
-        res.render('adminOptions/vacantsAdmin', {vacants: vacants, numVacants: vacants.length});
+        companyVacant.find({"companyName": vacants.companyName}, (err, compVacant)=>{
+             if (err) return res.status(500).send({
+                 message: `Error al realizar la petición ${err}`
+            });
+             if (!compVacant) return res.status(404).send({
+                 message: `La empresa no existe`
+             });
+             res.render('adminOptions/vacantsAdmin', {vacants, compVacant});
+         }).lean();
+        //res.render('adminOptions/vacantsAdmin', {vacants: vacants, numVacants: vacants.length});
     }).lean();
+});
+
+router.get('/mainAdmin/vacante/:vacantId', (req, res) => {
+    let vacantId = req.params.vacantId;
+    companyVacant.findById(vacantId, (err, datosVacante)=>{
+        if (err) return res.status(500).send({
+            message: `Error al realizar la petición ${err}`
+        });
+        if (!datosVacante) return res.status(404).send({
+            message: `El la empresa ${companyId} no existe`
+        });
+        Company.find({"companyName": datosVacante.companyName}, (err, datosEmpresa)=>{
+            if (err) return res.status(500).send({
+                message: `Error al realizar la petición ${err}`
+            });
+            if (!datosEmpresa) return res.status(404).send({
+                message: `La empresa ${userData[0].companyName} no existe`
+            });
+            res.render('adminOptions/vacantsEdit', {datosVacante, datosEmpresa});
+        }).lean();
+    }).lean();
+});
+
+//Pagina de información de aspirantes Administrador
+router.get('/mainAdmin/aspirantes', (req, res) => {
+    usersInfo.find({}, (err, applicants) => {
+        if(err) return res.status(500).send({
+            message: `Error al realizar la petición ${err}`
+        });
+
+        if(!applicants) return res.status(404).send({
+            message: 'No existe el usuario'
+        });
+        res.render('adminOptions/applicantsAdmin', {applicants});
+    }).lean();
+
 });
 
 //Perfil de Alumno
@@ -141,6 +201,29 @@ router.get('/perfilAspirante', authAccount, (req, res) => {
         });
         res.render('applicantProfile', {userProfile: userData});
     }).lean();
+});
+
+//Modificación del perfil del alumno por el alumno
+/*const putUser = require('../controllers/modifyUser');
+router.put('/perfilAspirante/:userID', putUser);*/
+
+router.use(methodOverride('_method'));
+router.put('/perfilAspirante/:userID', (req, res) => {
+    let userID = req.params.userID;
+    let update = req.body;
+    usersInfo.findByIdAndUpdate(userID, update, (err, users) => {
+        if(err) return res.status(500).send({
+            message: `Error al actualizar el usuario ${err}`
+        });
+
+        if(!users) return res.status(404).send({
+            message: 'El usuario no existe'
+        });
+
+        //res.status(200).send({products});
+
+        res.redirect('/perfilAspirante');
+    });
 });
 
 //Prefil de Empresa visto desde alumno

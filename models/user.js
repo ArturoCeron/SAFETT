@@ -23,6 +23,30 @@ const UserSchema = new Schema({
         type: String,
         required: true
     },
+    age: {
+        type: Number,
+        required: true
+    },
+    career:{
+        type: String,
+        required: true
+    },
+    lvlStudy: {
+        type:String,
+        required: true
+    },
+    presentation: {
+        type: String,
+        required: true
+    },
+    phone: {
+        type: Number,
+        required: true
+    },
+    email: {
+        type:String,
+        required: true
+    },
     role: {
         type: String,
         required: true
@@ -30,6 +54,10 @@ const UserSchema = new Schema({
     registerDate: {
         type: String,
         required: true
+    },
+    profilePhoto: {
+        data: Buffer,
+        contentType: String
     }
 });
 

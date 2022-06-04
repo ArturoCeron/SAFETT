@@ -1,9 +1,3 @@
-<div class="container" style="margin-left:20%; width: 75%">
-<table class="table">
-  <thead>
-    <tr>
-      
-    </tr>
 <script>
   //Script check all checkboxes
   function toggle(source) {
@@ -24,11 +18,69 @@ $(document).ready(function(){
   });
 });
 </script>
+
+<script type="text/javascript" src="https://unpkg.com/xlsx@0.15.1/dist/xlsx.full.min.js"></script>
+
+<script type="text/javascript">
+  function exportReportToExcel(type, fn, dl) {
+    var checks = document.getElementsByClassName('check');
+    var fullTable = document.getElementById('tableExport');
+    var elt = document.getElementById('myTable');
+    var head = document.getElementById('tableHead');
+    var element = document.getElementById("here");
+    var table = document.createElement("table");
+    var tblBody = document.createElement("tbody");
+    for (var i = 0; i < elt.rows.length; i++) {
+      if (i == 0) {
+        var tblHead = document.createElement("tr");
+        var num1 = head.rows[0].cells[1].innerHTML;
+        var date1 = head.rows[0].cells[2].innerHTML;
+        var company1 = head.rows[0].cells[3].innerHTML;
+        var vacants1 = head.rows[0].cells[4].innerHTML;
+        var contact1 = head.rows[0].cells[5].innerHTML;
+        var newthead = [num1, date1, company1, vacants1, contact1];
+
+        for (var CELL of newthead) {
+          var tblh = document.createElement("td");
+          var txtCell = document.createTextNode(CELL);
+          tblh.appendChild(txtCell);
+          tblHead.appendChild(tblh);
+        }
+        tblBody.appendChild(tblHead);
+        table.appendChild(tblBody);
+      }
+          if (checks.item(i).checked == true) {
+            var trow = document.createElement("tr");
+            var num2 = i + 1;
+            var date2 = elt.rows[i].cells[2].innerHTML;
+            var company2 = elt.rows[i].cells[3].innerHTML;
+            var vacants2 = elt.rows[i].cells[4].innerHTML;
+            var contact2 = elt.rows[i].cells[5].innerHTML;
+            contact2 = contact2.replaceAll(/<br>/g,", ")
+            var newlist = [num2, date2, company2, vacants2, contact2];
+            for (var CELL of newlist) {
+              var tcell = document.createElement("td");
+              var txtCell = document.createTextNode(CELL);
+              tcell.appendChild(txtCell);
+              trow.appendChild(tcell);
+            }
+            tblBody.appendChild(trow);
+            table.appendChild(tblBody);
+          }
+      
+    }
+    var wb = XLSX.utils.table_to_book(table, { sheet: "sheet1" });
+    return dl ?
+      XLSX.write(wb, { bookType: type, bookSST: true, type: 'base64' }) :
+      XLSX.writeFile(wb, fn || ('MySheetName.' + (type || 'xlsx')));
+  }
+</script>
 <br>
 <div class="container" style="margin-left:20%; width: 75%">
   <div>
     <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Buscar en todo">
   </div>
+  <button id="btnExport" onclick="exportReportToExcel('xlsx')">Descargar(.xls)</button>
   <table class="table" border="1">
     <thead>
       <tr class="table-primary">
@@ -48,28 +100,14 @@ $(document).ready(function(){
     <tbody id="myTable">
       
       {{#applicants}}
-      <tr>
-        <td><input type="checkbox" name="check" /></td>
-        <td></td>
-        <td>{{registerDate}}</td>
-        <td>{{name}} {{lastName}}</td>
-        <td>{{area}}</td>
-        <td>{{companyName}}</td>
-        <td>{{numVacants}}</td>
-        <td></td>
-        <!--
-        <td>
-          <form action="/api/product/{{_id}}" method="GET">
-            <button type="submit" class="btn btn-primary">Editar</button>
-          </form>
-        </td>
-        
-        <td>
-          <form action="/api/product/{{_id}}" method="delete">
-            <button type="submit" class="btn btn-primary">Eliminar</button>-->
-        <!--<button type="submit" formaction="/api/product/{{products._id}}?_method=delete" method = "POST" class="btn btn-primary">Eliminar</button>-->
-        <!--</form>
-        </td>-->
+        <tr>
+        <td><input type="checkbox" name="check" class="check"></td>
+        <td onclick="window.location='/mainAdmin/aspirante/{{_id}}';"></td>
+        <td onclick="window.location='/mainAdmin/aspirante/{{_id}}';">{{registerDate}}</td>
+        <td onclick="window.location='/mainAdmin/aspirante/{{_id}}';">{{name}}</td>
+        <td onclick="window.location='/mainAdmin/aspirante/{{_id}}';">Grado de estudios</td>
+        <td onclick="window.location='/mainAdmin/aspirante/{{_id}}';">Carrera</td>
+        <td onclick="window.location='/mainAdmin/aspirante/{{_id}}';">V. Aplicadas</td>
       </tr>
       {{/applicants}}
     </tbody>

@@ -10,6 +10,14 @@ module.exports = (req, res)=>{
     user.password = req.body.password;
     user.name = req.body.name;
     user.lastName = req.body.lastName;
+    user.age = req.body.age;
+    user.profilePhoto = req.body.profilePhoto;
+    user.sex = req.body.sex;
+    user.career = req.body.career;
+    user.lvlStudy = req.body.lvlStudy;
+    user.presentation = req.body.presentation;
+    user.email = req.body.emailContact;
+    user.phone = req.body.phone;
     user.role = "user";
     user.registerDate = objDate.getDate() + "/" + (objDate.getMonth() + 1) + "/" + objDate.getFullYear();
     user.save( (error, user) =>{

@@ -151,7 +151,7 @@ body{
     background-image: url('/css/searchicon.png'); /* Add a search icon to input */
     background-position: 10px 12px; /* Position the search icon */
     background-repeat: no-repeat; /* Do not repeat the icon image */
-    width: 25%; /* Full-width */
+    width: 125%; /* Full-width */
     font-size: 16px; /* Increase font-size */
     padding: 12px 20px 12px 40px; /* Add some padding */
     border: 1px solid #ddd; /* Add a grey border */
@@ -180,4 +180,60 @@ body{
     background-color: #f1f1f1;
   }
   
+  /*Side bar*/
+  .sidebar {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    padding: 58px 0 0; /* Height of navbar */
+    box-shadow: 0 2px 5px 0 rgb(0 0 0 / 5%), 0 2px 10px 0 rgb(0 0 0 / 5%);
+    width: 240px;
+    z-index: 600;
+  }
   
+  @media (max-width: 991.98px) {
+    .sidebar {
+      width: 100%;
+    }
+  }
+  .sidebar .active {
+    border-radius: 5px;
+    box-shadow: 0 2px 5px 0 rgb(0 0 0 / 16%), 0 2px 10px 0 rgb(0 0 0 / 12%);
+  }
+  
+  .sidebar-sticky {
+    position: relative;
+    top: 0;
+    height: calc(100vh - 48px);
+    padding-top: 0.5rem;
+    overflow-x: hidden;
+    overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
+  }
+
+  .logo {
+    display: inline-block;
+    vertical-align: top;
+    margin-right: 20px;
+   /* margin-top: -50px;*/    /* if you want it vertically middle of the navbar. */
+    margin-top: 10 px;
+}
+
+input[type="radio"]{
+    margin: 100 10px 100 10px;
+  }
+  textarea {
+    resize: none;
+  }
+
+  .image-upload>input {
+    display: none;
+  }
+  .image-upload img
+{
+    cursor: pointer;
+}
+.hide{
+    
+  display:none;
+}

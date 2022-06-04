@@ -1,4 +1,7 @@
-{{#userProfile}} 
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+<link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,600|Open+Sans" rel="stylesheet">
+{{#userProfile}}
+
 <div class="container-fluid">
     <div class="row justify-content-end">
         <div class="col-10" id="applicantInfoSection">
@@ -10,13 +13,18 @@
                     <p id="applicantName">{{name}} {{lastName}}</p>
                     <div class="row">
                         <div class="col">
-                            <p id="applicantDegree">Estudiante de Ingeniería en Sistemas Computacionales</p>
+                            <p id="applicantDegree">{{career}}</p>
                         </div>
                         <div class="col-auto">
-                            <p id="applicantDegree">Hombre · 22 años</p>
+                            <p id="applicantDegree">Hombre · {{age}} años</p>
                         </div>
                     </div>
                     <hr id="applicantNameDivider">
+                    <div class="row">
+                        <div class="col">
+                            <p id="applicantDegree">{{lvlStudy}}</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -26,22 +34,86 @@
 <div class="container">
     <div class="applicantInfoSection" id="applicantContactInfo">
         <p class="applicantInfoTitle">Presentación</p>
-        <p class="applicantInfoContent">David es un pensador sistemático, cooperativo y colaborador, orientado a seguir procedimientos. Trabaja más cómodo y eficazmente en ambientes y situaciones estructuradas y bien definidas. Comúnmente David actúa de una forma ordenada y predeterminada, además es preciso y presta atención a los detalles. Es cauteloso en la aproximación a los problemas y las decisiones. Difícilmente llegue a confrontar a colegas y normalmente actúa de una manera prudente y diplomática.. Es paciente y escucha cuidadosamente a otros, genuinamente interesado en sus ideas, opiniones e información. Expresa sus pensamientos e ideas mejor en un grupo pequeño y en situaciones de uno a uno. Es un buen “trabajador de equipo”. David trabajará para mantener la armonía en un grupo, mientras intenta satisfacer a la gente, en un esfuerzo por evitar el conflicto. David prefiere procedimientos operativos claros y consistentes y evitar los cambios repentinos o abruptos. A David lo motiva la seguridad, la consistencia y claridad en las instrucciones y las normas, como así también recibir constantes refuerzos positivos y reconfirmaciones de que está haciendo las cosas bien. David aplicará un estilo de pensamiento lógico y analítico al resolver los problemas. No quiere cometer errores y para evitarlos, aplicará un enfoque perfeccionista.</p>
+        <p class="applicantInfoContent">{{presentation}}</p>
     </div>
-     <div class="applicantInfoSection" id="">
+    <div class="applicantInfoSection" id="">
         <p class="applicantInfoTitle">Información de contacto</p>
-        <p class="applicantInfoContent">(664) 123-45-67</p>
-        <p class="applicantInfoContent">David.Becerra10@gmail.com</p>
+        <p class="applicantInfoContent">{{phone}}</p>
+        <p class="applicantInfoContent">{{email}}</p>
     </div>
     <div class="applicantInfoSection" id="">
         <p class="applicantInfoTitle">Curriculum</p>
         <div class="row justify-content-center">
             <div class="col-4">
-                <button class="buttonSolid btn btn-outline-success btn-wide" type="button" onclick="showCurriculum()">Abrir CV</button>
-                <div id="pdfContainer"> 
+                <button class="buttonSolid btn btn-outline-success btn-wide" type="button"
+                    onclick="showCurriculum()">Abrir CV</button>
+                <div id="pdfContainer">
                 </div>
             </div>
         </div>
     </div>
+    <button id="btn-abrir-popup" class="btn-abrir-popup btn btn-default" style="float: right;"><i
+            class="glyphicon glyphicon-pencil"></i>Edit</button><br><br>
+    <div class="overlay" id="overlay">
+        <div class="popup" id="popup">
+            <a href="#" id="btn-cerrar-popup" class="btn-cerrar-popup"><i class="glyphicon glyphicon-remove"></i></a>
+            <h3>Edita tu perfil</h3>
+            <form action="/perfilAspirante/{{_id}}?_method=PUT" method="POST">
+            <input type="hidden" name="_method" value="PUT"/>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="contenedor-inputs">
+                            <label for="txtNombre" class="col-form-label">Nombre(s)</label>
+                            <input id="txtNombre" type="text" class="form-control" placeholder="Nombre(s)" name="name"
+                                value="{{name}}" required>
+                            <label for="txtApellidos" class="col-form-label">Apellidos</label>
+                            <input id="txtApellidos" type="text" class="form-control" placeholder="Apellidos"
+                                name="lastName" value="{{lastName}}" required>
+                            <label for="txtEdad" class="col-form-label">Edad</label>
+                            <input id="txtEdad" type="text" class="form-control" placeholder="Edad" name="age"
+                                value="{{age}}" required>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="image-upload">
+                            <div class="contenedor-inputs">
+                                <label class="col-form-label">Foto de perfil</label>
+                                <label for="image-input">
+                                    <img id="profile-image"
+                                        src="https://happytravel.viajes/wp-content/uploads/2020/04/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png"
+                                        alt="..."
+                                        style="clip-path: circle(); object-fit: cover; width:250px; height:250px;">
+                                </label>
+                                <input id="image-input" type="file"
+                                    onchange="document.getElementById('profile-image').src = window.URL.createObjectURL(this.files[0])"
+                                    accept="image/png, image/jpg, image/jpeg" style="display: none;"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="contenedor-inputs">
+                    <label for="txtCarrera" class="col-form-label">Carrera</label>
+                    <input id="txtCarrera" type="text" class="form-control" placeholder="Carrera" name="career"
+                        value="{{career}}" required>
+                    <label for="txtGradoEstudios" class="col-form-label">Grado de estudios</label>
+                    <input id="txtGradoEstudios" type="text" class="form-control" placeholder="Grado de estudios"
+                        name="lvlStudy" value="{{lvlStudy}}" required>
+                    <label for="txtNumTelefono" class="col-form-label">Número telefonico</label>
+                    <input id="txtNumTelefono" type="text" class="form-control" placeholder="Número telefonico"
+                        name="phone" value="{{phone}}" required>
+                    <label for="txtMail" class="col-form-label">Correo electrónico</label>
+                    <input id="txtMail" type="email" class="form-control" placeholder="Correo" name="email"
+                        value="{{email}}" required>
+                    <label for="txtPresentation" class="col-form-label">Presentación</label>
+                    <textarea id="txtPresentation" type="text" class="form-control" name="presentation" rows="6"
+                        placeholder="Presentación" required>{{presentation}}</textarea>
+                    {{!-- <label for="CV_File" class="col-form-label">Curriculum</label><br> --}}
+                </div>
+                {{!-- <input type="file" id="CV_File" name="CV" /><br> --}}
+                <button class="buttonSolid btn btn-outline-success btn-wide btnMargin" type="submit">Guardar</button>
+            </form>
+        </div>
+    </div>
 </div>
 {{/userProfile}}
+<script src="/js/popup.js"></script>
