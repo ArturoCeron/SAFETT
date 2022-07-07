@@ -189,6 +189,19 @@ router.get('/mainAdmin/aspirantes', (req, res) => {
 
 });
 
+router.get('/mainAdmin/aspirante/:userId', (req, res) => {
+    let userId = req.params.userId;
+    usersInfo.findById(userId, (err, datosAspirante)=>{
+        if (err) return res.status(500).send({
+            message: `Error al realizar la petición ${err}`
+        });
+        if (!datosAspirante) return res.status(404).send({
+            message: `El usuario ${userId} no existe`
+        });
+            res.render('adminOptions/applicantsEdit', {datosAspirante});
+    }).lean();
+});
+
 //Perfil de Alumno
 router.get('/perfilAspirante', authAccount, (req, res) => {
     let idUser = req.session;

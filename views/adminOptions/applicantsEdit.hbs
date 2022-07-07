@@ -1,0 +1,52 @@
+<br><br>
+<div class="container" style="margin-left:20%; width: 75%">
+    <div "container">
+        <h6 style="color: #009BFF"> &lt;Aspirantes</h6>
+        {{#datosAspirante}}
+        <font size="6">Información del aspirante</font><br>
+        <font size="2">{{name}} {{lastName}}</font><br>
+        <font size="1">{{registerDate}}</font><br>
+        <br><br><br>
+    </div>
+    <div class="container">
+        <form>
+            <div class="row">
+                <div class="col">
+                    <label for="txtMessage" class="col-form-label">Nombre(s)</label>
+                    <input type="text" class="form-control" placeholder="Nombre(s)" value="{{name}}">
+                </div>
+                <div class="col">
+                    <label for="txtMessage" class="col-form-label">Apellido(s)</label>
+                    <input type="text" class="form-control" placeholder="Apellido(s)" value="{{lastName}}">
+                </div>
+            </div>
+            <label for="txtMessage" class="col-form-label">Correo electrónico</label>
+            <input type="text" class="form-control" placeholder="Correo electrónico" value="{{email}}">
+            <div class="row">
+                <div class="col">
+                    <label for="txtMessage" class="col-form-label">Teléfono</label>
+                    <input type="text" class="form-control" placeholder="Teléfono" value="{{phone}}">
+                </div>
+                <div class="col">
+                    <label for="txtMessage" class="col-form-label">Nivel de inglés</label>
+                    <input type="text" class="form-control" placeholder="Nivel de inglés" value="ingles">
+                </div>
+            </div>
+            <label for="txtMessage" class="col-form-label">Grado de estudios</label>
+            <input type="text" class="form-control" placeholder="Grado de estudios" value="{{lvlStudy}}">
+            <label for="txtMessage" class="col-form-label">Carrera</label>
+            <input type="text" class="form-control" placeholder="Carrera" value="{{career}}">
+            <label for="txtMessage" class="col-form-label">Fecha de nacimiento</label>
+            <input type="text" class="form-control" placeholder="Fecha de nacimiento" value="f_nacimiento">
+            <label for="txtMessage" class="col-form-label">Ciudad</label>
+            <input type="text" class="form-control" placeholder="Ciudad" value="Ciudad">
+            <label for="txtMessage" class="col-form-label">Genero</label>
+            <input type="text" class="form-control" placeholder="Genero" value="Genero">
+            <label for="txtMessage" class="col-form-label">Universidad</label>
+            <input type="text" class="form-control" placeholder="Universidad" value="Universidad">
+        </form>
+    </div>
+    {{/datosAspirante}}
+</div>
+<br>
+<br>

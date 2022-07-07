@@ -63,12 +63,14 @@
     for (var i = 0; i < elt.rows.length; i++) {
       if (i == 0) {
         var tblHead = document.createElement("tr");
-        var num1 = head.rows[0].cells[1].innerHTML;
-        var date1 = head.rows[0].cells[2].innerHTML;
-        var company1 = head.rows[0].cells[3].innerHTML;
-        var vacants1 = head.rows[0].cells[4].innerHTML;
-        var contact1 = head.rows[0].cells[5].innerHTML;
-        var newthead = [num1, date1, company1, vacants1, contact1];
+        var num1 = head.rows[0].cells[1].innerHTML.replace(/<\s*input[^>]*>/gi,'');
+        var date1 = head.rows[0].cells[2].innerHTML.replace(/<\s*input[^>]*>/gi,'');
+        var title1 = head.rows[0].cells[3].innerHTML.replace(/<\s*input[^>]*>/gi,'');
+        var rel_Careers1 = head.rows[0].cells[4].innerHTML.replace(/<\s*input[^>]*>/gi,'');
+        var company1 = head.rows[0].cells[5].innerHTML.replace(/<\s*input[^>]*>/gi,'');
+        var quantity1 = head.rows[0].cells[6].innerHTML.replace(/<\s*input[^>]*>/gi,'');
+        var applicants1 = head.rows[0].cells[7].innerHTML.replace(/<\s*input[^>]*>/gi,'');
+        var newthead = [num1, date1, title1, rel_Careers1, company1, quantity1, applicants1];
 
         for (var CELL of newthead) {
           var tblh = document.createElement("td");
@@ -83,11 +85,12 @@
         var trow = document.createElement("tr");
         var num2 = i + 1;
         var date2 = elt.rows[i].cells[2].innerHTML;
-        var company2 = elt.rows[i].cells[3].innerHTML;
-        var vacants2 = elt.rows[i].cells[4].innerHTML;
-        var contact2 = elt.rows[i].cells[5].innerHTML;
-        contact2 = contact2.replaceAll(/<br>/g, ", ")
-        var newlist = [num2, date2, company2, vacants2, contact2];
+        var title2 = elt.rows[i].cells[3].innerHTML;
+        var rel_Careers2 = elt.rows[i].cells[4].innerHTML;
+        var company2 = elt.rows[i].cells[5].innerHTML;
+        var quantity2 = elt.rows[i].cells[6].innerHTML;
+        var applicants2 = elt.rows[i].cells[7].innerHTML;
+        var newlist = [num2, date2, title2, rel_Careers2, company2, quantity2, applicants2];
         for (var CELL of newlist) {
           var tcell = document.createElement("td");
           var txtCell = document.createTextNode(CELL);

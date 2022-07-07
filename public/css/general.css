@@ -158,12 +158,12 @@ body{
     margin-bottom: 12px; /* Add some space below the input */
   }
   
-  #myTable {
-    border-collapse: collapse; /* Collapse borders */
-    width: 100%; /* Full-width */
-    border: 1px solid #ddd; /* Add a grey border */
-    font-size: 18px; /* Increase font-size */
-  }
+  /*#myTable {*/
+    /*border-collapse: collapse;*/ /* Collapse borders */
+    /*width: 100%;*/ /* Full-width */
+    /*border: 1px solid #ddd;*/ /* Add a grey border */
+    /*font-size: 18px;*/ /* Increase font-size */
+  /*}*/
   
   #myTable th, #myTable td {
     text-align: left; /* Left-align text */
@@ -186,7 +186,9 @@ body{
     top: 0;
     bottom: 0;
     left: 0;
-    padding: 58px 0 0; /* Height of navbar */
+    /*padding: 58px 0 0;*/ /* Height of navbar */
+    /*background-color: var(--color-blue-main)!important;*/
+    font-weight: 600;
     box-shadow: 0 2px 5px 0 rgb(0 0 0 / 5%), 0 2px 10px 0 rgb(0 0 0 / 5%);
     width: 240px;
     z-index: 600;
@@ -236,4 +238,14 @@ input[type="radio"]{
 .hide{
     
   display:none;
+}
+.topmenu ul a, .topmenu ul li a:hover {
+  text-decoration:none;
+  color:rgb(0, 0, 0);
+  background-color:rgba(0, 140, 255, 0.384);
+}
+.topmenu ul li.active a {
+  text-decoration:none;
+  color:rgb(255, 255, 255);
+  background-color:rgba(0, 140, 255, 0.849);
 }

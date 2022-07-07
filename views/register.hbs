@@ -1,4 +1,3 @@
-{{!-- <script src="/js/upload.js"></script> --}}
 <div class="container">
   <div class="row justify-content-md-center">
     <div class="col-6">
@@ -6,73 +5,76 @@
         <p id="formTitle">Registrate</p>
         <p class="formContent">¿Quieres registrar tu empresa? <a href="/company/register">Crea tu cuenta como
             empresa</a></p>
-        <form action="/users/register" method="POST">
-          <div class="row">
-            <div class="col-md-6">
-              <label for="txtNombre" class="col-form-label">Nombre(s)</label>
-              <input id="txtNombre" type="text" class="form-control" placeholder="Nombre(s)" name="name" required>
-              <label for="txtApellidos" class="col-form-label">Apellidos</label>
-              <input id="txtApellidos" type="text" class="form-control" placeholder="Apellidos" name="lastName"
-                required>
-              <label for="txtEdad" class="col-form-label">Edad</label>
-              <input id="txtEdad" type="text" class="form-control" placeholder="Edad" name="age" required>
-              <label for="txtNombre" class="col-form-label">Sexo</label>
-              <div id="RadioSexo">
-                <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="radio" name="sex" id="inlineRadio1"
-                    value="option1">
-                  <label class="form-check-label" for="inlineRadio1">M</label>
-                </div>
-                <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="radio" name="sex" id="inlineRadio2"
-                    value="option2">
-                  <label class="form-check-label" for="inlineRadio2">H</label>
-                </div>
-              </div>
+        <form action="/users/register" method="POST" enctype="multipart/form-data">
+        <p class="formSubtitle">Perfil del usuario</p>
+            <hr id="formDivider" class="contentDivider">
+        <div class="row">
+          <div class="col-md-6">
+
+            <div class="image-upload">
+              <label class="col-form-label">Foto de perfil</label>
+              <label for="image">
+                <img id="profile-image"
+                  src="https://happytravel.viajes/wp-content/uploads/2020/04/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png"
+                  alt="..." style="clip-path: circle(); object-fit: cover; width:250px; height:250px;">
+              </label>
+              <input id="image" type="file" name="image"
+                onchange="document.getElementById('profile-image').src = window.URL.createObjectURL(this.files[0])"
+                accept="image/png, image/jpg, image/jpeg" required />
             </div>
-            <div class="col-md-6">
-              <div class="image-upload">
-                <label class="col-form-label">Foto de perfil</label>
-                <label for="image-input">
-                  <img id="profile-image"
-                    src="https://happytravel.viajes/wp-content/uploads/2020/04/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png"
-                    alt="..." style="clip-path: circle(); object-fit: cover; width:250px; height:250px;">
-                </label>
-                <input id="image-input" type="file" name="myImage" onchange="document.getElementById('profile-image').src = window.URL.createObjectURL(this.files[0])" accept="image/png, image/jpg, image/jpeg" required/>
+          </div>
+          <div class="col-md-6">
+            <label for="txtNombre" class="col-form-label">Nombre(s)</label>
+            <input id="txtNombre" type="text" class="form-control" placeholder="Nombre(s)" name="name" required>
+            <label for="txtApellidos" class="col-form-label">Apellidos</label>
+            <input id="txtApellidos" type="text" class="form-control" placeholder="Apellidos" name="lastName" required>
+            <label for="txtEdad" class="col-form-label">Edad</label>
+            <input id="txtEdad" type="text" class="form-control" placeholder="Edad" name="age" required>
+            <label for="txtNombre" class="col-form-label">Sexo</label>
+            <div id="RadioSexo">
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="sex" id="inlineRadio1" value="option1">
+                <label class="form-check-label" for="inlineRadio1">M</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="sex" id="inlineRadio2" value="option2">
+                <label class="form-check-label" for="inlineRadio2">H</label>
               </div>
             </div>
           </div>
-          <label for="txtCarrera" class="col-form-label">Carrera</label>
-          <input id="txtCarrera" type="text" class="form-control" placeholder="Carrera" name="career" required>
-          <label for="txtGradoEstudios" class="col-form-label">Grado de estudios</label>
-          <input id="txtGradoEstudios" type="text" class="form-control" placeholder="Grado de estudios" name="lvlStudy"
-            required>
-          <label for="txtNumTelefono" class="col-form-label">Número telefonico</label>
-          <input id="txtNumTelefono" type="text" class="form-control" placeholder="Número telefonico" name="phone"
-            required>
-          <label for="txtContactMail" class="col-form-label">Correo electrónico</label>
-          <input id="txtContactMail" type="email" class="form-control" placeholder="Correo" name="emailContact" required>
-          <label for="txtPresentation" class="col-form-label">Presentación</label>
-          <textarea id="txtPresentation" type="text" class="form-control" name="presentation" rows="6"
-            placeholder="Presentación" required></textarea>
-          <label for="CV_File" class="col-form-label">Curriculum</label><br>
-          <input type="file" id="CV_File" name="CV" /><br>
-          <label for="txtMail" class="col-form-label">Correo electrónico</label>
-          <input id="txtMail" type="email" class="form-control" placeholder="Correo" name="email" required>
-          <label for="txtPassword" class="col-form-label">Contraseña</label>
-          <input id="txtPassword" type="password" class="form-control" placeholder="Contraseña" name="password"
-            required>
-          <button class="buttonSolid btn btn-outline-success btn-wide btnMargin" type="submit">Registrate</button>
+        </div>
+        <p class="formSubtitle">Datos escolares</p>
+        <hr id="formDivider" class="contentDivider">
+        <label for="txtCarrera" class="col-form-label">Carrera</label>
+        <input id="txtCarrera" type="text" class="form-control" placeholder="Carrera" name="career" required>
+        <label for="txtGradoEstudios" class="col-form-label">Grado de estudios</label>
+        <input id="txtGradoEstudios" type="text" class="form-control" placeholder="Grado de estudios" name="lvlStudy"
+          required>
+          <p class="formSubtitle">Datos de contacto</p>
+            <hr id="formDivider" class="contentDivider">
+        <label for="txtNumTelefono" class="col-form-label">Número telefonico</label>
+        <input id="txtNumTelefono" type="text" class="form-control" placeholder="Número telefonico" name="phone"
+          required>
+        <label for="txtContactMail" class="col-form-label">Correo electrónico</label>
+        <input id="txtContactMail" type="email" class="form-control" placeholder="Correo" name="emailContact" required>
+        <p class="formSubtitle">Presentación</p>
+            <hr id="formDivider" class="contentDivider">
+        <label for="txtPresentation" class="col-form-label">Presentación</label>
+        <textarea id="txtPresentation" type="text" class="form-control" name="presentation" rows="6"
+          placeholder="Presentación" required></textarea>
+        <p class="formSubtitle">Recursos</p>
+            <hr id="formDivider" class="contentDivider">
+        <label for="CV_File" class="col-form-label">Curriculum</label><br>
+        <input type="file" id="CV_File" name="CV" /><br>
+        <p class="formSubtitle">Datos de acceso</p>
+            <hr id="formDivider" class="contentDivider">
+        <label for="txtMail" class="col-form-label">Correo electrónico</label>
+        <input id="txtMail" type="email" class="form-control" placeholder="Correo" name="email" required>
+        <label for="txtPassword" class="col-form-label">Contraseña</label>
+        <input id="txtPassword" type="password" class="form-control" placeholder="Contraseña" name="password" required>
+        <button class="buttonSolid btn btn-outline-success btn-wide btnMargin" type="submit">Registrate</button>
         </form>
       </div>
     </div>
   </div>
 </div>
-{{!-- <script>
-    // Get a reference to the file input element
-    const inputElement = document.querySelector('input[type="file"]');
-
-    // Create a FilePond instance
-    const pond = FilePond.create(inputElement);
-</script> --}}
-
