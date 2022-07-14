@@ -20,6 +20,10 @@ module.exports = (req, res)=>{
     user.phone = req.body.phone;
     user.role = "user";
     user.registerDate = objDate.getDate() + "/" + (objDate.getMonth() + 1) + "/" + objDate.getFullYear();
+    user.sex = req.body.sex;
+    user.lvlEnglish = req.body.lvlEnglish;
+    user.campus = req.body.campus;
+    user.birthday = req.body.birthday;
     user.save( (error, user) =>{
         if (error) {
             console.log(error);

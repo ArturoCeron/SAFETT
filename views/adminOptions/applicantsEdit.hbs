@@ -9,43 +9,80 @@
         <br><br><br>
     </div>
     <div class="container">
-        <form>
+        <form action="/mainAdmin/aspirante/{{_id}}?_method=PUT" method="POST">
             <div class="row">
                 <div class="col">
-                    <label for="txtMessage" class="col-form-label">Nombre(s)</label>
-                    <input type="text" class="form-control" placeholder="Nombre(s)" value="{{name}}">
+                    <label class="col-form-label">Nombre(s)</label>
+                    <input type="text" class="form-control" placeholder="Nombre(s)" name="name" value="{{name}}">
                 </div>
                 <div class="col">
-                    <label for="txtMessage" class="col-form-label">Apellido(s)</label>
-                    <input type="text" class="form-control" placeholder="Apellido(s)" value="{{lastName}}">
+                    <label class="col-form-label">Apellido(s)</label>
+                    <input type="text" class="form-control" placeholder="Apellido(s)" name="lastName" value="{{lastName}}">
                 </div>
             </div>
-            <label for="txtMessage" class="col-form-label">Correo electrónico</label>
-            <input type="text" class="form-control" placeholder="Correo electrónico" value="{{email}}">
+            <label class="col-form-label">Correo electrónico</label>
+            <input type="text" class="form-control" placeholder="Correo electrónico" name="email" value="{{email}}">
             <div class="row">
                 <div class="col">
-                    <label for="txtMessage" class="col-form-label">Teléfono</label>
-                    <input type="text" class="form-control" placeholder="Teléfono" value="{{phone}}">
+                    <label class="col-form-label">Teléfono</label>
+                    <input type="text" class="form-control" placeholder="Teléfono" name="phone" value="{{phone}}">
                 </div>
                 <div class="col">
-                    <label for="txtMessage" class="col-form-label">Nivel de inglés</label>
-                    <input type="text" class="form-control" placeholder="Nivel de inglés" value="ingles">
+                    <label class="col-form-label">Nivel de inglés</label>
+                    <label for="en">Nivel de inglés</label>
+                    <select class="form-control" id="en" name="lvlEnglish">
+                        <option value="A1">A1</option>
+                        <option value="A2">A2</option>
+                        <option value="B1">B1</option>
+                        <option value="B2">B2</option>
+                        <option value="C1">C1</option>
+                        <option value="C2">C2</option>
+                    </select>
                 </div>
             </div>
-            <label for="txtMessage" class="col-form-label">Grado de estudios</label>
-            <input type="text" class="form-control" placeholder="Grado de estudios" value="{{lvlStudy}}">
-            <label for="txtMessage" class="col-form-label">Carrera</label>
-            <input type="text" class="form-control" placeholder="Carrera" value="{{career}}">
-            <label for="txtMessage" class="col-form-label">Fecha de nacimiento</label>
-            <input type="text" class="form-control" placeholder="Fecha de nacimiento" value="f_nacimiento">
-            <label for="txtMessage" class="col-form-label">Ciudad</label>
-            <input type="text" class="form-control" placeholder="Ciudad" value="Ciudad">
-            <label for="txtMessage" class="col-form-label">Genero</label>
-            <input type="text" class="form-control" placeholder="Genero" value="Genero">
-            <label for="txtMessage" class="col-form-label">Universidad</label>
-            <input type="text" class="form-control" placeholder="Universidad" value="Universidad">
+            <label class="col-form-label">Grado de estudios</label>
+            <input type="text" class="form-control" placeholder="Grado de estudios" name="lvlStudy" value="{{lvlStudy}}">
+            <label class="col-form-label">Carrera</label>
+            <input type="text" class="form-control" placeholder="Carrera" name="career" value="{{career}}">
+            <label class="col-form-label">Fecha de nacimiento</label>
+            <input type="date" class="date form-control" id="birthday" name="birthday" value="">
+            <label class="col-form-label">Genero</label>
+            <div id="RadioSexo">
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="sex" id="Hombre" value="Hombre" required>
+                <label class="form-check-label" for="Hombre">Hombre</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="sex" id="Mujer" value="Mujer">
+                <label class="form-check-label" for="Mujer">Mujer</label>
+            </div>
+            </div>
+            <label class="col-form-label">Unidad</label>
+            <select class="form-control" id="Uni" name="campus">
+                <option selected disabled hidden>Selecciona una unidad</option>
+                <option value="Tomás Aquino">Tomás Aquino</option>
+                <option value="Otay">Otay</option>
+            </select>
+            <button class="buttonSolid btn btn-outline-success btn-wide btnMargin" id="btn" type="submit" style="float: right; width: 90px; height: 40px;">Guardar</button><br><br>
         </form>
     </div>
+    <script>
+        var date = new Date(`{{birthday}}`);
+        var day = date.getDate() + 1;
+        var month = date.getMonth() + 1;
+        var year = date.getFullYear();
+        if (month < 10){document.getElementById("birthday").value = (year + "-0" + month + "-" + day);}
+        else{document.getElementById("birthday").value = (year + "-" + month + "-" + day);}
+    </script>
+    <script>
+        var select = document.getElementById('en');
+        select.value = `{{lvlEnglish}}`;
+
+        var select = document.getElementById('Uni');
+        select.value = `{{campus}}`;
+
+        document.getElementById(`{{sex}}`).checked = true;
+    </script>
     {{/datosAspirante}}
 </div>
 <br>

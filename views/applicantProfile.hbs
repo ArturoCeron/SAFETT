@@ -14,7 +14,7 @@
                             <p id="applicantDegree">{{career}}</p>
                         </div>
                         <div class="col-auto">
-                            <p id="applicantDegree">Hombre · {{age}} años</p>
+                            <p id="applicantDegree">{{sex}} · {{age}} años</p>
                         </div>
                     </div>
                     <hr id="applicantNameDivider">
@@ -57,61 +57,115 @@
             <a href="#" id="btn-cerrar-popup" class="btn-cerrar-popup"><i class="bi bi-x"></i></a>
             <h3>Edita tu perfil</h3>
             <form action="/perfilAspirante/{{_id}}?_method=PUT" method="POST">
-            <input type="hidden" name="_method" value="PUT"/>
+                <input type="hidden" name="_method" value="PUT" />
+                <p class="formSubtitle">Perfil del usuario</p>
+                <hr id="formDivider" class="contentDivider">
                 <div class="row">
                     <div class="col-md-6">
-                        <div class="contenedor-inputs">
-                            <label for="txtNombre" class="col-form-label">Nombre(s)</label>
-                            <input id="txtNombre" type="text" class="form-control" placeholder="Nombre(s)" name="name"
-                                value="{{name}}" required>
-                            <label for="txtApellidos" class="col-form-label">Apellidos</label>
-                            <input id="txtApellidos" type="text" class="form-control" placeholder="Apellidos"
-                                name="lastName" value="{{lastName}}" required>
-                            <label for="txtEdad" class="col-form-label">Edad</label>
-                            <input id="txtEdad" type="text" class="form-control" placeholder="Edad" name="age"
-                                value="{{age}}" required>
+
+                        <div class="image-upload">
+                            <label class="col-form-label">Foto de perfil</label>
+                            <label for="image">
+                                <img id="profile-image"
+                                    src="https://happytravel.viajes/wp-content/uploads/2020/04/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png"
+                                    alt="..."
+                                    style="clip-path: circle(); object-fit: cover; width:250px; height:250px;">
+                            </label>
+                            <input id="image" type="file" name="image"
+                                onchange="document.getElementById('profile-image').src = window.URL.createObjectURL(this.files[0])"
+                                accept="image/png, image/jpg, image/jpeg" />
                         </div>
                     </div>
                     <div class="col-md-6">
-                        <div class="image-upload">
-                            <div class="contenedor-inputs">
-                                <label class="col-form-label">Foto de perfil</label>
-                                <label for="image-input">
-                                    <img id="profile-image"
-                                        src="https://happytravel.viajes/wp-content/uploads/2020/04/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png"
-                                        alt="..."
-                                        style="clip-path: circle(); object-fit: cover; width:250px; height:250px;">
-                                </label>
-                                <input id="image-input" type="file"
-                                    onchange="document.getElementById('profile-image').src = window.URL.createObjectURL(this.files[0])"
-                                    accept="image/png, image/jpg, image/jpeg" style="display: none;"/>
+                        <label for="txtNombre" class="col-form-label">Nombre(s)</label>
+                        <input id="txtNombre" type="text" class="form-control" placeholder="Nombre(s)" name="name" value="{{name}}"
+                            required>
+                        <label for="txtApellidos" class="col-form-label">Apellidos</label>
+                        <input id="txtApellidos" type="text" class="form-control" placeholder="Apellidos"
+                            name="lastName" value="{{lastName}}" required>
+                        <label for="txtEdad" class="col-form-label">Edad</label>
+                        <input id="txtEdad" type="text" class="form-control" placeholder="Edad" name="age" value="{{age}}" required>
+                        <label class="col-form-label" for="birthday">Fecha de nacimiento</label>
+                        <input type="date" class="date form-control" id="birthday" name="birthday" required>
+                        <label for="RadioSexo" class="col-form-label">Sexo</label>
+                        <div id="RadioSexo">
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="sex" id="Hombre" value="Hombre"
+                                    required>
+                                <label class="form-check-label" for="Hombre">Hombre</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="sex" id="Mujer" value="Mujer">
+                                <label class="form-check-label" for="Mujer">Mujer</label>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="contenedor-inputs">
-                    <label for="txtCarrera" class="col-form-label">Carrera</label>
-                    <input id="txtCarrera" type="text" class="form-control" placeholder="Carrera" name="career"
-                        value="{{career}}" required>
-                    <label for="txtGradoEstudios" class="col-form-label">Grado de estudios</label>
-                    <input id="txtGradoEstudios" type="text" class="form-control" placeholder="Grado de estudios"
-                        name="lvlStudy" value="{{lvlStudy}}" required>
-                    <label for="txtNumTelefono" class="col-form-label">Número telefonico</label>
-                    <input id="txtNumTelefono" type="text" class="form-control" placeholder="Número telefonico"
-                        name="phone" value="{{phone}}" required>
-                    <label for="txtMail" class="col-form-label">Correo electrónico</label>
-                    <input id="txtMail" type="email" class="form-control" placeholder="Correo" name="email"
-                        value="{{email}}" required>
-                    <label for="txtPresentation" class="col-form-label">Presentación</label>
-                    <textarea id="txtPresentation" type="text" class="form-control" name="presentation" rows="6"
-                        placeholder="Presentación" required>{{presentation}}</textarea>
-                    {{!-- <label for="CV_File" class="col-form-label">Curriculum</label><br> --}}
+                <p class="formSubtitle">Datos escolares</p>
+                <hr id="formDivider" class="contentDivider">
+                <label for="txtCarrera" class="col-form-label">Carrera</label>
+                <input id="txtCarrera" type="text" class="form-control" placeholder="Carrera" name="career" value="{{career}}" required>
+                <label for="txtGradoEstudios" class="col-form-label">Grado de estudios</label>
+                <input id="txtGradoEstudios" type="text" class="form-control" placeholder="Grado de estudios"
+                    name="lvlStudy" value="{{lvlStudy}}" required>
+                <div class="form-group">
+                    <label for="Uni">Unidad</label>
+                    <select class="form-control" id="Uni" name="campus">
+                        <option selected disabled hidden>Selecciona una unidad</option>
+                        <option value="Tomás Aquino">Tomás Aquino</option>
+                        <option value="Otay">Otay</option>
+                    </select>
                 </div>
-                {{!-- <input type="file" id="CV_File" name="CV" /><br> --}}
+                <div class="form-group">
+                    <label for="en">Nivel de inglés</label>
+                    <select class="form-control" id="en" name="lvlEnglish">
+                        <option selected disabled hidden>Selecciona tu nivel de inglés</option>
+                        <option value="A1">A1</option>
+                        <option value="A2">A2</option>
+                        <option value="B1">B1</option>
+                        <option value="B2">B2</option>
+                        <option value="C1">C1</option>
+                        <option value="C2">C2</option>
+                    </select>
+                </div>
+                <p class="formSubtitle">Datos de contacto</p>
+                <hr id="formDivider" class="contentDivider">
+                <label for="txtNumTelefono" class="col-form-label">Número telefonico</label>
+                <input id="txtNumTelefono" type="text" class="form-control" placeholder="Número telefonico" name="phone"
+                    value="{{phone}}" required>
+                <label for="txtContactMail" class="col-form-label">Correo electrónico</label>
+                <input id="txtContactMail" type="email" class="form-control" placeholder="Correo" name="email" value="{{email}}"
+                    required>
+                <p class="formSubtitle">Presentación</p>
+                <hr id="formDivider" class="contentDivider">
+                <label for="txtPresentation" class="col-form-label">Presentación</label>
+                <textarea id="txtPresentation" type="text" class="form-control" name="presentation" rows="6"
+                    placeholder="Presentación" required>{{presentation}}</textarea>
+                <p class="formSubtitle">Recursos</p>
+                <hr id="formDivider" class="contentDivider">
+                <label for="CV_File" class="col-form-label">Curriculum</label><br>
+                <input type="file" id="CV_File" name="CV" /><br>
                 <button class="buttonSolid btn btn-outline-success btn-wide btnMargin" type="submit">Guardar</button>
             </form>
         </div>
     </div>
 </div>
+<script>
+        var date = new Date(`{{birthday}}`);
+        var day = date.getDate() + 1;
+        var month = date.getMonth() + 1;
+        var year = date.getFullYear();
+        if (month < 10){document.getElementById("birthday").value = (year + "-0" + month + "-" + day);}
+        else{document.getElementById("birthday").value = (year + "-" + month + "-" + day);}
+    </script>
+    <script>
+        var select = document.getElementById('en');
+        select.value = `{{lvlEnglish}}`;
+
+        var select = document.getElementById('Uni');
+        select.value = `{{campus}}`;
+
+        document.getElementById(`{{sex}}`).checked = true;
+    </script>
 {{/userProfile}}
 <script src="/js/popup.js"></script>

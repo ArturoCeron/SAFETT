@@ -58,6 +58,22 @@ const UserSchema = new Schema({
     profilePhoto: {
         data: Buffer,
         contentType: String
+    },
+    sex: {
+        type: String,
+        possibleValues: ['hombre', 'mujer']
+    },
+    lvlEnglish: {
+        type: String,
+        possibleValues: ['A1', 'A2', 'B1', 'B2', 'C1', 'C2']
+    },
+    campus:{
+        type: String,
+        possibleValues: ['Tomás Aquino', 'Otay']
+    },
+    birthday:{
+        type: Date,
+        required: true
     }
 });
 

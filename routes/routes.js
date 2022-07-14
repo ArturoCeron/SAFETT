@@ -239,6 +239,24 @@ router.put('/perfilAspirante/:userID', (req, res) => {
     });
 });
 
+router.put('/mainAdmin/aspirante/:userID', (req, res) => {
+    let userID = req.params.userID;
+    let update = req.body;
+    usersInfo.findByIdAndUpdate(userID, update, (err, users) => {
+        if(err) return res.status(500).send({
+            message: `Error al actualizar el usuario ${err}`
+        });
+
+        if(!users) return res.status(404).send({
+            message: 'El usuario no existe'
+        });
+
+        //res.status(200).send({products});
+
+        res.redirect('/mainAdmin/aspirantes');
+    });
+});
+
 //Prefil de Empresa visto desde alumno
 router.get('/empresa/:companyId', authAccount, (req, res) => {
     let companyId = req.params.companyId;
