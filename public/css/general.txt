@@ -1,0 +1,183 @@
+@font-face {
+    font-family: 'Montserrat';
+    src: local('Montserrat'),
+            local('Montserrat Regular'),
+            local('Montserrat-Regular'),
+            url(../fonts/Montserrat-Regular.ttf) format('truetype');
+}
+
+:root {
+    --color-blue-main: #002F6C;
+    --color-blue-dark: #072650;
+    --color-blue-light: #004299;
+    --color-grey-main: #EEEEEE;
+    --color-grey-dark: #858585;
+    --color-black: #181818;
+}
+
+body{
+    font-family: 'Montserrat';
+    color: var(--color-black);
+}
+
+.navbar{
+    background-color: var(--color-blue-main)!important;
+    font-weight: 600;
+}
+
+.navbar-dark .navbar-nav .nav-link{
+    color: white;
+    padding-right: 30px;
+}
+
+.buttonSmall{
+    font-weight: 500;
+    font-size: small;
+}
+
+.buttonSolid {
+    background-color: var(--color-blue-main)!important;;
+    color: white;
+    border-color: var(--color-blue-main);
+    font-weight: 600;
+}
+
+.buttonSolid:hover,
+.buttonSolid:active,
+.buttonSolid:visited,
+.buttonSolid:focus {
+    background-color: var(--color-blue-dark)!important;
+    border-color: var(--color-blue-dark);
+    color: white;
+}
+
+.buttonWarning{
+    background-color: #c51937!important;
+    border-color: #c51937;
+}
+
+.buttonWarning:hover,
+.buttonWarning:active,
+.buttonWarning:visited,
+.buttonWarning:focus {
+    background-color: #9e142c!important;
+    border-color: #9e142c;
+}
+
+
+.buttonSolidInverted {
+    background-color: white;
+    color: var(--color-blue-main);
+    border-color: var(--color-blue-main);
+    font-weight: 600;
+}
+
+.buttonSolidInverted:hover,
+.buttonSolidInverted:active,
+.buttonSolidInverted:visited,
+.buttonSolidInverted:focus {
+    background-color: var(--color-grey-main)!important;
+    border-color: var(--color-blue-dark);
+    color: var(--color-blue-dark);
+}
+
+.buttonBorder {
+    color: white;
+    border-color: white;
+    font-weight: 600;
+}
+
+.buttonBorder:hover,
+.buttonBorder:active,
+.buttonBorder:visited,
+.buttonBorder:focus {
+    background-color: white;
+    border-color: var(--color-blue-main);
+    color: var(--color-blue-main);
+}
+
+.btn-wide{
+    width: 100%;
+}
+
+#footerContainer{
+    background-color: var(--color-blue-main)!important;
+}
+
+#footerContent{
+    padding: 16px 0px;
+}
+
+#footerImage{
+    height: 175px;
+    width: auto;
+}
+
+#footerImageSection{
+    display: flex; 
+    justify-content: flex-end;
+    margin-bottom: 0px;
+}
+
+.footerTitle{
+    font-size: large;
+    color: white;
+}
+
+.footerParagraph{
+    font-size: small;
+    text-align: justify;
+    color: white;
+}
+  table
+  {
+      border: none;
+      counter-reset: rowNumber;
+  }
+  
+  table tr > td:nth-child(2)
+  {
+      counter-increment: rowNumber;
+  }
+                  
+  table tr td:nth-child(2)::after
+  {
+      content: counter(rowNumber);
+      min-width: 1em;
+      margin-right: 0.5em;
+  }
+
+  #myInput {
+    background-image: url('/css/searchicon.png'); /* Add a search icon to input */
+    background-position: 10px 12px; /* Position the search icon */
+    background-repeat: no-repeat; /* Do not repeat the icon image */
+    width: 25%; /* Full-width */
+    font-size: 16px; /* Increase font-size */
+    padding: 12px 20px 12px 40px; /* Add some padding */
+    border: 1px solid #ddd; /* Add a grey border */
+    margin-bottom: 12px; /* Add some space below the input */
+  }
+  
+  #myTable {
+    border-collapse: collapse; /* Collapse borders */
+    width: 100%; /* Full-width */
+    border: 1px solid #ddd; /* Add a grey border */
+    font-size: 18px; /* Increase font-size */
+  }
+  
+  #myTable th, #myTable td {
+    text-align: left; /* Left-align text */
+    padding: 12px; /* Add padding */
+  }
+  
+  #myTable tr {
+    /* Add a bottom border to all table rows */
+    border-bottom: 1px solid #ddd;
+  }
+  
+  #myTable tr.header, #myTable tr:hover {
+    /* Add a grey background color to the table header and on hover */
+    background-color: #f1f1f1;
+  }
+  
+  

@@ -20,7 +20,7 @@
                 </label>
                 <input id="image" type="file" name="image"
                   onchange="document.getElementById('profile-image').src = window.URL.createObjectURL(this.files[0])"
-                  accept="image/png, image/jpg, image/jpeg"/>
+                  accept="image/png, image/jpg, image/jpeg" />
               </div>
             </div>
             <div class="col-md-6">
@@ -33,7 +33,7 @@
               <input id="txtEdad" type="text" class="form-control" placeholder="Edad" name="age" required>
               <label class="col-form-label" for="birthday">Fecha de nacimiento</label>
               <input type="date" class="date form-control" id="birthday" name="birthday" required>
-              <label for="txtNombre" class="col-form-label">Sexo</label>
+              <label for="RadioSexo" class="col-form-label">Sexo</label>
               <div id="RadioSexo">
                 <div class="form-check form-check-inline">
                   <input class="form-check-input" type="radio" name="sex" id="inlineRadio1" value="Hombre" required>
@@ -97,17 +97,10 @@
           <label for="txtPassword" class="col-form-label">Contraseña</label>
           <input id="txtPassword" type="password" class="form-control" placeholder="Contraseña" name="password"
             required>
-          <button class="buttonSolid btn btn-outline-success btn-wide btnMargin" id="btn" type="submit">Registrate</button>
+          <button class="buttonSolid btn btn-outline-success btn-wide btnMargin" id="btn"
+            type="submit">Registrate</button>
         </form>
       </div>
     </div>
   </div>
 </div>
-{{!-- <script>
-  document.getElementById("btn").addEventListener("click", function() {
-  var bday = document.getElementById("txtDay");
-  var bmonth = document.getElementById("txtMonth");
-  var byear = document.getElementById("txtYear");
-  const fullBirthday = bday + "/" + bmonth + "/" + byear;
-});
-</script>

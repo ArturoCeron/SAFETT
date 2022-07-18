@@ -40,6 +40,7 @@
         <font size="4">Información de la empresa</font><br>
         <font size="1">Esta es la información principal para su participación en la feria Virtual</font><br><br><br>
     </div>
+    <form action="/mainAdmin/empresa/{{_id}}?_method=PUT" method="POST">
     <div class="container">
         <div class="row">
             <div class="col">
@@ -47,15 +48,18 @@
                     <label for="txtMessage" class="col-form-label">Estado de la empresa</label><br>
                     <div class="form-check form-check-inline">
 
-                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1"
-                            value="option1">
+                        <input class="form-check-input" type="radio" name="status" id="aprobada"
+                            value="aprobada">
                         <label class="form-check-label text-center" for="inlineRadio1">Aprobada</label>
                     </div>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2"
-                            value="option2">
+                        <input class="form-check-input" type="radio" name="status" id="rechazada"
+                            value="rechazada">
                         <label class="form-check-label text-center" for="inlineRadio2">Rechazada</label>
                     </div>
+                    <script>
+                        document.getElementById(`{{status}}`).checked = true;
+                    </script>
                     {{/datosPerfil}}
                     <div class="form-group">
                         <label for="txtMessage" class="col-form-label">Titulo de vacantes que le interesa cubrir</label>
@@ -165,4 +169,5 @@
         </div>
         <br><br>
     </div>
+    </form>
 </div>

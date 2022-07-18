@@ -30,7 +30,7 @@
         inputContent = $input.val().toLowerCase(),
         $panel = $input.parents('.filterable'),
         column = $panel.find('.filters th').index($input.parents('th')),
-        $table = $panel.find('.table'),
+        $table = $panel.find('.tb'),
         $rows = $table.find('tbody tr');
       /* Dirtiest filter function ever ;) */
       var $filteredRows = $rows.filter(function () {
@@ -128,16 +128,14 @@
               style="margin-right:0.5em; width: 10%">Descargar(.xls)</button>
         </div>
       </div>
-      <table class="table" id="tableExport">
+      <table class="tb second" id="tableExport">
         <thead id="tableHead">
           <tr class="table filters" style="background-color: #3067A0">
-            <th>
-              <div class="container">
-                <input type="checkbox" onClick="toggle(this)" class="text-center" /><br />
-              </div>
+            <th class="center">
+                <input type="checkbox" onClick="toggle(this)" class="text-center"/>
             </th>
             <th style="color: #FFFFFF" scope="col">#<input type="text" id="numFilter" class="form-control"
-                placeholder="#" /></th>
+                placeholder="#"/></th>
             <th style="color: #FFFFFF" scope="col">Fecha<input type="text" id="dateFilter" class="form-control"
                 placeholder="Fecha" /></th>
             <th style="color: #FFFFFF" scope="col">Nombre<input type="text" id="nameFilter" class="form-control"

@@ -1,32 +1,18 @@
 <!DOCTYPE html>
 <html>
-
-<head>
+    <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-    <link href="https://unpkg.com/filepond/dist/filepond.css" rel="stylesheet">
     {{>scripts}}
 
-</head>
+    </head>
+    <body>
+        {{>navbar}}
 
-<body>
-    {{>navbar}}
+        {{{body}}}
 
-    {{{body}}}
-
-    {{>footer}}
-    <script src="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.js"></script>
-    <script src="https://unpkg.com/filepond-plugin-image-resize/dist/filepond-plugin-image-resize.js"></script>
-    <script src="https://unpkg.com/filepond-plugin-image-transform/dist/filepond-plugin-image-transform.js"></script>
-    <script src="https://unpkg.com/filepond/dist/filepond.js"></script>
-    {{!-- <script>
-        const inputElement = document.querySelector('input[type="file"]');
-        const pond = FilePond.create(inputElement);
-    </script> --}}
-    {{!-- <script src="/js/upload.js"></script>  --}}
-
-</body>
-
+        {{>footer}}
+    </body>
 </html>

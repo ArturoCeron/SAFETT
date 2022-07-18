@@ -89,8 +89,6 @@
             </select>
             <label for="txtEmployeeNumber" class="col-form-label">Número de empleados</label>
             <input id="txtEmployeeNumber" type="text" class="form-control" placeholder="Número de empleados" name="quantityEmployees" required>
-            <label for="txtCompanyName" class="col-form-label">Número de vacantes a presentar</label>
-            <input id="txtCompanyName" type="text" class="form-control" placeholder="Número de vacantes" name="quantityVacantsC" required>
             <label for="txtMainActivity" class="col-form-label">Actividad principal</label>
             <input id="txtMainActivity" type="text" class="form-control" placeholder="Actividad principal" name="mainRole" required>
             <label for="txtWebSite" class="col-form-label">Sitio web</label>
@@ -249,3 +247,12 @@
     </div>
   </div>
 </div>
+<script>
+  function pendingStatus() {
+    var status = document.createElement("input");
+    status.type = "hidden";
+    status.value = "pending";
+    status.name = "status";
+    document.getElementById("companyForm").appendChild(status);
+  }
+</script>

@@ -1,8 +1,8 @@
 <br><br>
 <div class="container" style="margin-left:20%; width: 75%">
+    {{#datosAspirante}}
     <div "container">
-        <h6 style="color: #009BFF"> &lt;Aspirantes</h6>
-        {{#datosAspirante}}
+        <h6 style="color: #009BFF"> &lt;Aspirantes</h6>        
         <font size="6">Información del aspirante</font><br>
         <font size="2">{{name}} {{lastName}}</font><br>
         <font size="1">{{registerDate}}</font><br>
@@ -17,7 +17,8 @@
                 </div>
                 <div class="col">
                     <label class="col-form-label">Apellido(s)</label>
-                    <input type="text" class="form-control" placeholder="Apellido(s)" name="lastName" value="{{lastName}}">
+                    <input type="text" class="form-control" placeholder="Apellido(s)" name="lastName"
+                        value="{{lastName}}">
                 </div>
             </div>
             <label class="col-form-label">Correo electrónico</label>
@@ -41,21 +42,22 @@
                 </div>
             </div>
             <label class="col-form-label">Grado de estudios</label>
-            <input type="text" class="form-control" placeholder="Grado de estudios" name="lvlStudy" value="{{lvlStudy}}">
+            <input type="text" class="form-control" placeholder="Grado de estudios" name="lvlStudy"
+                value="{{lvlStudy}}">
             <label class="col-form-label">Carrera</label>
             <input type="text" class="form-control" placeholder="Carrera" name="career" value="{{career}}">
             <label class="col-form-label">Fecha de nacimiento</label>
             <input type="date" class="date form-control" id="birthday" name="birthday" value="">
             <label class="col-form-label">Genero</label>
             <div id="RadioSexo">
-            <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="sex" id="Hombre" value="Hombre" required>
-                <label class="form-check-label" for="Hombre">Hombre</label>
-            </div>
-            <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="sex" id="Mujer" value="Mujer">
-                <label class="form-check-label" for="Mujer">Mujer</label>
-            </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="sex" id="Hombre" value="Hombre" required>
+                    <label class="form-check-label" for="Hombre">Hombre</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="sex" id="Mujer" value="Mujer">
+                    <label class="form-check-label" for="Mujer">Mujer</label>
+                </div>
             </div>
             <label class="col-form-label">Unidad</label>
             <select class="form-control" id="Uni" name="campus">
@@ -63,7 +65,8 @@
                 <option value="Tomás Aquino">Tomás Aquino</option>
                 <option value="Otay">Otay</option>
             </select>
-            <button class="buttonSolid btn btn-outline-success btn-wide btnMargin" id="btn" type="submit" style="float: right; width: 90px; height: 40px;">Guardar</button><br><br>
+            <button class="buttonSolid btn btn-outline-success btn-wide btnMargin" id="btn" type="submit"
+                style="float: right; width: 90px; height: 40px;">Guardar</button><br><br>
         </form>
     </div>
     <script>
@@ -71,8 +74,8 @@
         var day = date.getDate() + 1;
         var month = date.getMonth() + 1;
         var year = date.getFullYear();
-        if (month < 10){document.getElementById("birthday").value = (year + "-0" + month + "-" + day);}
-        else{document.getElementById("birthday").value = (year + "-" + month + "-" + day);}
+        if (month < 10) { document.getElementById("birthday").value = (year + "-0" + month + "-" + day); }
+        else { document.getElementById("birthday").value = (year + "-" + month + "-" + day); }
     </script>
     <script>
         var select = document.getElementById('en');
@@ -84,6 +87,31 @@
         document.getElementById(`{{sex}}`).checked = true;
     </script>
     {{/datosAspirante}}
+    <br><br>
+    <div class="container">
+        <p class="formSubtitle">Vacantes aplicadas</p>
+        <hr id="formDivider" class="contentDivider">
+        <table class="first table">
+            <thead>
+                <tr style="background-color: #3067A0">
+                    <th style="color: #FFFFFF" scope="col" class="center">#</th>
+                    <th style="color: #FFFFFF" scope="col">Vacante</th>
+                    <th style="color: #FFFFFF" scope="col">Empresa</th>
+                    <th style="color: #FFFFFF" scope="col">Postulación</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#datosPostulacion}}
+                <tr>
+                    <td class="center"></td>
+                    <td>{{vacantName}}</td>
+                    <td>{{companyName}}</td>
+                    <td>{{registerDate}}</td>
+                </tr>
+                {{/datosPostulacion}}
+            </tbody>
+        </table>
+    </div>
 </div>
 <br>
 <br>

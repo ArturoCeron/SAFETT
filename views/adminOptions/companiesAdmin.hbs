@@ -31,7 +31,7 @@
         inputContent = $input.val().toLowerCase(),
         $panel = $input.parents('.filterable'),
         column = $panel.find('.filters th').index($input.parents('th')),
-        $table = $panel.find('.table'),
+        $table = $panel.find('.tb'),
         $rows = $table.find('tbody tr');
       /* Dirtiest filter function ever ;) */
       var $filteredRows = $rows.filter(function () {
@@ -70,12 +70,13 @@
     for (var i = 0; i < elt.rows.length; i++) {
       if (i == 0) {
         var tblHead = document.createElement("tr");
-        var num1 = head.rows[0].cells[1].innerHTML.replace(/<\s*input[^>]*>/gi,'');
-        var date1 = head.rows[0].cells[2].innerHTML.replace(/<\s*input[^>]*>/gi,'');
-        var company1 = head.rows[0].cells[3].innerHTML.replace(/<\s*input[^>]*>/gi,'');
-        var vacants1 = head.rows[0].cells[4].innerHTML.replace(/<\s*input[^>]*>/gi,'');
-        var contact1 = head.rows[0].cells[5].innerHTML.replace(/<\s*input[^>]*>/gi,'');
-        var newthead = [num1, date1, company1, vacants1, contact1];
+        var num1 = head.rows[0].cells[1].innerHTML.replace(/<\s*input[^>]*>/gi, '');
+        var date1 = head.rows[0].cells[2].innerHTML.replace(/<\s*input[^>]*>/gi, '');
+        var company1 = head.rows[0].cells[3].innerHTML.replace(/<\s*input[^>]*>/gi, '');
+        var vacants1 = head.rows[0].cells[4].innerHTML.replace(/<\s*input[^>]*>/gi, '');
+        var published1 = head.rows[0].cells[5].innerHTML.replace(/<\s*input[^>]*>/gi, '');
+        var contact1 = head.rows[0].cells[6].innerHTML.replace(/<\s*input[^>]*>/gi, '');
+        var newthead = [num1, date1, company1, vacants1, published1, contact1];
 
         for (var CELL of newthead) {
           var tblh = document.createElement("td");
@@ -92,9 +93,10 @@
         var date2 = elt.rows[i].cells[2].innerHTML;
         var company2 = elt.rows[i].cells[3].innerHTML;
         var vacants2 = elt.rows[i].cells[4].innerHTML;
-        var contact2 = elt.rows[i].cells[5].innerHTML;
+        var published2 = head.rows[i].cells[5].innerHTML;
+        var contact2 = elt.rows[i].cells[6].innerHTML;
         contact2 = contact2.replaceAll(/<br>/g, ", ")
-        var newlist = [num2, date2, company2, vacants2, contact2];
+        var newlist = [num2, date2, company2, vacants2, published2, contact2];
         for (var CELL of newlist) {
           var tcell = document.createElement("td");
           var txtCell = document.createTextNode(CELL);
@@ -135,13 +137,11 @@
               style="margin-right:0.5em; width: 10%">Descargar(.xls)</button>
         </div>
       </div>
-      <table class="table" id="tableExport">
+      <table class="tb second" id="tableExport" style="width: 100%;">
         <thead id="tableHead">
           <tr class="table filters" style="background-color: #3067A0">
-            <th>
-              <div class="container">
-                <input type="checkbox" onClick="toggle(this)" class="text-center" /><br>
-              </div>
+            <th class="centerCompany">
+              <input type="checkbox" onClick="toggle(this)" />
             </th>
             <th style="color: #FFFFFF" scope="col">#<input type="text" id="numFilter" class="form-control"
                 placeholder="#" /></th>
@@ -153,8 +153,11 @@
             <th style="color: #FFFFFF" scope="col">Vacantes<input type="text" id="vacFilter" class="form-control"
                 placeholder="Vacantes" />
             </th>
+            <th style="color: #FFFFFF" scope="col">Publicadas<input type="text" id="pubFilter" class="form-control"
+                placeholder="Publicadas" />
+            </th>
             <th style="color: #FFFFFF" scope="col">Contacto<input type="text" id="contFilter" class="form-control"
-                placeholder="Contacto" />
+                placeholder="Contacto"/>
             </th>
           </tr>
         </thead>
@@ -165,10 +168,13 @@
             <td id="number" onclick="window.location='/mainAdmin/empresa/{{_id}}';"></td>
             <td id="date" onclick="window.location='/mainAdmin/empresa/{{_id}}';">{{registerDate}}</td>
             <td id="company" onclick="window.location='/mainAdmin/empresa/{{_id}}';">{{companyName}}</td>
-            <td id="vacants" onclick="window.location='/mainAdmin/empresa/{{_id}}';">{{quantityVacants}}</td>
-            <td id="contact" onclick="window.location='/mainAdmin/empresa/{{_id}}';">{{contactName}}<br>
+            <td id="vacants" onclick="window.location='/mainAdmin/empresa/{{_id}}';">{{quantityVacantsC}}</td>
+            <td id="published" onclick="window.location='/mainAdmin/empresa/{{_id}}';"></td>
+            <td id="contact" onclick="window.location='/mainAdmin/empresa/{{_id}}';">
+              {{contactName}}<br>
               {{contactMail}}<br>
-              {{contactPhone}}</td>
+              {{contactPhone}}
+            </td>
           </tr>
           {{/companies}}
         </tbody>

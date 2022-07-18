@@ -27,7 +27,6 @@ module.exports = (req, res)=>{
     company.companyName = req.body.companyName;
     company.companyBusiness = req.body.companyBusiness;
     company.quantityEmployees = req.body.quantityEmployees;
-    company.quantityVacantsC = req.body.quantityVacantsC;
     company.mainRole = req.body.mainRole;
     company.webPage = req.body.webPage;
     company.description = req.body.description;
@@ -45,6 +44,7 @@ module.exports = (req, res)=>{
     company.contactCharge = req.body.contactCharge;
     company.contactExt = req.body.contactExt;
     company.registerDate = objDate.getDate() + "/" + (objDate.getMonth() + 1) + "/" + objDate.getFullYear();
+    //company.status = req.body.status;
     company.save( (error, company) =>{
         if (error) {
             console.log("Error en empresa")

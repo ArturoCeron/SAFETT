@@ -30,7 +30,7 @@
         inputContent = $input.val().toLowerCase(),
         $panel = $input.parents('.filterable'),
         column = $panel.find('.filters th').index($input.parents('th')),
-        $table = $panel.find('.table'),
+        $table = $panel.find('.tb'),
         $rows = $table.find('tbody tr');
       /* Dirtiest filter function ever ;) */
       var $filteredRows = $rows.filter(function () {
@@ -124,13 +124,11 @@
           <button class="btn btn-success" style="float: right;" id="btnExport" onclick="exportReportToExcel('xlsx')"><img src="https://cdn.icon-icons.com/icons2/195/PNG/256/Excel_2013_23480.png" style="margin-right:0.5em; width: 10%">Descargar(.xls)</button>
         </div>
       </div>
-      <table class="table" id="tableExport" border="1">
+      <table class="tb second" id="tableExport">
         <thead id="tableHead">
           <tr class="table filters" style="background-color: #3067A0">
-            <th>
-              <div class="container">
-                <input type="checkbox" onClick="toggle(this)" class="text-center" /><br />
-              </div>
+            <th class="center">
+                <input type="checkbox" onClick="toggle(this)"/>
             </th>
             <th style="color: #FFFFFF" scope="col">#<input type="text" class="form-control" placeholder="#" /></th>
             <th style="color: #FFFFFF" scope="col">Fecha<input type="text" class="form-control" placeholder="Fecha" />
@@ -148,16 +146,15 @@
           </tr>
         </thead>
         <tbody id="myTable">
-
           {{#vacants}}
           <tr>
-            <td><input type="checkbox" name="check" class="check"/></td>
+            <td class="center"><input type="checkbox" name="check" class="check"/></td>
             <td onclick="window.location='/mainAdmin/vacante/{{_id}}';"></td>
             <td onclick="window.location='/mainAdmin/vacante/{{_id}}';">{{registerDate}}</td>
             <td onclick="window.location='/mainAdmin/vacante/{{_id}}';">{{name}}</td>
             <td onclick="window.location='/mainAdmin/vacante/{{_id}}';">{{area}}</td>
             <td onclick="window.location='/mainAdmin/vacante/{{_id}}';">{{companyName}}</td>
-            <td class="text-center" onclick="window.location='/mainAdmin/vacante/{{_id}}';">{{quantityVacants}}</td>
+            <td onclick="window.location='/mainAdmin/vacante/{{_id}}';">{{quantityVacants}}</td>
             <td onclick="window.location='/mainAdmin/vacante/{{_id}}';"></td>
           </tr>
           {{/vacants}}

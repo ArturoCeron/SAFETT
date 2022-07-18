@@ -1,5 +1,3 @@
-/*jshint esversion: 6 */
-
 const User = require('../models/user');
 const path = require('path');
 var objDate = new Date();
