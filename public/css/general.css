@@ -325,3 +325,66 @@ textarea {
 .date {
   color: #858585;
 }
+
+.btn-options{
+  border:1px solid #305891;
+  background-color: white;
+  border-radius: 17px;
+  color: #305891;
+}
+
+.multiselect{
+  margin:20px 0 0 0;
+}
+
+/* .btn-options:hover{
+  background-color: rgb(108, 159, 253);
+  color: rgb(255, 255, 255);
+}
+
+.btn-options:visited{
+  color: inherit;
+}
+
+.btn-options:active{
+  background-color: #002F6C !important;
+  color: white;
+} */
+
+/* .multiselect label.btn-primary{
+  width:90%;
+  border:1px solid #305891;
+  background-color: white;
+  margin:5px; 
+  border-radius: 17px;
+  color: #305891;
+} */
+
+.multiselect label.btn-outline-primary{
+  width:90%;
+  border:1px solid #305891;
+  background-color: white;
+  margin:5px; 
+  border-radius: 17px;
+  color: #305891;
+}
+
+.multiselect label.btn-outline-primary:hover{
+  background-color: rgb(68, 131, 248);
+  color: white;
+}
+
+.otherSelect label.btn-outline-primary{
+  width: 100%;
+  border:1px solid #305891;
+  background-color: white;
+  margin:5px; 
+  border-radius: 17px;
+  color: #305891;
+}
+
+.otherSelect label.btn-outline-primary:hover{
+  background-color: rgb(68, 131, 248);
+  color: white;
+}
+

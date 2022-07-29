@@ -3,13 +3,24 @@
         <div class="col-6" id="sectionForm">
             <p id = "formTitle">Contáctanos</p>
             <p class="formContent">Envía un mensaje para ayudar a mejorar nuestro servicio hacía los usuarios</p>
+            <form action="https://formsubmit.co/b5f2d118f0b60443d9e5d22c4a9f7033" method = "POST">
             <label for="txtName" class="col-form-label">Nombre</label>
-            <input id="txtName" type="text" class="form-control" name="person" placeholder="Nombre" required>
+            <input id="txtName" type="text" class="form-control" name="Nombre: " placeholder="Nombre" required>
             <label for="txtEmail" class="col-form-label">Correo electrónico</label>
-            <input id="txtEmail" type="text" class="form-control" name="e-mail" placeholder="Correo electrónico" required>
+            <input id="txtEmail" type="email" class="form-control" name="Correo electrónico" placeholder="Correo electrónico" required>
             <label for="txtMessage" class="col-form-label">Mensaje</label>
-            <textarea id="txtMessage" class="form-control" name="message" rows="4" placeholder="Mensaje" required></textarea>
-            <button class="buttonSolid btn btn-outline-success btnMargin" type="submit">Enviar</button>
+            <textarea id="txtMessage" class="form-control" name="mensaje" rows="4" placeholder="Mensaje" required></textarea>
+            <input type="hidden" name="_template" value="box">
+            <input type="text" name="_honey" style="display:none">
+            <input type="hidden" name="_captcha" value="false">
+            <input type="hidden" name="_next" value="http://localhost:3000/">
+            <button class="buttonSolid btn btn-outline-success btnMargin" type="submit" onclick="confirmation()">Enviar</button>
+            </form>
         </div>
     </div>
 </div>
+<script>
+    function confirmation(){
+        alert("¡Su mensaje a sido enviado!\nNuestro equipo respondera en la brevedad de lo posible\nPresione aceptar para regresar la página de inicio");
+    }
+</script>

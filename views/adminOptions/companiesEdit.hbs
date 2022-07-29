@@ -1,10 +1,4 @@
 <script>
-    $('.btn').click(function (e) {
-        e.preventDefault();
-        $(this).addClass('active');
-    })
-</script>
-<script>
     function dynamicMaps() {
         var btn = document.getElementById("btnMap");
         if (btn.textContent == "Obtener mapa") {
@@ -41,133 +35,231 @@
         <font size="1">Esta es la información principal para su participación en la feria Virtual</font><br><br><br>
     </div>
     <form action="/mainAdmin/empresa/{{_id}}?_method=PUT" method="POST">
-    <div class="container">
-        <div class="row">
-            <div class="col">
-                <div class="container">
-                    <label for="txtMessage" class="col-form-label">Estado de la empresa</label><br>
-                    <div class="form-check form-check-inline">
-
-                        <input class="form-check-input" type="radio" name="status" id="aprobada"
-                            value="aprobada">
-                        <label class="form-check-label text-center" for="inlineRadio1">Aprobada</label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="status" id="rechazada"
-                            value="rechazada">
-                        <label class="form-check-label text-center" for="inlineRadio2">Rechazada</label>
-                    </div>
-                    <script>
-                        document.getElementById(`{{status}}`).checked = true;
-                    </script>
-                    {{/datosPerfil}}
-                    <div class="form-group">
-                        <label for="txtMessage" class="col-form-label">Titulo de vacantes que le interesa cubrir</label>
-                        <textarea type="text" class="form-control" name="interest" rows="6"
-                            placeholder="Titulo de vacantes a cubrir" required>Contabilidad</textarea>
-                    </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="container">
-                    <div class="form-group">
-                        <label for="txtMessage" class="col-form-label">Cantidad de vacantes a cubrir</label>
-                        <input type="text" class="form-control" name="interest" placeholder="Cantidad a cubrir"
-                            value="4" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="txtMessage" class="col-form-label">Area(s) a las que pertenecen las
-                            vacantes</label><br>
-                        <button type="button" class="btn btn-outline-primary">Administración</button>
-                        <button type="button" class="btn btn-outline-primary">Almacén</button>
-                        <button type="button" class="btn btn-outline-primary">Calidad</button>
-                        <button type="button" class="btn btn-outline-primary">Cobranza</button>
-                        <button type="button" class="btn btn-outline-primary">Comercial</button>
-                        <button type="button" class="btn btn-outline-primary">Compras</button>
-                        <button type="button" class="btn btn-outline-primary">Comunicación</button>
-                        <button type="button" class="btn btn-outline-primary">Consultoría</button>
-                        <button type="button" class="btn btn-outline-primary">Contabilidad</button>
-                        <button type="button" class="btn btn-outline-primary">Costos y presupuestos</button>
-                        <button type="button" class="btn btn-outline-primary">Dirección</button>
-                        <button type="button" class="btn btn-outline-primary">Diseño</button>
-                        <button type="button" class="btn btn-outline-primary">Educación</button>
-                        <button type="button" class="btn btn-outline-primary">Gerencias</button>
-                        <button type="button" class="btn btn-outline-primary">Import/Export</button>
-                        <button type="button" class="btn btn-outline-primary">Informática(sistemas)</button>
-                        <button type="button" class="btn btn-outline-primary">Ingeniería</button>
-                        <button type="button" class="btn btn-outline-primary">Juridico(legal)</button>
-                        <button type="button" class="btn btn-outline-primary">Logistica</button>
-                        <button type="button" class="btn btn-outline-primary">Mantenimiento</button>
-                        <button type="button" class="btn btn-outline-primary" id="otro">Otro</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <br><br>
-    <div>
-        <font size="4">Ubicación</font><br>
-        <font size="1">Esta información nos sera de utilidad para ubicarte en google maps</font><br>
         <div class="container">
-            {{#datosPerfil}}
             <div class="row">
                 <div class="col">
-                    <label for="txtMessage" class="col-form-label">Calle</label>
-                    <input type="text" id="street" class="form-control" placeholder="Calle" value="{{street}}" required />
-                    <label for="txtMessage" class="col-form-label">Codigo postal</label>
-                    <input type="text" id="zip" class="form-control" placeholder="Codigo postal" value="{{zip}}"
-                        required />
+                    <div class="container">
+                        <label for="txtMessage" class="col-form-label">Estado de la empresa</label><br>
+                        <div class="form-check form-check-inline">
+
+                            <input class="form-check-input" type="radio" name="status" id="aprobada" value="aprobada">
+                            <label class="form-check-label text-center" for="aprobada">Aprobada</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="status" id="rechazada" value="rechazada">
+                            <label class="form-check-label text-center" for="rechazada">Rechazada</label>
+                        </div>
+                        <script>
+                            document.getElementById(`{{status}}`).checked = true;
+                        </script>
+                        {{/datosPerfil}}
+                        <div class="form-group">
+                            <label for="txtMessage" class="col-form-label">Titulo de vacantes que le interesa
+                                cubrir</label>
+                            <textarea type="text" class="form-control" name="interest" rows="6"
+                                placeholder="Titulo de vacantes a cubrir">Contabilidad</textarea>
+                        </div>
+                    </div>
                 </div>
                 <div class="col">
-                    <label for="txtMessage" class="col-form-label">Número</label>
-                    <input type="text" id="streetNumber" class="form-control" placeholder="Número"
-                        value="{{streetNumber}}" required />
-                    <label for="txtMessage" class="col-form-label">Estado</label>
-                    <input type="text" id="state" class="form-control" placeholder="Estado" value="{{state}}" required />
-                </div>
-                <div class="col">
-                    <label for="txtMessage" class="col-form-label">Colonia</label>
-                    <input type="text" id="suburb" class="form-control" placeholder="Colonia" value="{{suburb}}"
-                        required />
-                    <label for="txtMessage" class="col-form-label">Ciudad</label>
-                    <input type="text" id="city" class="form-control" placeholder="Ciudad" value="{{city}}" required />
+                    <div class="container">
+                        <div class="form-group">
+                            <label for="txtMessage" class="col-form-label">Cantidad de vacantes a cubrir</label>
+                            <input type="text" class="form-control" name="interest" placeholder="Cantidad a cubrir"
+                                value="4">
+                        </div>
+                        <div class="multiselect">
+                            <label class="col-form-label">Área(s) a las que pertenecen las
+                                vacantes</label><br>
+                            <div class="btn-group">
+                                <input type="checkbox" class="btn-check" id="Administración" value="Administración"
+                                    autocomplete="off" name="area">
+                                <label class="btn btn-outline-primary"
+                                    for="Administración"><span>Administración</span></label>
+                            </div>
+                            <div class="btn-group">
+                                <input type="checkbox" class="btn-check" id="Almacén" value="Almacén" autocomplete="off"
+                                    name="area">
+                                <label class="btn btn-outline-primary" for="Almacén"><span>Almacén</span></label>
+                            </div>
+                            <div class="btn-group">
+                                <input type="checkbox" class="btn-check" id="Calidad" value="Calidad" autocomplete="off"
+                                    name="area">
+                                <label class="btn btn-outline-primary" for="Calidad"><span>Calidad</span></label>
+                            </div>
+                            <div class="btn-group">
+                                <input type="checkbox" class="btn-check" id="Cobranza" value="Cobranza"
+                                    autocomplete="off" name="area">
+                                <label class="btn btn-outline-primary" for="Cobranza"><span>Cobranza</span></label>
+                            </div>
+                            <div class="btn-group">
+                                <input type="checkbox" class="btn-check" id="Comercial" value="Comercial"
+                                    autocomplete="off" name="area">
+                                <label class="btn btn-outline-primary" for="Comercial"><span>Comercial</span></label>
+                            </div>
+                            <div class="btn-group">
+                                <input type="checkbox" class="btn-check" id="Compras" value="Compras" autocomplete="off"
+                                    name="area">
+                                <label class="btn btn-outline-primary" for="Compras"><span>Compras</span></label>
+                            </div>
+                            <div class="btn-group">
+                                <input type="checkbox" class="btn-check" id="Comunicación" value="Comunicación"
+                                    autocomplete="off" name="area">
+                                <label class="btn btn-outline-primary"
+                                    for="Comunicación"><span>Comunicación</span></label>
+                            </div>
+                            <div class="btn-group">
+                                <input type="checkbox" class="btn-check" id="Consultoría" value="Consultoría"
+                                    autocomplete="off" name="area">
+                                <label class="btn btn-outline-primary"
+                                    for="Consultoría"><span>Consultoría</span></label>
+                            </div>
+                            <div class="btn-group">
+                                <input type="checkbox" class="btn-check" id="Contabilidad" value="Contabilidad"
+                                    autocomplete="off" name="area">
+                                <label class="btn btn-outline-primary"
+                                    for="Contabilidad"><span>Contabilidad</span></label>
+                            </div>
+                            <div class="btn-group">
+                                <input type="checkbox" class="btn-check" id="Costos y presupuestos"
+                                    value="Costos y presupuestos" autocomplete="off" name="area">
+                                <label class="btn btn-outline-primary" for="Costos y presupuestos"><span>Costos y
+                                        presupuestos</span></label>
+                            </div>
+                            <div class="btn-group">
+                                <input type="checkbox" class="btn-check" id="Dirección" value="Dirección"
+                                    autocomplete="off" name="area">
+                                <label class="btn btn-outline-primary" for="Dirección"><span>Dirección</span></label>
+                            </div>
+                            <div class="btn-group">
+                                <input type="checkbox" class="btn-check" id="Diseño" value="Diseño" autocomplete="off"
+                                    name="area">
+                                <label class="btn btn-outline-primary" for="Diseño"><span>Diseño</span></label>
+                            </div>
+                            <div class="btn-group">
+                                <input type="checkbox" class="btn-check" id="Educación" value="Educación"
+                                    autocomplete="off" name="area">
+                                <label class="btn btn-outline-primary" for="Educación"><span>Educación</span></label>
+                            </div>
+                            <div class="btn-group">
+                                <input type="checkbox" class="btn-check" id="Gerencias" value="Gerencias"
+                                    autocomplete="off" name="area">
+                                <label class="btn btn-outline-primary" for="Gerencias"><span>Gerencias</span></label>
+                            </div>
+                            <div class="btn-group">
+                                <input type="checkbox" class="btn-check" id="Import/Export" value="Import/Export"
+                                    autocomplete="off" name="area">
+                                <label class="btn btn-outline-primary"
+                                    for="Import/Export"><span>Import/Export</span></label>
+                            </div>
+                            <div class="btn-group">
+                                <input type="checkbox" class="btn-check" id="Informática(sistemas)"
+                                    value="Informática(sistemas)" autocomplete="off" name="area">
+                                <label class="btn btn-outline-primary"
+                                    for="Informática(sistemas)"><span>Informática(sistemas)</span></label>
+                            </div>
+                            <div class="btn-group">
+                                <input type="checkbox" class="btn-check" id="Ingeniería" value="Ingeniería"
+                                    autocomplete="off" name="area">
+                                <label class="btn btn-outline-primary" for="Ingeniería"><span>Ingeniería</span></label>
+                            </div>
+                            <div class="btn-group">
+                                <input type="checkbox" class="btn-check" id="Jurídico(legal)" value="Jurídico(legal)"
+                                    autocomplete="off" name="area">
+                                <label class="btn btn-outline-primary"
+                                    for="Jurídico(legal)"><span>Jurídico(legal)</span></label>
+                            </div>
+                            <div class="btn-group">
+                                <input type="checkbox" class="btn-check" id="Logística" value="Logística"
+                                    autocomplete="off" name="area">
+                                <label class="btn btn-outline-primary" for="Logística"><span>Logística</span></label>
+                            </div>
+                            <div class="btn-group">
+                                <input type="checkbox" class="btn-check" id="Mantenimiento" value="Mantenimiento"
+                                    autocomplete="off" name="area">
+                                <label class="btn btn-outline-primary"
+                                    for="Mantenimiento"><span>Mantenimiento</span></label>
+                            </div>
+                            <div class="btn-group">
+                                <input type="checkbox" class="btn-check" id="Otro" value="Otro" autocomplete="off"
+                                    name="area">
+                                <label class="btn btn-outline-primary" for="Otro"><span>Otro</span></label>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <br>
-            <button type="button" class="btn btn-primary" id="btnMap" onclick="dynamicMaps()">Obtener mapa</button>
-            <br><br><br>
-            <div class="text-center" id="place"></div><br>
-            <font size="4">Contacto</font><br>
-            <font size="1">Información de contacto de la empresa</font><br>
-            <div class="row">
-                <div class="col">
-                    <label for="txtMessage" class="col-form-label">Nombre(s)</label>
-                    <input type="text" id="street" class="form-control" placeholder="Nombres" value="{{contactName}}"
-                        required />
-                    <label for="txtMessage" class="col-form-label">Correo electrónico</label>
-                    <input type="text" id="zip" class="form-control" placeholder="Correo electrónico"
-                        value="{{contactMail}}" required />
-                </div>
-                <div class="col">
-                    <label for="txtMessage" class="col-form-label">Apellidos</label>
-                    <input type="text" id="streetNumber" class="form-control" placeholder="Apellidos"
-                        value="{{contactLastName}}" required />
-                    <label for="txtMessage" class="col-form-label">Teléfono</label>
-                    <input type="text" id="state" class="form-control" placeholder="Teléfono" value="{{contactPhone}}"
-                        required />
-                </div>
-                <div class="col">
-                    <label for="txtMessage" class="col-form-label">Cargo</label>
-                    <input type="text" id="suburb" class="form-control" placeholder="Cargo" value="{{contactCharge}}"
-                        required />
-                    <label for="txtMessage" class="col-form-label">Ext.</label>
-                    <input type="text" id="city" class="form-control" placeholder="Ext." value="{{contactExt}}"
-                        required />
-                </div>
-            </div>
-            {{/datosPerfil}}
         </div>
         <br><br>
-    </div>
+        <div>
+            <font size="4">Ubicación</font><br>
+            <font size="1">Esta información nos sera de utilidad para ubicar a la empresa en google maps</font><br>
+            <div class="container">
+                {{#datosPerfil}}
+                <div class="row">
+                    <div class="col">
+                        <label for="txtMessage" class="col-form-label">Calle</label>
+                        <input type="text" id="street" class="form-control" placeholder="Calle" value="{{street}}"
+                            required />
+                        <label for="txtMessage" class="col-form-label">Codigo postal</label>
+                        <input type="text" id="zip" class="form-control" placeholder="Codigo postal" value="{{zip}}"
+                            required />
+                    </div>
+                    <div class="col">
+                        <label for="txtMessage" class="col-form-label">Número</label>
+                        <input type="text" id="streetNumber" class="form-control" placeholder="Número"
+                            value="{{streetNumber}}" required />
+                        <label for="txtMessage" class="col-form-label">Estado</label>
+                        <input type="text" id="state" class="form-control" placeholder="Estado" value="{{state}}"
+                            required />
+                    </div>
+                    <div class="col">
+                        <label for="txtMessage" class="col-form-label">Colonia</label>
+                        <input type="text" id="suburb" class="form-control" placeholder="Colonia" value="{{suburb}}"
+                            required />
+                        <label for="txtMessage" class="col-form-label">Ciudad</label>
+                        <input type="text" id="city" class="form-control" placeholder="Ciudad" value="{{city}}"
+                            required />
+                    </div>
+                </div>
+                <br>
+                <button type="button" class="btn btn-primary" id="btnMap" onclick="dynamicMaps()">Obtener
+                    mapa</button>
+                <br><br><br>
+                <div class="text-center" id="place"></div><br>
+                <font size="4">Contacto</font><br>
+                <font size="1">Información de contacto de la empresa</font><br>
+                <div class="row">
+                    <div class="col">
+                        <label for="txtMessage" class="col-form-label">Nombre(s)</label>
+                        <input type="text" id="street" class="form-control" placeholder="Nombres"
+                            value="{{contactName}}" required />
+                        <label for="txtMessage" class="col-form-label">Correo electrónico</label>
+                        <input type="text" id="zip" class="form-control" placeholder="Correo electrónico"
+                            value="{{contactMail}}" required />
+                    </div>
+                    <div class="col">
+                        <label for="txtMessage" class="col-form-label">Apellidos</label>
+                        <input type="text" id="streetNumber" class="form-control" placeholder="Apellidos"
+                            value="{{contactLastName}}" required />
+                        <label for="txtMessage" class="col-form-label">Teléfono</label>
+                        <input type="text" id="state" class="form-control" placeholder="Teléfono"
+                            value="{{contactPhone}}" required />
+                    </div>
+                    <div class="col">
+                        <label for="txtMessage" class="col-form-label">Cargo</label>
+                        <input type="text" id="suburb" class="form-control" placeholder="Cargo"
+                            value="{{contactCharge}}" required />
+                        <label for="txtMessage" class="col-form-label">Ext.</label>
+                        <input type="text" id="city" class="form-control" placeholder="Ext." value="{{contactExt}}"
+                            required />
+                    </div>
+                </div>
+                {{/datosPerfil}}
+            </div>
+            <br><br>
+        </div>
+        <button class="buttonSolid btn btn-outline-success btn-wide btnMargin" id="btn" type="submit"
+            style="float: right; width: 90px; height: 40px;">Guardar</button><br><br>
     </form>
 </div>

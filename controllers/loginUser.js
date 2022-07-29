@@ -15,7 +15,7 @@ module.exports = (req, res) => {
                     req.session.username = user.username;
                     req.session.userId = user._id;
                     req.session.logged = user.role;
-                    res.redirect('/mainAdmin/empresas');
+                    res.redirect('/');
                 }
                 else {
                     res.redirect('/auth/login');
@@ -30,7 +30,7 @@ module.exports = (req, res) => {
                             req.session.username = adminUser.username;
                             req.session.userId = adminUser._id;
                             req.session.adminrole = adminUser.role;
-                            res.redirect('/');
+                            res.redirect('/mainAdmin/empresas');
                         }
                         else {
                             res.redirect('/auth/login');

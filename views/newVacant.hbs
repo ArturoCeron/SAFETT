@@ -1,6 +1,6 @@
 <div class="container">
   <div class="row justify-content-md-center">
-    <div class="col-6">
+    <div class="col-7">
 
       <div id="companyRegistrationForm">
         <p id="formTitle">Registro de nueva vacante</p>
@@ -12,29 +12,152 @@
             <label for="txtName" class="col-form-label">Nombre de la vacante</label>
             <input id="txtName" type="text" class="form-control" placeholder="Nombre" name="name" required>
             <label for="txtDesc" class="col-form-label">Descripción y detalles de las actividades</label>
-            <textarea id="txtDesc" class="form-control" rows="3" placeholder="Descripción" name="description" required></textarea>
+            <textarea id="txtDesc" class="form-control" rows="3" placeholder="Descripción" name="description"
+              required></textarea>
             <label for="txtReq" class="col-form-label">Requisitos</label>
-            <textarea id="txtReq" class="form-control" rows="3" placeholder="Requisitos" name="requirements" required></textarea>
+            <textarea id="txtReq" class="form-control" rows="3" placeholder="Requisitos" name="requirements"
+              required></textarea>
             <label for="txtNumV" class="col-form-label">Número de vacantes</label>
-            <input id="txtNumV" type="number" class="form-control" placeholder="Número de vacantes" name="numberVacants" required>
-            <label for="txtArea" class="col-form-label">Área</label>
-            <input id="txtArea" type="text" class="form-control" placeholder="Área" name="area" required>
+            <input id="txtNumV" type="number" class="form-control" placeholder="Número de vacantes" name="numberVacants"
+              required>
+            {{!-- <input id="txtArea" type="text" class="form-control" placeholder="Área" name="area" required> --}}
+            <div class="multiselect">
+              <div class="row">
+                <label for="txtArea" class="col-form-label">Área(s)</label>
+                <div class="col">
+                  <input type="checkbox" class="btn-check" id="Administración" value="Administración" autocomplete="off"
+                    name="area">
+                  <label class="btn btn-outline-primary" for="Administración"><span>Administración</span></label>
+                  <input type="checkbox" class="btn-check" id="Almacén" value="Almacén" autocomplete="off"
+                    name="area">
+                  <label class="btn btn-outline-primary" for="Almacén"><span>Almacén</span></label>
+                  <input type="checkbox" class="btn-check" id="Calidad" value="Calidad" autocomplete="off"
+                    name="area">
+                  <label class="btn btn-outline-primary" for="Calidad"><span>Calidad</span></label>
+                  <input type="checkbox" class="btn-check" id="Cobranza" value="Cobranza" autocomplete="off"
+                    name="area">
+                  <label class="btn btn-outline-primary" for="Cobranza"><span>Cobranza</span></label>
+                  <input type="checkbox" class="btn-check" id="Comercial" value="Comercial" autocomplete="off"
+                    name="area">
+                  <label class="btn btn-outline-primary" for="Comercial"><span>Comercial</span></label>
+                </div>
+                <div class="col">
+                  <input type="checkbox" class="btn-check" id="Compras" value="Compras" autocomplete="off"
+                    name="area">
+                  <label class="btn btn-outline-primary" for="Compras"><span>Compras</span></label>
+                  <input type="checkbox" class="btn-check" id="Comunicación" value="Comunicación" autocomplete="off"
+                    name="area">
+                  <label class="btn btn-outline-primary" for="Comunicación"><span>Comunicación</span></label>
+                  <input type="checkbox" class="btn-check" id="Consultoría" value="Consultoría" autocomplete="off"
+                    name="area">
+                  <label class="btn btn-outline-primary" for="Consultoría"><span>Consultoría</span></label>
+                  <input type="checkbox" class="btn-check" id="Contabilidad" value="Contabilidad" autocomplete="off"
+                    name="area">
+                  <label class="btn btn-outline-primary" for="Contabilidad"><span>Contabilidad</span></label>
+                  <input type="checkbox" class="btn-check" id="Costos y presupuestos" value="Costos y presupuestos"
+                    autocomplete="off" name="area">
+                  <label class="btn btn-outline-primary" for="Costos y presupuestos"><span>Costos y
+                      presupuestos</span></label>
+                </div>
+                <div class="col">
+                  <input type="checkbox" class="btn-check" id="Dirección" value="Dirección" autocomplete="off"
+                    name="area">
+                  <label class="btn btn-outline-primary" for="Dirección"><span>Dirección</span></label>
+                  <input type="checkbox" class="btn-check" id="Diseño" value="Diseño" autocomplete="off" name="area">
+                  <label class="btn btn-outline-primary" for="Diseño"><span>Diseño</span></label>
+                  <input type="checkbox" class="btn-check" id="Educación" value="Educación" autocomplete="off"
+                    name="area">
+                  <label class="btn btn-outline-primary" for="Educación"><span>Educación</span></label>
+                  <input type="checkbox" class="btn-check" id="Gerencias" value="Gerencias" autocomplete="off"
+                    name="area">
+                  <label class="btn btn-outline-primary" for="Gerencias"><span>Gerencias</span></label>
+                  <input type="checkbox" class="btn-check" id="Import/Export" value="Import/Export" autocomplete="off"
+                    name="area">
+                  <label class="btn btn-outline-primary" for="Import/Export"><span>Import/Export</span></label>
+                </div>
+                <div class="col">
+                  <input type="checkbox" class="btn-check" id="Informática(sistemas)" value="Informática(sistemas)"
+                    autocomplete="off" name="area">
+                  <label class="btn btn-outline-primary"
+                    for="Informática(sistemas)"><span>Informática(sistemas)</span></label>
+                  <input type="checkbox" class="btn-check" id="Ingeniería" value="Ingeniería" autocomplete="off"
+                    name="area">
+                  <label class="btn btn-outline-primary" for="Ingeniería"><span>Ingeniería</span></label>
+                  <input type="checkbox" class="btn-check" id="Jurídico(legal)" value="Jurídico(legal)"
+                    autocomplete="off" name="area">
+                  <label class="btn btn-outline-primary" for="Jurídico(legal)"><span>Jurídico(legal)</span></label>
+                  <input type="checkbox" class="btn-check" id="Logística" value="Logística" autocomplete="off"
+                    name="area">
+                  <label class="btn btn-outline-primary" for="Logística"><span>Logística</span></label>
+                  <input type="checkbox" class="btn-check" id="Mantenimiento" value="Mantenimiento" autocomplete="off"
+                    name="area">
+                  <label class="btn btn-outline-primary" for="Mantenimiento"><span>Mantenimiento</span></label>
+                </div>
+              </div>
+              </div>
+              <div class="row">
+              <div class="text-center otherSelect col-4" id="other">
+                <input type="checkbox" class="btn-check" id="Otro" value="Otro" autocomplete="off" name="area">
+                <label class="btn btn-outline-primary" for="Otro"><span>Otro</span></label>
+              </div>
+            
+            <div class="col-8">
+              <input type="text" id="otherText" class="form-control" placeholder="Otro" name="area" style="margin: 5px; width: 96%;" disabled>
+              </div>
+              </div>
+            <br>
             <label for="txtSalary" class="col-form-label">Salario</label>
-            <input id="txtSalary" type="number" min="1" step="any" class="form-control" placeholder="$0.00" name="salary" required>
+            <input id="txtSalary" type="number" min="1" step="any" class="form-control" placeholder="$0.00"
+              name="salary" required>
             <label for="txtContract" class="col-form-label">Tipo de contrato</label>
             <select id="txtContract" class="form-select" name="contract" required>
               <option value="">Selecciona...</option>
               <option value="Contrato por Obra">Contrato por Obra</option>
               <option value="Contrato por Tiempo Indeterminado">Contrato por Tiempo Indeterminado</option>
               <option value="Contrato Periodo de Prueba">Contrato Periodo de Prueba</option>
-              <option value="Contrato por Relación de Trabajo por Temporada">Contrato por Relación de Trabajo por Temporada</option>
+              <option value="Contrato por Relación de Trabajo por Temporada">Contrato por Relación de Trabajo por
+                Temporada</option>
             </select>
             <label for="txtSchedule" class="col-form-label">Horario</label>
             <input id="txtSchedule" type="text" class="form-control" placeholder="Horario" name="schedule" required>
-             <button class="buttonSolid btn btn-outline-success btn-wide btnMargin">Registrar vacante</button>
-          </div> 
-        </form>     
+            <button class="buttonSolid btn btn-outline-success btn-wide btnMargin">Registrar vacante</button>
+          </div>
+        </form>
+        <button onclick = "checkboxArray()">Prueba</button>
       </div>
     </div>
   </div>
 </div>
+<script>
+  var checkbox = document.getElementById('Otro');
+  var textbox = document.getElementById('otherText');
+  checkbox.addEventListener('click', function () {
+    if (textbox.disabled == true) {
+      textbox.disabled = false;
+      textbox.required = true;
+    } else {
+      textbox.disabled = true;
+      textbox.required = false;
+    }
+  });
+</script>
+<script>
+  function checkboxArray() {
+//var x = document.getElementById("myCheck1").value;
+//var y = document.getElementById("myCheck1").checked;
+
+ var checkboxes = document.getElementsByName("area");
+  console.log(checkboxes);
+        var checkboxesChecked = [];
+
+  for (var i=0; i<checkboxes.length; i++) {
+   
+     if (checkboxes[i].checked) {
+        checkboxesChecked.push(checkboxes[i].value);
+     }
+  }
+
+      console.log(checkboxesChecked);
+    //document.getElementById("demo").innerHTML = x;
+}
+</script>

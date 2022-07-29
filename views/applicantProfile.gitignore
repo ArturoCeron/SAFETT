@@ -1,0 +1,47 @@
+{{#userProfile}} 
+<div class="container-fluid">
+    <div class="row justify-content-end">
+        <div class="col-10" id="applicantInfoSection">
+            <div class="row">
+                <div class="col-auto">
+                    <img id="applicantPhoto" src="../img/defaultUser.jpg">
+                </div>
+                <div id="applicantIdentity" class="col-8 my-auto">
+                    <p id="applicantName">{{name}} {{lastName}}</p>
+                    <div class="row">
+                        <div class="col">
+                            <p id="applicantDegree">Estudiante de Ingeniería en Sistemas Computacionales</p>
+                        </div>
+                        <div class="col-auto">
+                            <p id="applicantDegree">Hombre · 22 años</p>
+                        </div>
+                    </div>
+                    <hr id="applicantNameDivider">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="applicantInfoSection" id="applicantContactInfo">
+        <p class="applicantInfoTitle">Presentación</p>
+        <p class="applicantInfoContent">David es un pensador sistemático, cooperativo y colaborador, orientado a seguir procedimientos. Trabaja más cómodo y eficazmente en ambientes y situaciones estructuradas y bien definidas. Comúnmente David actúa de una forma ordenada y predeterminada, además es preciso y presta atención a los detalles. Es cauteloso en la aproximación a los problemas y las decisiones. Difícilmente llegue a confrontar a colegas y normalmente actúa de una manera prudente y diplomática.. Es paciente y escucha cuidadosamente a otros, genuinamente interesado en sus ideas, opiniones e información. Expresa sus pensamientos e ideas mejor en un grupo pequeño y en situaciones de uno a uno. Es un buen “trabajador de equipo”. David trabajará para mantener la armonía en un grupo, mientras intenta satisfacer a la gente, en un esfuerzo por evitar el conflicto. David prefiere procedimientos operativos claros y consistentes y evitar los cambios repentinos o abruptos. A David lo motiva la seguridad, la consistencia y claridad en las instrucciones y las normas, como así también recibir constantes refuerzos positivos y reconfirmaciones de que está haciendo las cosas bien. David aplicará un estilo de pensamiento lógico y analítico al resolver los problemas. No quiere cometer errores y para evitarlos, aplicará un enfoque perfeccionista.</p>
+    </div>
+     <div class="applicantInfoSection" id="">
+        <p class="applicantInfoTitle">Información de contacto</p>
+        <p class="applicantInfoContent">(664) 123-45-67</p>
+        <p class="applicantInfoContent">David.Becerra10@gmail.com</p>
+    </div>
+    <div class="applicantInfoSection" id="">
+        <p class="applicantInfoTitle">Curriculum</p>
+        <div class="row justify-content-center">
+            <div class="col-4">
+                <button class="buttonSolid btn btn-outline-success btn-wide" type="button" onclick="showCurriculum()">Abrir CV</button>
+                <div id="pdfContainer"> 
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{{/userProfile}}

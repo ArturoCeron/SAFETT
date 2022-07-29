@@ -1,0 +1,21 @@
+<div class="container">
+  <div class="row justify-content-md-center">
+    <div class="col-6">
+      <div id="sectionForm">
+        <p id="formTitle">Registrate</p>
+        <p class="formContent">¿Quieres registrar tu empresa? <a href="/company/register">Crea tu cuenta como empresa</a></p>
+        <form action="/users/register" method="POST">
+          <label for="txtNombre" class="col-form-label">Nombre(s)</label>
+          <input id="txtNombre" type="text" class="form-control" placeholder="Nombre(s)" name="name">
+          <label for="txtApellidos" class="col-form-label">Apellidos</label>
+          <input id="txtApellidos" type="text" class="form-control" placeholder="Apellidos" name="lastName">
+          <label for="txtMail" class="col-form-label">Correo</label>
+          <input id="txtMail" type="email" class="form-control" placeholder="Correo" name="email">
+          <label for="txtPassword" class="col-form-label">Contraseña</label>
+          <input id="txtPassword" type="password" class="form-control" placeholder="Contraseña" name="password">
+          <button class="buttonSolid btn btn-outline-success btn-wide btnMargin" type="submit">Registrate</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
