@@ -5,7 +5,7 @@
         <div class="col-10" id="applicantInfoSection">
             <div class="row">
                 <div class="col-auto">
-                    <img id="applicantPhoto" src="../img/defaultUser.jpg">
+                    <img id="applicantPhoto" src="../uploads/{{imageName}}">
                 </div>
                 <div id="applicantIdentity" class="col-8 my-auto">
                     <p id="applicantName">{{name}} {{lastName}}</p>
@@ -67,7 +67,7 @@
                             <label class="col-form-label">Foto de perfil</label>
                             <label for="image">
                                 <img id="profile-image"
-                                    src="https://happytravel.viajes/wp-content/uploads/2020/04/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png"
+                                    src="../uploads/{{imageName}}"
                                     alt="..."
                                     style="clip-path: circle(); object-fit: cover; width:250px; height:250px;">
                             </label>

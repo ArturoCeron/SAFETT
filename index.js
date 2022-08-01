@@ -3,16 +3,26 @@
 const express = require('express')
 const mongoose = require('mongoose')
 const config = require('./config')
+const path = require('path');
 const hbs = require('express-handlebars')
 const router = require('./routes/routes')
-
+const multer = require("multer")
+const cors = require('cors')
+const {
+    GridFsStorage
+  } = require("multer-gridfs-storage")
+  require("dotenv")
+  .config();
+const Grid = require('gridfs-stream')
+const {User} = require('./models/user')
 const app = express()
-
+//const fileRoutes = require('./routes/file-upload-routes');
 // method-override
-const methodOverride = require('method-override')
+const methodOverride = require('method-override');
 app.use(methodOverride('_method'))
 
 //Body Parser
+app.use(cors());
 app.use(express.urlencoded({extended:true}))
 app.use(express.json())
 //Motor de Vistas
@@ -22,6 +32,7 @@ app.engine('.hbs', hbs({
 }))
 app.set('view engine', '.hbs')
 //Recursos Estáticos
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 app.use(express.static('public'))
 
 //Router app
@@ -36,3 +47,5 @@ mongoose.connect(config.db, config.urlParser, (err, res) =>{
         console.log(`Ejecutando en http://localhost:${config.port}`)
     })
 })
+////////////////////
+//app.use('/', fileRoutes.routes);

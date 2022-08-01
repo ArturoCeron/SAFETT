@@ -55,9 +55,12 @@ const UserSchema = new Schema({
         type: String,
         required: true
     },
-    profilePhoto: {
+    image: {
         data: Buffer,
         contentType: String
+    },
+    imageName: {
+        type:String
     },
     sex: {
         type: String,
@@ -89,3 +92,4 @@ UserSchema.pre('save', function (next){
 //export model
 const User = mongoose.model('User', UserSchema);
 module.exports = User;
+//module.exports = UserSchema;

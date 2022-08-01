@@ -13,6 +13,7 @@ const authAdmin = require('../middleware/authAdmin');
 const redirectIfAuth = require('../middleware/redirectIfAuth');
 const { isBuffer } = require('util');
 
+
 //MODELS
 const companyUser = require("../models/companyUser");
 const companyVacant = require('../models/vacants');
@@ -28,7 +29,8 @@ const loginController = require('../controllers/login');
 const loginUserController = require('../controllers/loginUser');
 const newUser = require('../controllers/newUser');
 const deleteVacant = require('../controllers/deleteVacant');
-const newUserController = require('../controllers/storeUser');
+const {singleFileUpload} = require('../controllers/fileuploaderController');
+//const newUserController = require('../controllers/storeUser');
 const storeVacantController = require('../controllers/storeVacant');
 const newCompanyController = require('../controllers/storeCompany');
 const newAdminController = require('../controllers/storeAdmin');
@@ -37,7 +39,7 @@ const userPostulations = require('../controllers/userPostulations');
 const searchVacants = require('../controllers/searchVacants');
 const searchCompanies = require('../controllers/searchCompanies');
 //const getActualDate = require ('../controllers/getDateRegister');
-
+const {upload} = require('../helpers/filehelper');
 //Crear objeto router
 const router = express.Router();
 
@@ -530,7 +532,9 @@ router.post('/home', searchValues);
 router.post('/users/login', redirectIfAuth, loginUserController);
 
 //Post para el registro
-router.post('/users/register', redirectIfAuth, newUserController);
+//router.post('/users/register', redirectIfAuth, newUserController);
+//router.post('/users/register', redirectIfAuth);
+router.post('/users/register', redirectIfAuth, upload.single('image'), singleFileUpload);
 
 router.post('/vacants/postulate/:vacantId', authAccount, postulateStudent);
 

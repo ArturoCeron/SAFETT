@@ -9,7 +9,7 @@ module.exports = (req, res)=>{
     user.name = req.body.name;
     user.lastName = req.body.lastName;
     user.age = req.body.age;
-    user.profilePhoto = req.body.profilePhoto;
+    user.image = req.body.image;
     user.sex = req.body.sex;
     user.career = req.body.career;
     user.lvlStudy = req.body.lvlStudy;
