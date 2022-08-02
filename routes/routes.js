@@ -29,7 +29,7 @@ const loginController = require('../controllers/login');
 const loginUserController = require('../controllers/loginUser');
 const newUser = require('../controllers/newUser');
 const deleteVacant = require('../controllers/deleteVacant');
-const {singleFileUpload} = require('../controllers/fileuploaderController');
+const {singleFileUpload, multiFileUpload} = require('../controllers/fileuploaderController');
 //const newUserController = require('../controllers/storeUser');
 const storeVacantController = require('../controllers/storeVacant');
 const newCompanyController = require('../controllers/storeCompany');
@@ -534,7 +534,7 @@ router.post('/users/login', redirectIfAuth, loginUserController);
 //Post para el registro
 //router.post('/users/register', redirectIfAuth, newUserController);
 //router.post('/users/register', redirectIfAuth);
-router.post('/users/register', redirectIfAuth, upload.single('image'), singleFileUpload);
+router.post('/users/register', redirectIfAuth, upload.fields([{name:'image', maxCount: 1}, {name:'curriculum', maxCount: 1}]), singleFileUpload);
 
 router.post('/vacants/postulate/:vacantId', authAccount, postulateStudent);
 

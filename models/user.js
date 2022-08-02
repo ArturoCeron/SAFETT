@@ -77,6 +77,13 @@ const UserSchema = new Schema({
     birthday:{
         type: Date,
         required: true
+    },
+    curriculum: {
+        data: Buffer,
+        contentType: String
+    },
+    curriculumName:{
+        type:String
     }
 });
 

@@ -43,8 +43,7 @@
         <p class="applicantInfoTitle">Curriculum</p>
         <div class="row justify-content-center">
             <div class="col-4">
-                <button class="buttonSolid btn btn-outline-success btn-wide" type="button"
-                    onclick="showCurriculum()">Abrir CV</button>
+                <button class="buttonSolid btn btn-outline-success btn-wide" type="button" onclick="window.open('../uploads/{{curriculumName}}');">Abrir CV</button>
                 <div id="pdfContainer">
                 </div>
             </div>
@@ -144,7 +143,7 @@
                 <p class="formSubtitle">Recursos</p>
                 <hr id="formDivider" class="contentDivider">
                 <label for="CV_File" class="col-form-label">Curriculum</label><br>
-                <input type="file" id="CV_File" name="CV" /><br>
+                <input type="file" id="CV_File" name="curriculum"></input><br>
                 <button class="buttonSolid btn btn-outline-success btn-wide btnMargin" type="submit">Guardar</button>
             </form>
         </div>

@@ -10,7 +10,7 @@ const singleFileUpload = async (req, res, next) => {
             user.lastName = req.body.lastName;
             user.age = req.body.age;
             user.image = req.body.image;
-            user.imageName = req.file.filename;
+            user.imageName = req.files.image[0].filename;
             user.sex = req.body.sex;
             user.career = req.body.career;
             user.lvlStudy = req.body.lvlStudy;
@@ -23,6 +23,9 @@ const singleFileUpload = async (req, res, next) => {
             user.lvlEnglish = req.body.lvlEnglish;
             user.campus = req.body.campus;
             user.birthday = req.body.birthday;
+            user.curriculum = req.body.curriculum;
+            user.curriculumName = req.files.curriculum[0].filename;
+
             user.save( (error, user) =>{
                 if (error) {
                     console.log(error);
@@ -32,9 +35,16 @@ const singleFileUpload = async (req, res, next) => {
             });
 }
 
-// const multiFileUpload = async (req, res, next) => {
+const multiFileUpload = async (req, res, next) => {
+    try{
+        
+        res.status(500).send('archivos subidos con exito');
+    }catch{
+        res.status(404).send(error.message);
+    }
 
-// };
+};
 module.exports = {
-    singleFileUpload
+    singleFileUpload,
+    multiFileUpload
 }
