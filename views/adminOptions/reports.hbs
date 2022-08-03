@@ -32,9 +32,49 @@
             {{!-- <td>{{companyName}}</td>
             <td></td> --}}
           </tr>
+
+        </tbody>
+      </table>
+      <br>
+      <table id="tableExport" style="width: 100%;">
+        <thead id="tableHead">
+          <tr class="table filters" style="background-color: #3067A0">
+            <th style="color: #FFFFFF" scope="col">Con CV</th>
+            <th style="color: #FFFFFF" scope="col">Sin CV</th>
+            <th style="color: #FFFFFF" scope="col">Total</th>
+          </tr>
+        </thead>
+        <tbody id="myTable">
+          <tr>
+            <td>{{haveCV}}</td>
+            <td>{{empty}}</td>
+            <td>{{allUsers}}</td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+      <table id="tableExport" style="width: 100%;">
+        <thead id="tableHead">
+          <tr class="table filters" style="background-color: #3067A0">
+            <th style="color: #FFFFFF" scope="col">Unidad</th>
+            <th style="color: #FFFFFF" scope="col">Total</th>
+          </tr>
+        </thead>
+        <tbody id="myTable">
+          <tr>
+            <td>Tomas Aquino</td>
+            <td>{{quantityTA}}</td>
+          </tr>
+          <tr>
+            <td>Otay</td>
+            <td>{{quantityOtay}}</td>
+          </tr>
         </tbody>
       </table>
       <br>
     </div>
   </div>
 </div>
+<script>
+  console.log(`{{empty}}`)
+</script>

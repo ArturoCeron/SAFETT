@@ -32,6 +32,10 @@ const postulaciones = new Schema({
         type: String,
         required: true
     },
+    status: {
+        type: String,
+        possibleValues: ['pendiente', 'aceptada', "rechazada"]
+    }
 });
 
 //export model

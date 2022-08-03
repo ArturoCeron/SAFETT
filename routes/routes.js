@@ -62,6 +62,9 @@ router.use((req, res, next) => {
     next();
 });
 
+//Modificador de datos
+router.use(methodOverride('_method'));
+
 
 // -------------------------------------------------- ROUTER.GET SECTION ------------------------------------------------------------
 
@@ -239,41 +242,47 @@ router.get('/mainAdmin/reporte', (req, res) => {
             if (!companies) return res.status(404).send({
                 message: 'No existen empresas'
             });
-            // companyVacant.find({ "companyName": companies.companyName }, (err, compVacant) => {
-            //     if (err) return res.status(500).send({
-            //         message: `Error al realizar la petición ${err}`
-            //     });
-            //     if (!compVacant) return res.status(404).send({
-            //         message: `La empresa no existe`
-            //     });
-            //     res.render('adminOptions/reports', { companies, compVacant });
-            // }).lean();
-            res.render('adminOptions/reports', { companies, approved: companies.length, companies2, totalComp: companies2.length });
+            usersInfo.find({"role":"user"}, (err, usersData) => {
+                if (err) return res.status(500).send({
+                    message: `Error al realizar la petición ${err}`
+                });
+        
+                if (!usersData) return res.status(404).send({
+                    message: 'No existe usuario'
+                });
+                usersInfo.find({ "curriculumName":null}, (err, noCV) => {
+                    if (err) return res.status(500).send({
+                        message: `Error al realizar la petición ${err}`
+                    });
+        
+                    if (!noCV) return res.status(404).send({
+                        message: 'No existe usuario'
+                    });
+                    usersInfo.find({ "campus": "Otay"}, (err, campusOtay) => {
+                        if (err) return res.status(500).send({
+                            message: `Error al realizar la petición ${err}`
+                        });
+            
+                        if (!campusOtay) return res.status(404).send({
+                            message: 'No se encontraron campus'
+                        });
+                        usersInfo.find({ "campus": "Tomas Aquino"}, (err, campusTA) => {
+                            if (err) return res.status(500).send({
+                                message: `Error al realizar la petición ${err}`
+                            });
+                
+                            if (!campusTA) return res.status(404).send({
+                                message: 'No se encontraron campus'
+                            });
+                            res.render('adminOptions/reports', { companies, approved: companies.length, companies2, totalComp: companies2.length, usersData, allUsers: usersData.length, noCV, empty: noCV.length, haveCV:(usersData.length - noCV.length), quantityOtay: campusOtay.length, quantityTA: campusTA.length});
+                        }).lean();
+                    }).lean();
+                }).lean();
+            }).lean();
         }).lean();
     }).lean();
 });
-router.get('/mainAdmin/reporte', (req, res) => {
 
-    usersInfo.find({"role":"user"}, (err, usersData) => {
-        if (err) return res.status(500).send({
-            message: `Error al realizar la petición ${err}`
-        });
-
-        if (!usersData) return res.status(404).send({
-            message: 'No existen empresas'
-        });
-        Company.find({ "CV":""}, (err, noCV) => {
-            if (err) return res.status(500).send({
-                message: `Error al realizar la petición ${err}`
-            });
-
-            if (!noCV) return res.status(404).send({
-                message: 'No existen empresas'
-            });
-            res.render('adminOptions/reports', { usersData, allUsers: usersData.length, noCV, empty: noCV.length });
-        }).lean();
-    }).lean();
-});
 
 
 //Perfil de Alumno
@@ -292,7 +301,6 @@ router.get('/perfilAspirante', authAccount, (req, res) => {
 
 //Modificación del perfil del alumno por el alumno
 
-router.use(methodOverride('_method'));
 router.put('/perfilAspirante/:userID', (req, res) => {
     let userID = req.params.userID;
     let update = req.body;

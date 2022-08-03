@@ -1,0 +1,27 @@
+<div class="overlay" id="overlay">
+    <div class="popup" id="popup">
+        <a href="#" id="btn-cerrar-popup" class="btn-cerrar-popup"><i class="bi bi-x"></i></a>
+        <h3>Estado de la feria</h3>
+        <form action="/perfilAspirante/{{_id}}?_method=PUT" method="POST">
+            <input type="hidden" name="_method" value="PUT" />
+            <p style="color:gray;">Alterar el siguiente switch afectará la parte de empresas y aplicantes</p>
+            <hr id="formDivider" class="contentDivider">
+            <div class="multiselect btn-group">
+                    <input type="checkbox" class="btn-check" id="Pre-registro de empresas" value="Pre-registro de empresas"
+                        autocomplete="off" name="area">
+                    <label class="btn btn-outline-primary" for="Pre-registro de empresas"><span>Pre-registro de empresas</span></label>
+                    <input type="checkbox" class="btn-check" id="Registro de aspirantes" value="Registro de aspirantes" autocomplete="off"
+                        name="area">
+                    <label class="btn btn-outline-primary" for="Registro de aspirantes"><span>Registro de aspirantes</span></label>
+                    <input type="checkbox" class="btn-check" id="Feria activa al 100%" value="Feria activa al 100%" autocomplete="off"
+                        name="area">
+                    <label class="btn btn-outline-primary" for="Feria activa al 100%"><span>Feria activa al 100%</span></label>
+                    <input type="checkbox" class="btn-check" id="Feria terminada" value="Feria terminada" autocomplete="off"
+                        name="area">
+                    <label class="btn btn-outline-primary" for="Feria terminada"><span>Feria terminada</span></label>
+                </div>
+                <button class="buttonSolid btn btn-outline-success btn-wide btnMargin" type="submit">Guardar</button>
+        </form>
+    </div>
+</div>
+<script src="/js/popup.js"></script>

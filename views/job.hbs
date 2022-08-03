@@ -60,8 +60,8 @@
                 <div class="col-3">
                      {{#vacantVals}}
     
-                    <form action="/vacants/postulate/{{_id}}" method="POST">
-                        <button class="buttonSolid btn btn-outline-success btn-wide">Solicitar puesto</button>
+                    <form action="/vacants/postulate/{{_id}}" method="POST" id="postStatus">
+                        <button class="buttonSolid btn btn-outline-success btn-wide" onclick="pendingStatus()">Solicitar puesto</button>
                     </form>
                      {{/vacantVals}}
     
@@ -85,12 +85,53 @@
    
     {{#if postVals}}
         <h1> Postulados </h1>
-        {{#postVals}}
+        {{!-- {{#postVals}}
             <input type="text" class="form-control" disable value="Nombre de la vacante: {{vacantName}}" name="name">
             <input type="text" class="form-control" disable value="Nombre de empresa: {{companyName}}" name="companyName">
             <input type="text" class="form-control" disable value="Nombre del estudiante: {{studentName}}" name="studentName">
             <input type="text" class="form-control" disable value="Correo del estudiante: {{studentEmail}}" name="studentEmail">
-        {{/postVals}}
+        {{/postVals}} --}}
+        <table class="table">
+            <thead>
+                        <tr style="background-color: #3067A0">
+                            <th style="color: #FFFFFF" scope="col">Vacante</th>
+                            <th style="color: #FFFFFF" scope="col">Empresa</th>
+                            <th style="color: #FFFFFF" scope="col">Aspirante</th>
+                            <th style="color: #FFFFFF" scope="col">Correo del aspirante</th>
+                        </tr>
+                    </thead>
+                    <tbody id="myTable">
+
+                        {{#postVals}}
+                        <tr>
+                            <td>{{vacantName}}</td>
+                            <td>{{companyName}}</td>
+                            <td>{{studentName}}</td>
+                            <td>{{studentEmail}}</td>
+                            <td>
+                            <div class="my-auto mx-auto">
+                                <form action="vacante/{{_id}}" method="get">
+                                    <button class="buttonSolid btn btn-outline-success btn-wide buttonSmall">Ver más</button>
+                                </form>
+                                <form action="postulation/delete/{{_id}}?_method=delete" method="POST">
+                                    <button class="buttonSolid buttonWarning btn btn-outline-success btn-wide buttonSmall" style="margin-top: 16px;">Eliminar</button>
+                                </form>
+                            </div>
+                            </td>
+                            {{!-- onclick="window.location='/perfilAspirante/{{studentId}}';" --}}
+                        </tr>
+                        {{/postVals}}
+                    </tbody>
+                </table>        
     {{/if}}
     
 </div>
+<script>
+  function pendingStatus() {
+    var status = document.createElement("input");
+    status.type = "hidden";
+    status.value = "pending";
+    status.name = "status";
+    document.getElementById("postStatus").appendChild(status);
+  }
+</script>

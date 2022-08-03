@@ -49,12 +49,13 @@
             <div class="contentSection">
                 <p class="contentTitle">Información</p>
                 <p class="contentParagraph">{{description}}</p>
-    {{/datosPerfil}}
+                {{/datosPerfil}}
                 <p class="contentTitle">Vacantes</p>
                 <hr class="contentDivider">
-                {{#vacantData}}    
+                {{#vacantData}}
                 <!--<form id="form{{_id}}" action="vacante/{{_id}}" method="get">-->
-                <a class="hyperlinkSection" href="/vacante/{{_id}}" onclick="document.getElementById('form{{_id}}').submit()">
+                <a class="hyperlinkSection" href="/vacante/{{_id}}"
+                    onclick="document.getElementById('form{{_id}}').submit()">
                     <div class="vacantElement flex">
                         <p class="vacantName">{{name}}</p>
                         <p class="vacantSalary">${{salary}}</p>
@@ -62,8 +63,33 @@
                         <p class="vacantDate">{{schedule}}</p>
                     </div>
                 </a>
-                 <!--</form>-->
+                <!--</form>-->
                 {{/vacantData}}
+                {{!-- <table id="tableExport">
+                    <thead id="tableHead">
+                        <tr class="table filters" style="background-color: #3067A0">
+                            <th class="center">
+                                <input type="checkbox" onClick="toggle(this)" class="text-center" />
+                            </th>
+                            <th style="color: #FFFFFF" scope="col">Nombre</th>
+                            <th style="color: #FFFFFF" scope="col">Salario</th>
+                            <th style="color: #FFFFFF" scope="col">Detalles</th>
+                            <th style="color: #FFFFFF" scope="col">Horario</th>
+                        </tr>
+                    </thead>
+                    <tbody id="myTable">
+
+                        {{#vacantData}}
+                        <tr>
+                            <td><input type="checkbox" name="check" class="check"></td>
+                            <td onclick="window.location='/mainAdmin/aspirante/{{_id}}';">{{name}}</td>
+                            <td onclick="window.location='/mainAdmin/aspirante/{{_id}}';">${{salary}}</td>
+                            <td onclick="window.location='/mainAdmin/aspirante/{{_id}}';">{{details}}</td>
+                            <td onclick="window.location='/mainAdmin/aspirante/{{_id}}';">{{schedule}}</td>
+                        </tr>
+                        {{/vacantData}}
+                    </tbody>
+                </table> --}}
             </div>
         </div>
     </div>

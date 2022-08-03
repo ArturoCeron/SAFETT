@@ -42,6 +42,7 @@ module.exports = (req, res)=>{
                     postVacant.studentId = userData._id;
                     postVacant.studentName = userData.name;
                     postVacant.studentEmail = userData.username;
+                    postVacant.status = req.body.status;
                     console.log("Postulacion: ", postVacant);
                     postVacant.save( (err, postVacant) =>{
                         if (err) return res.status(500).send({
