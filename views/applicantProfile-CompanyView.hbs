@@ -1,0 +1,53 @@
+{{#userProfile}}
+
+<div class="container-fluid">
+    <div class="row justify-content-end">
+        <div class="col-10" id="applicantInfoSection">
+            <div class="row">
+                <div class="col-auto">
+                    <img id="applicantPhoto" src="../uploads/{{imageName}}">
+                </div>
+                <div id="applicantIdentity" class="col-8 my-auto">
+                    <p id="applicantName">{{name}} {{lastName}}</p>
+                    <div class="row">
+                        <div class="col">
+                            <p id="applicantDegree">{{career}}</p>
+                        </div>
+                        <div class="col-auto">
+                            <p id="applicantDegree">{{sex}} · {{age}} años</p>
+                        </div>
+                    </div>
+                    <hr id="applicantNameDivider">
+                    <div class="row">
+                        <div class="col">
+                            <p id="applicantDegree">{{lvlStudy}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="applicantInfoSection" id="applicantContactInfo">
+        <p class="applicantInfoTitle">Presentación</p>
+        <p class="applicantInfoContent">{{presentation}}</p>
+    </div>
+    <div class="applicantInfoSection" id="">
+        <p class="applicantInfoTitle">Información de contacto</p>
+        <p class="applicantInfoContent">{{phone}}</p>
+        <p class="applicantInfoContent">{{email}}</p>
+    </div>
+    <div class="applicantInfoSection" id="">
+        <p class="applicantInfoTitle">Curriculum</p>
+        <div class="row justify-content-center">
+            <div class="col-4">
+                <button class="buttonSolid btn btn-outline-success btn-wide" type="button" onclick="window.open('../uploads/{{curriculumName}}');">Abrir CV</button>
+                <div id="pdfContainer">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{{/userProfile}}

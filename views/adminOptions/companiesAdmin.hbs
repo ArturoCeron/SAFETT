@@ -1,3 +1,4 @@
+{{#if adminLogged}}
 <script>
   //Script check all checkboxes
   function toggle(source) {
@@ -51,13 +52,6 @@
   });
 </script>
 
-
-
-
-
-
-<script type="text/javascript" src="https://unpkg.com/xlsx@0.15.1/dist/xlsx.full.min.js"></script>
-
 <script type="text/javascript">
   function exportReportToExcel(type, fn, dl) {
     var checks = document.getElementsByClassName('check');
@@ -70,13 +64,13 @@
     for (var i = 0; i < elt.rows.length; i++) {
       if (i == 0) {
         var tblHead = document.createElement("tr");
-        var num1 = head.rows[0].cells[1].innerHTML.replace(/<\s*input[^>]*>/gi, '');
-        var date1 = head.rows[0].cells[2].innerHTML.replace(/<\s*input[^>]*>/gi, '');
-        var company1 = head.rows[0].cells[3].innerHTML.replace(/<\s*input[^>]*>/gi, '');
-        var vacants1 = head.rows[0].cells[4].innerHTML.replace(/<\s*input[^>]*>/gi, '');
-        var published1 = head.rows[0].cells[5].innerHTML.replace(/<\s*input[^>]*>/gi, '');
+        var num1 = head.rows[0].cells[1].innerHTML.replace(/<\s*input[^>]*>/gi,'');
+        var date1 = head.rows[0].cells[2].innerHTML.replace(/<\s*input[^>]*>/gi,'');
+        var lvlstudy1 = head.rows[0].cells[3].innerHTML.replace(/<\s*input[^>]*>/gi,'');
+        var career1 = head.rows[0].cells[4].innerHTML.replace(/<\s*input[^>]*>/gi,'');
+        var ap_Vacants1 = head.rows[0].cells[5].innerHTML.replace(/<\s*input[^>]*>/gi,'');
         var contact1 = head.rows[0].cells[6].innerHTML.replace(/<\s*input[^>]*>/gi, '');
-        var newthead = [num1, date1, company1, vacants1, published1, contact1];
+        var newthead = [num1, date1, lvlstudy1, career1, ap_Vacants1, contact1];
 
         for (var CELL of newthead) {
           var tblh = document.createElement("td");
@@ -91,12 +85,12 @@
         var trow = document.createElement("tr");
         var num2 = i + 1;
         var date2 = elt.rows[i].cells[2].innerHTML;
-        var company2 = elt.rows[i].cells[3].innerHTML;
-        var vacants2 = elt.rows[i].cells[4].innerHTML;
-        var published2 = head.rows[i].cells[5].innerHTML;
+        var lvlstudy2 = elt.rows[i].cells[3].innerHTML;
+        var career2 = elt.rows[i].cells[4].innerHTML;
+        var ap_Vacants2 = elt.rows[i].cells[5].innerHTML;
         var contact2 = elt.rows[i].cells[6].innerHTML;
         contact2 = contact2.replaceAll(/<br>/g, ", ")
-        var newlist = [num2, date2, company2, vacants2, published2, contact2];
+        var newlist = [num2, date2, lvlstudy2, career2, ap_Vacants2, contact2];
         for (var CELL of newlist) {
           var tcell = document.createElement("td");
           var txtCell = document.createTextNode(CELL);
@@ -128,7 +122,9 @@
         <font size="2" style="color: #8994A0;">Pagina para admisión y Administración de empresas</font>
         <br><br><br>
         <div class="col">
-          <input type="text" id="myInput" placeholder="Buscar en todo">
+          <div class="input-icons">
+          <i class="bi bi-search icon"></i>
+          <input type="text" id="myInput" placeholder="Buscar en todo"></div>
         </div>
         <div class="col">
           <button class="btn btn-success" style="float: right;" id="btnExport"
@@ -137,13 +133,27 @@
               style="margin-right:0.5em; width: 10%">Descargar(.xls)</button>
         </div>
       </div>
+      <div class="row">
+        <div class="col-sm-1">
+      <select class="form-select" name="state" id="maxRows">
+          <option value="5">5</option>
+          <option value="10">10</option>
+          <option value="20">20</option>
+          <option value="50">50</option>
+          <option value="100">100</option>
+          <option value="0">Todos</option>
+        </select>
+        </div>
+        <label for="maxRows" class="control-label col-sm-3" style="padding: 9px;">Cantidad de datos por página</label>
+        </div>
+        <br>
       <table class="tb second" id="tableExport" style="width: 100%;">
         <thead id="tableHead">
           <tr class="table filters" style="background-color: #3067A0">
             <th class="centerCompany">
               <input type="checkbox" onClick="toggle(this)" />
             </th>
-            <th style="color: #FFFFFF" scope="col">#<input type="text" id="numFilter" class="form-control"
+            <th style="color: #FFFFFF" scope="col"><input type="text" id="numFilter" class="form-control"
                 placeholder="#" /></th>
             <th style="color: #FFFFFF" scope="col">Fecha<input type="text" id="dateFilter" class="form-control"
                 placeholder="Fecha" /></th>
@@ -157,7 +167,7 @@
                 placeholder="Publicadas" />
             </th>
             <th style="color: #FFFFFF" scope="col">Contacto<input type="text" id="contFilter" class="form-control"
-                placeholder="Contacto"/>
+                placeholder="Contacto" />
             </th>
           </tr>
         </thead>
@@ -180,6 +190,25 @@
         </tbody>
       </table>
       <br>
+      <!--		Start Pagination -->
+        <div class='pagination-container'>
+          <nav>
+            <ul class="pagination">
+              <li class="page-item" data-page="prev"><a class="page-link" href="#">
+                <span> < <span class="sr-only">(current)</span></span></a>
+              </li>
+              <li class="page-item" data-page="next" id="prev"><a class="page-link" href="#">
+                <span> > <span class="sr-only">(current)</span></span></a>
+              </li>
+            </ul>
+          </nav>
+        </div>
     </div>
   </div>
 </div>
+<script src="/js/sortTable.js"></script>
+{{else}}
+    <script>
+      window.location.href = "/";
+    </script>
+    {{/if}}

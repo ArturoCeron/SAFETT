@@ -21,9 +21,8 @@ module.exports = (req, res)=>{
             console.log("Error en usuario")
         }
     });
-
     
-    let company = new Company();
+    const company = new Company();
     company.companyName = req.body.companyName;
     company.companyBusiness = req.body.companyBusiness;
     company.quantityEmployees = req.body.quantityEmployees;
@@ -42,7 +41,7 @@ module.exports = (req, res)=>{
     company.contactMail = req.body.contactMail;
     company.contactPhone = req.body.contactPhone;
     company.contactCharge = req.body.contactCharge;
-    company.contactExt = req.body.contactExt;
+    // company.contactExt = req.body.contactExt;
     company.registerDate = objDate.getDate() + "/" + (objDate.getMonth() + 1) + "/" + objDate.getFullYear();
     company.status = req.body.status;
     company.save( (error, company) =>{

@@ -1,3 +1,4 @@
+{{#if adminLogged}}
 <br><br>
 <div class="container" style="margin-left:20%; width: 75%">
     <div "container">
@@ -9,60 +10,64 @@
         <br><br><br>
     </div>
     <div class="container">
-        <form>
+        <form action="/mainAdmin/vacante/{{_id}}?_method=PUT" method="POST">
             <div class="row">
                 <div class="col">
                     <label for="txtMessage" class="col-form-label">Titulo de la vacante</label>
-                    <input type="text" class="form-control" placeholder="Titulo de la vacante" value="{{name}}">
+                    <input type="text" class="form-control" placeholder="Titulo de la vacante" name="name" value="{{name}}" required>
                 </div>
                 <div class="col">
                     <label for="txtMessage" class="col-form-label">Número de vacantes disponibles</label>
-                    <input type="text" class="form-control" placeholder="Número de vacantes disponibles"
-                        value="{{quantityVacants}}">
+                    <input type="text" class="form-control" name="quantityVacants" placeholder="Número de vacantes disponibles"
+                        value="{{quantityVacants}}" required>
                 </div>
                 <div class="col">
                     <label for="txtMessage" class="col-form-label">Salario</label>
-                    <input type="text" class="form-control" placeholder="Salario" value="{{salary}}">
+                    <input type="text" class="form-control" name="salary" placeholder="Salario" value="{{salary}}" required>
                 </div>
             </div>
             <div class="row">
                 <div class="col">
                     <label for="txtMessage" class="col-form-label">Tipo de Contrato</label>
-                    <input type="text" class="form-control" placeholder="Fecha de registro" value="{{typeContract}}">
+                    <input type="text" class="form-control" name="typeContract" placeholder="Fecha de registro" value="{{typeContract}}" required>
                 </div>
                 <div class="col">
                     <label for="txtMessage" class="col-form-label">Area</label>
-                    <input type="text" class="form-control" placeholder="Area" value="{{area}}" required>
+                    <input type="text" class="form-control" name="area" placeholder="Area" value="{{area}}" required>
                 </div>
                 <div class="col">
                     <label for="txtMessage" class="col-form-label">Horario</label>
-                    <input type="text" class="form-control" placeholder="Salario" value="{{schedule}}">
+                    <input type="text" class="form-control" name="schedule" placeholder="Salario" value="{{schedule}}" required>
                 </div>
             </div>
-        </form>
-    </div>
-    <br><br>
-    <div class="container">
-        <form>
-            <div class="row">
-                <div class="col">
-                    <div class="form-group">
-                        <label for="txtMessage" class="col-form-label">Descripción y detalles de actividades</label>
-                        <textarea type="text" class="form-control" name="interest" rows="6"
-                            placeholder="Titulo de vacantes a cubrir" required>{{details}}</textarea>
+            <br><br>
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="txtMessage" class="col-form-label">Descripción y detalles de actividades</label>
+                            <textarea type="text" class="form-control" name="details" rows="6"
+                                placeholder="Titulo de vacantes a cubrir" required>{{details}}</textarea>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="txtMessage" class="col-form-label">Experiencia y requisitos</label>
+                            <textarea type="text" class="form-control" name="requirements" rows="6"
+                                placeholder="Titulo de vacantes a cubrir" required>{{requirements}}</textarea>
+                        </div>
                     </div>
                 </div>
-            <div class="col">
-                <div class="form-group">
-                    <label for="txtMessage" class="col-form-label">Experiencia y requisitos</label>
-                    <textarea type="text" class="form-control" name="interest" rows="6"
-                        placeholder="Titulo de vacantes a cubrir" required>{{requirements}}</textarea>
-                </div>
-            </div>
-            </div>
+                <button class="buttonSolid btn btn-outline-success btn-wide btnMargin" id="btn" type="submit"
+                    style="float: right; width: 90px; height: 40px;">Guardar</button><br><br>
         </form>
     </div>
     {{/datosVacante}}
 </div>
 <br>
 <br>
+{{else}}
+<script>
+    window.location.href = "/";
+</script>
+{{/if}}

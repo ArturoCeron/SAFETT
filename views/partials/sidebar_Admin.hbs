@@ -1,40 +1,40 @@
 <header>
     <script type="text/javascript">
-    $(function() {
-        // this will get the full URL at the address bar
-        var url = window.location.href;
+        $(function () {
+            // this will get the full URL at the address bar
+            var url = window.location.href;
 
-        // passes on every "a" tag
-        $(".topmenu a").each(function() {
-            // checks if its the same on the address bar
-            if (url == (this.href)) {
-                $(this).closest("li").addClass("active");
-                //for making parent of submenu active
-               $(this).closest("li").parent().parent().addClass("active");
-            }
-        });
-    });        
-</script>
-<script>
-  function redirect() {
-  	window.location.href = url
-  }
-</script>
-<!-- Navbar -->
-<script>
-    function showContent(ev) {
-        (ev || event).preventDefault();
-        var x = document.getElementById("table");
-        if (x.style.display === "none") {
-            x.style.display = "block";
-        } else {
-            x.style.display = "none";
+            // passes on every "a" tag
+            $(".topmenu a").each(function () {
+                // checks if its the same on the address bar
+                if (url == (this.href)) {
+                    $(this).closest("li").addClass("active");
+                    //for making parent of submenu active
+                    $(this).closest("li").parent().parent().addClass("active");
+                }
+            });
+        });        
+    </script>
+    <script>
+        function redirect() {
+            window.location.href = url
         }
-    }
-</script>
+    </script>
+    <!-- Navbar -->
+    <script>
+        function showContent(ev) {
+            (ev || event).preventDefault();
+            var x = document.getElementById("table");
+            if (x.style.display === "none") {
+                x.style.display = "block";
+            } else {
+                x.style.display = "none";
+            }
+        }
+    </script>
+
     <nav class="sidebar">
-        <div class="d-flex flex-column flex-shrink-0 p-3 topmenu"
-            style="height:100%;">
+        <div class="d-flex flex-column flex-shrink-0 p-3 topmenu" style="height:100%;">
             {{!-- <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
                 <img src="/public/img/logo_TECT.png" width="200" height="50" alt="" />
                 <svg class="bi me-2" width="40" height="32">
@@ -43,10 +43,9 @@
                 <span class="fs-4">Instituto Tecnológico de Tijuana</span>
             </a> --}}
             <div class="container">
-                   <div class="container text-center">
-                    <img class="logo img-fluid"
-                        src="../img/logo_TECT.png" style="background-color: rgba(0, 0, 0, 0); ">
-                    <span>Bienvenido {{name}}<br></span>
+                <div class="container text-center">
+                    <img class="logo img-fluid" src="../img/logo_TECT.png" style="background-color: rgba(0, 0, 0, 0); ">
+                    <span>Bienvenido {{adminName}}<br></span>
                 </div>
             </div>
             <hr>
@@ -54,7 +53,7 @@
                 <li class="nav-item">
                     <a href="/mainAdmin/empresas" class="nav-link link-dark">
                         <svg class="bi me-2" width="16" height="16">
-                            <use xlink:href="#home"></use>
+                            <i class="bi bi-building"></i>
                         </svg>
                         Empresas
                     </a>
@@ -62,7 +61,7 @@
                 <li>
                     <a href="/mainAdmin/vacantes" class="nav-link link-dark">
                         <svg class="bi me-2" width="16" height="16">
-                            <use xlink:href="#speedometer2"></use>
+                            <i class="bi bi-journal"></i>
                         </svg>
                         Vacantes
                     </a>
@@ -70,7 +69,7 @@
                 <li>
                     <a href="/mainAdmin/aspirantes" class="nav-link link-dark">
                         <svg class="bi me-2" width="16" height="16">
-                            <use xlink:href="#table"></use>
+                            <i class="bi bi-person"></i>
                         </svg>
                         Aspirantes
                     </a>
@@ -78,19 +77,10 @@
                 <li>
                     <a href="/mainAdmin/reporte" class="nav-link link-dark">
                         <svg class="bi me-2" width="16" height="16">
-                            <use xlink:href="#grid"></use>
+                            <i class="bi bi-clipboard-data"></i>
                         </svg>
                         Reportes
                     </a>
-                </li>
-                <li>
-                    <a class="nav-link link-dark" id="btn-abrir-popup">
-                        <svg class="bi me-2" width="16" height="16">
-                            <use xlink:href="#people-circle"></use>
-                        </svg>
-                        Estado de la feria
-                    </a>
-                    {{>state}}
                 </li>
                 {{!-- {{#if loggedIn}}
                 <li>
@@ -103,15 +93,27 @@
                 </li>
                 {{/if}} --}}
             </ul>
+            <a class="d-flex align-items-center link-dark text-decoration-none" id="btn-abrir-popup" style="cursor: pointer; padding-bottom: 10px;">
+                <svg class="bi me-2" width="16" height="16">
+                    <img src="../img/progress.png" width="16" height="16"/>
+                </svg>&nbsp;Estado de la feria
+            </a>
+            <a class="d-flex align-items-center link-dark text-decoration-none" id="btn-abrir-popup2" style="cursor: pointer;">
+                <svg class="bi me-2" width="16" height="16">
+                    <i class="bi bi-person-plus-fill"></i>
+                </svg>
+                &nbsp;Administrador
+            </a>
             <hr>
             <div>
                 <a href="/auth/logout" class="d-flex align-items-center link-dark text-decoration-none">
                     <svg class="bi me-2" width="16" height="16">
-                        <use xlink:href=""></use>
                     </svg>
                     Cerrar sesión
                 </a>
             </div>
         </div>
     </nav>
+    {{>state}}
+    {{>adminRegister}}
 </header>

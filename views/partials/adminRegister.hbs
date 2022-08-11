@@ -1,0 +1,48 @@
+{{#if adminLogged}}
+{{!-- <div class="container">
+  <div class="row justify-content-md-center">
+    <div class="col-6">
+      <div id="sectionForm">
+        <p id="formTitle">Registrate</p>
+        <form action="/admin/register" method="POST">
+          <label for="txtNombre" class="col-form-label">Nombre(s)</label>
+          <input id="txtNombre" type="text" class="form-control" placeholder="Nombre(s)" name="name">
+          <label for="txtApellidos" class="col-form-label">Apellidos</label>
+          <input id="txtApellidos" type="text" class="form-control" placeholder="Apellidos" name="lastName">
+          <label for="txtMail" class="col-form-label">Correo</label>
+          <input id="txtMail" type="text" class="form-control" placeholder="Correo" name="email">
+          <label for="txtPassword" class="col-form-label">Contraseña</label>
+          <input id="txtPassword" type="password" class="form-control" placeholder="Contraseña" name="password">
+          <button class="buttonSolid btn btn-outline-success btn-wide btnMargin" type="submit">Registrate</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div> --}}
+<div class="overlay" id="overlay2">
+  <div class="popup" id="popup2">
+    <a id="btn-cerrar-popup2" class="btn-cerrar-popup"><i class="bi bi-x-lg"></i></a>
+    <h3>Regístrate</h3>
+    <form action="/perfilAspirante/{{_id}}?_method=PUT" method="POST">
+      <input type="hidden" name="_method" value="PUT" />
+      <p style="color:gray;">Registra a nuevos administradores para la página</p>
+          <form action="/admin/register" method="POST">
+            <label for="txtNombre" class="col-form-label">Nombre(s)</label>
+            <input id="txtNombre" type="text" class="form-control" placeholder="Nombre(s)" name="name">
+            <label for="txtApellidos" class="col-form-label">Apellidos</label>
+            <input id="txtApellidos" type="text" class="form-control" placeholder="Apellidos" name="lastName">
+            <label for="txtMail" class="col-form-label">Correo</label>
+            <input id="txtMail" type="text" class="form-control" placeholder="Correo" name="email">
+            <label for="txtPassword" class="col-form-label">Contraseña</label>
+            <input id="txtPassword" type="password" class="form-control" placeholder="Contraseña" name="password">
+            <button class="buttonSolid btn btn-outline-success btn-wide btnMargin" type="submit">Registrate</button>
+          </form>
+    </form>
+  </div>
+</div>
+<script src="/js/popup.js"></script>
+{{else}}
+<script>
+  window.location.href = "/";
+</script>
+{{/if}}

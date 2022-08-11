@@ -144,6 +144,9 @@ body {
 
 table {
   border: none;
+}
+
+table.first {
   counter-reset: rowNumber;
 }
 
@@ -164,14 +167,6 @@ table thead {
 
 table td:last-child {
   border-right: none;
-}
-
-table.second tr>td:nth-child(2) {
-  counter-increment: rowNumber;
-}
-
-table.second tr td:nth-child(2)::after {
-  content: counter(rowNumber);
 }
 
 table.first tr>td:first-child {
@@ -388,3 +383,22 @@ textarea {
   color: white;
 }
 
+.input-icons i {
+  position: absolute;
+}
+
+.input-icons {
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.icon {
+  padding: 10px;
+  min-width: 50px;
+  color: gray;
+  text-align: center;
+}
+
+.pagination li:hover{
+  cursor: pointer;
+}

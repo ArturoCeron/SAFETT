@@ -1,3 +1,4 @@
+{{#if adminLogged}}
 <script>
   //Script check all checkboxes
   function toggle(source) {
@@ -50,7 +51,6 @@
   });
 </script>
 
-<script type="text/javascript" src="https://unpkg.com/xlsx@0.15.1/dist/xlsx.full.min.js"></script>
 
 <script type="text/javascript">
   function exportReportToExcel(type, fn, dl) {
@@ -64,11 +64,11 @@
     for (var i = 0; i < elt.rows.length; i++) {
       if (i == 0) {
         var tblHead = document.createElement("tr");
-        var num1 = head.rows[0].cells[1].innerHTML.replace(/<\s*input[^>]*>/gi,'');
-        var date1 = head.rows[0].cells[2].innerHTML.replace(/<\s*input[^>]*>/gi,'');
-        var lvlstudy1 = head.rows[0].cells[3].innerHTML.replace(/<\s*input[^>]*>/gi,'');
-        var career1 = head.rows[0].cells[4].innerHTML.replace(/<\s*input[^>]*>/gi,'');
-        var ap_Vacants1 = head.rows[0].cells[5].innerHTML.replace(/<\s*input[^>]*>/gi,'');
+        var num1 = head.rows[0].cells[1].innerHTML.replace(/<\s*input[^>]*>/gi, '');
+        var date1 = head.rows[0].cells[2].innerHTML.replace(/<\s*input[^>]*>/gi, '');
+        var lvlstudy1 = head.rows[0].cells[3].innerHTML.replace(/<\s*input[^>]*>/gi, '');
+        var career1 = head.rows[0].cells[4].innerHTML.replace(/<\s*input[^>]*>/gi, '');
+        var ap_Vacants1 = head.rows[0].cells[5].innerHTML.replace(/<\s*input[^>]*>/gi, '');
         var newthead = [num1, date1, lvlstudy1, career1, ap_Vacants1];
 
         for (var CELL of newthead) {
@@ -115,11 +115,14 @@
       </div>
       <div class="row">
         <br><br><br>
-        <h1>Aplicantes</h1>
+        <h1>Aspirantes</h1>
         <font size="2" style="color: #8994A0;">Pagina para la administración de aspirantes</font>
         <br><br><br>
         <div class="col">
-          <input type="text" id="myInput" placeholder="Buscar en todo">
+          <div class="input-icons">
+            <i class="bi bi-search icon"></i>
+            <input type="text" id="myInput" placeholder="Buscar en todo">
+          </div>
         </div>
         <div class="col">
           <button class="btn btn-success" style="float: right;" id="btnExport"
@@ -128,43 +131,80 @@
               style="margin-right:0.5em; width: 10%">Descargar(.xls)</button>
         </div>
       </div>
-      <table class="tb second" id="tableExport">
-        <thead id="tableHead">
-          <tr class="table filters" style="background-color: #3067A0">
-            <th class="center">
-                <input type="checkbox" onClick="toggle(this)" class="text-center"/>
-            </th>
-            <th style="color: #FFFFFF" scope="col">#<input type="text" id="numFilter" class="form-control"
-                placeholder="#"/></th>
-            <th style="color: #FFFFFF" scope="col">Fecha<input type="text" id="dateFilter" class="form-control"
-                placeholder="Fecha" /></th>
-            <th style="color: #FFFFFF" scope="col">Nombre<input type="text" id="nameFilter" class="form-control"
-                placeholder="Nombre" />
-            </th>
-            <th style="color: #FFFFFF" scope="col">Grado de estudios<input type="text" id="lvlFilter" class="form-control"
-                placeholder="Grado de estudios" />
-            </th>
-            <th style="color: #FFFFFF" scope="col">Carrera<input type="text" id="careerFilter" class="form-control"
-                placeholder="Carrera" />
-            </th>
-            <th style="color: #FFFFFF" scope="col">Vacantes aplicadas<input type="text" id="vacFilter" class="form-control"
-                placeholder="Vacantes aplicadas" />
-            </th>
-          </tr>
-        </thead>
-        <tbody id="myTable">
+      <div class="row">
+        <div class="col-sm-1">
+      <select class="form-select" name="state" id="maxRows">
+          <option value="5">5</option>
+          <option value="10">10</option>
+          <option value="20">20</option>
+          <option value="50">50</option>
+          <option value="100">100</option>
+          <option value="0">Todos</option>
+        </select>
+        </div>
+        <label for="maxRows" class="control-label col-sm-3" style="padding: 9px;">Cantidad de datos por página</label>
+        </div>
+        <br>
+      <div class="tableBox">
+        <table class="tb second" id="tableExport">
+          <thead id="tableHead">
+            <tr class="table filters" style="background-color: #3067A0">
+              <th class="center">
+                <input type="checkbox" onClick="toggle(this)" class="text-center" />
+              </th>
+              <th style="color: #FFFFFF" scope="col"><input type="text" id="numFilter" class="form-control"
+                  placeholder="#" /></th>
+              <th style="color: #FFFFFF" scope="col">Fecha<input type="text" id="dateFilter" class="form-control"
+                  placeholder="Fecha" /></th>
+              <th style="color: #FFFFFF" scope="col">Nombre<input type="text" id="nameFilter" class="form-control"
+                  placeholder="Nombre" />
+              </th>
+              <th style="color: #FFFFFF" scope="col">Grado de estudios<input type="text" id="lvlFilter"
+                  class="form-control" placeholder="Grado de estudios" />
+              </th>
+              <th style="color: #FFFFFF" scope="col">Carrera<input type="text" id="careerFilter" class="form-control"
+                  placeholder="Carrera" />
+              </th>
+              <th style="color: #FFFFFF" scope="col">Vacantes aplicadas<input type="text" id="vacFilter"
+                  class="form-control" placeholder="Vacantes aplicadas" />
+              </th>
+            </tr>
+          </thead>
+          <tbody id="myTable">
 
-          {{#applicants}}
-          <tr>
-            <td><input type="checkbox" name="check" class="check"></td>
-            <td onclick="window.location='/mainAdmin/aspirante/{{_id}}';"></td>
-            <td onclick="window.location='/mainAdmin/aspirante/{{_id}}';">{{registerDate}}</td>
-            <td onclick="window.location='/mainAdmin/aspirante/{{_id}}';">{{name}}</td>
-            <td onclick="window.location='/mainAdmin/aspirante/{{_id}}';">{{lvlStudy}}</td>
-            <td onclick="window.location='/mainAdmin/aspirante/{{_id}}';">{{career}}</td>
-            <td onclick="window.location='/mainAdmin/aspirante/{{_id}}';">V. Aplicadas</td>
-          </tr>
-          {{/applicants}}
-        </tbody>
-      </table>
+            {{#applicants}}
+            <tr>
+              <td><input type="checkbox" name="check" class="check"></td>
+              <td onclick="window.location='/mainAdmin/aspirante/{{_id}}';"></td>
+              <td onclick="window.location='/mainAdmin/aspirante/{{_id}}';">{{registerDate}}</td>
+              <td onclick="window.location='/mainAdmin/aspirante/{{_id}}';">{{name}}</td>
+              <td onclick="window.location='/mainAdmin/aspirante/{{_id}}';">{{lvlStudy}}</td>
+              <td onclick="window.location='/mainAdmin/aspirante/{{_id}}';">{{career}}</td>
+              <td onclick="window.location='/mainAdmin/aspirante/{{_id}}';">V. Aplicadas</td>
+            </tr>
+            {{/applicants}}
+          </tbody>
+        </table>
+        <br>
+        <!--		Start Pagination -->
+        <div class='pagination-container'>
+          <nav>
+            <ul class="pagination">
+              <li class="page-item" data-page="prev"><a class="page-link" href="#">
+                <span> < <span class="sr-only">(current)</span></span></a>
+              </li>
+              <li class="page-item" data-page="next" id="prev"><a class="page-link" href="#">
+                <span> > <span class="sr-only">(current)</span></span></a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
     </div>
+  </div>
+  <script src="/js/sortTable.js"></script>
+  {{else}}
+  <script>
+    window.location.href = "/";
+  </script>
+  {{/if}}

@@ -61,11 +61,19 @@ const empresasSchema = new Schema({
         type: String,
         required: true
     },
+    contactLastName: {
+        type: String,
+        required: true
+    },
     contactMail: {
         type: String,
         required: true
     },
     contactPhone: {
+        type: String,
+        required: true
+    },
+    contactCharge: {
         type: String,
         required: true
     },
@@ -76,7 +84,14 @@ const empresasSchema = new Schema({
     status: {
         type: String,
         possibleValues: ['pendiente', 'aceptada', "rechazada"]
-    }
+    },
+    /* image: {
+        data: Buffer,
+        contentType: String
+    },
+    imageName: {
+        type:String
+    } */
 });
 
 

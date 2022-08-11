@@ -35,7 +35,7 @@ const singleFileUpload = async (req, res, next) => {
             });
 }
 
-const multiFileUpload = async (req, res, next) => {
+/* const multiFileUpload = async (req, res, next) => {
     try{
         
         res.status(500).send('archivos subidos con exito');
@@ -43,8 +43,7 @@ const multiFileUpload = async (req, res, next) => {
         res.status(404).send(error.message);
     }
 
-};
+}; */
 module.exports = {
-    singleFileUpload,
-    multiFileUpload
+    singleFileUpload
 }

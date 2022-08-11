@@ -104,11 +104,11 @@
 
                         {{#postVals}}
                         <tr>
-                            <td>{{vacantName}}</td>
-                            <td>{{companyName}}</td>
-                            <td>{{studentName}}</td>
-                            <td>{{studentEmail}}</td>
-                            <td>
+                            <td onclick="window.location='/perfilAspirante/{{studentId}}';">{{vacantName}}</td>
+                            <td onclick="window.location='/perfilAspirante/{{studentId}}';">{{companyName}}</td>
+                            <td onclick="window.location='/perfilAspirante/{{studentId}}';">{{studentName}}</td>
+                            <td onclick="window.location='/perfilAspirante/{{studentId}}';">{{studentEmail}}</td>
+                            {{!-- <td>
                             <div class="my-auto mx-auto">
                                 <form action="vacante/{{_id}}" method="get">
                                     <button class="buttonSolid btn btn-outline-success btn-wide buttonSmall">Ver más</button>
@@ -117,7 +117,7 @@
                                     <button class="buttonSolid buttonWarning btn btn-outline-success btn-wide buttonSmall" style="margin-top: 16px;">Eliminar</button>
                                 </form>
                             </div>
-                            </td>
+                            </td> --}}
                             {{!-- onclick="window.location='/perfilAspirante/{{studentId}}';" --}}
                         </tr>
                         {{/postVals}}

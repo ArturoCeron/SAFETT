@@ -1,3 +1,4 @@
+{{#if adminLogged}}
 <script>
     function dynamicMaps() {
         var btn = document.getElementById("btnMap");
@@ -39,7 +40,7 @@
             <div class="row">
                 <div class="col">
                     <div class="container">
-                        <label for="txtMessage" class="col-form-label">Estado de la empresa</label><br>
+                        <label class="col-form-label">Estado de la empresa</label><br>
                         <div class="form-check form-check-inline">
 
                             <input class="form-check-input" type="radio" name="status" id="aprobada" value="aprobada">
@@ -198,27 +199,27 @@
                 {{#datosPerfil}}
                 <div class="row">
                     <div class="col">
-                        <label for="txtMessage" class="col-form-label">Calle</label>
-                        <input type="text" id="street" class="form-control" placeholder="Calle" value="{{street}}"
+                        <label for="street" class="col-form-label">Calle</label>
+                        <input type="text" id="street" class="form-control" name="street" placeholder="Calle" value="{{street}}"
                             required />
-                        <label for="txtMessage" class="col-form-label">Codigo postal</label>
-                        <input type="text" id="zip" class="form-control" placeholder="Codigo postal" value="{{zip}}"
+                        <label for="zip" class="col-form-label">Codigo postal</label>
+                        <input type="text" id="zip" class="form-control" name="zip" placeholder="Codigo postal" value="{{zip}}"
                             required />
                     </div>
                     <div class="col">
-                        <label for="txtMessage" class="col-form-label">Número</label>
-                        <input type="text" id="streetNumber" class="form-control" placeholder="Número"
+                        <label for="street" class="col-form-label">Número</label>
+                        <input type="text" id="streetNumber" class="form-control" name="streetNumber" placeholder="Número"
                             value="{{streetNumber}}" required />
-                        <label for="txtMessage" class="col-form-label">Estado</label>
-                        <input type="text" id="state" class="form-control" placeholder="Estado" value="{{state}}"
+                        <label for="state" class="col-form-label">Estado</label>
+                        <input type="text" id="state" class="form-control" name="state" placeholder="Estado" value="{{state}}"
                             required />
                     </div>
                     <div class="col">
-                        <label for="txtMessage" class="col-form-label">Colonia</label>
-                        <input type="text" id="suburb" class="form-control" placeholder="Colonia" value="{{suburb}}"
+                        <label for="suburb" class="col-form-label">Colonia</label>
+                        <input type="text" id="suburb" class="form-control" name="suburb" placeholder="Colonia" value="{{suburb}}"
                             required />
-                        <label for="txtMessage" class="col-form-label">Ciudad</label>
-                        <input type="text" id="city" class="form-control" placeholder="Ciudad" value="{{city}}"
+                        <label for="city" class="col-form-label">Ciudad</label>
+                        <input type="text" id="city" class="form-control" name="city" placeholder="Ciudad" value="{{city}}"
                             required />
                     </div>
                 </div>
@@ -232,27 +233,27 @@
                 <div class="row">
                     <div class="col">
                         <label for="txtMessage" class="col-form-label">Nombre(s)</label>
-                        <input type="text" id="street" class="form-control" placeholder="Nombres"
+                        <input type="text" id="street" class="form-control" name="contactName" placeholder="Nombre(s)"
                             value="{{contactName}}" required />
                         <label for="txtMessage" class="col-form-label">Correo electrónico</label>
-                        <input type="text" id="zip" class="form-control" placeholder="Correo electrónico"
+                        <input type="text" id="zip" class="form-control" name="contactMail" placeholder="Correo electrónico"
                             value="{{contactMail}}" required />
                     </div>
                     <div class="col">
                         <label for="txtMessage" class="col-form-label">Apellidos</label>
-                        <input type="text" id="streetNumber" class="form-control" placeholder="Apellidos"
+                        <input type="text" id="streetNumber" class="form-control" name="contactLastName" placeholder="Apellidos"
                             value="{{contactLastName}}" required />
                         <label for="txtMessage" class="col-form-label">Teléfono</label>
-                        <input type="text" id="state" class="form-control" placeholder="Teléfono"
+                        <input type="text" id="state" class="form-control" name="contactPhone" placeholder="Teléfono"
                             value="{{contactPhone}}" required />
                     </div>
-                    <div class="col">
+                    <div class="col text-center">
                         <label for="txtMessage" class="col-form-label">Cargo</label>
-                        <input type="text" id="suburb" class="form-control" placeholder="Cargo"
+                        <input type="text" id="suburb" name="contactCharge" class="form-control" placeholder="Cargo"
                             value="{{contactCharge}}" required />
-                        <label for="txtMessage" class="col-form-label">Ext.</label>
+                        {{!-- <label for="txtMessage" class="col-form-label">Ext.</label>
                         <input type="text" id="city" class="form-control" placeholder="Ext." value="{{contactExt}}"
-                            required />
+                            required /> --}}
                     </div>
                 </div>
                 {{/datosPerfil}}
@@ -263,3 +264,8 @@
             style="float: right; width: 90px; height: 40px;">Guardar</button><br><br>
     </form>
 </div>
+{{else}}
+    <script>
+      window.location.href = "/";
+    </script>
+    {{/if}}

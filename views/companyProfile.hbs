@@ -5,6 +5,38 @@
             <div class="col-3"></div>
             <div class="col-9" style="padding: 30px 0px 0px 22px;">
                 <div id="companyIdentity">
+                    <button id="btn-abrir-popup" class="btn-abrir-popup btn btn-default" style="float: right;"><i
+                            class="bi bi-pencil-square"></i>Edit</button><br><br>
+                    <div class="overlay" id="overlay">
+                        <div class="popup" id="popup">
+                            <a href="#" id="btn-cerrar-popup" class="btn-cerrar-popup"><i class="bi bi-x-lg"></i></a>
+                            <h3>Edita el perfil de tu empresa</h3>
+                            <form action="/perfilEmpresa/{{_id}}?_method=PUT" method="POST">
+                                <input type="hidden" name="_method" value="PUT" />
+                                <p class="formSubtitle">Sitio web de la empresa</p>
+                                <hr id="formDivider" class="contentDivider">
+                                <label for="txtWebSite" class="col-form-label">Sitio web</label>
+                                <input id="txtWebSite" type="text" class="form-control" placeholder="Sitio web"
+                                    name="webPage" value="{{webPage}}">
+                                <p class="formSubtitle">Contacto de la sucursal</p>
+                                <hr id="formDivider" class="contentDivider">
+                                <label for="txtNameContact" class="col-form-label">Nombre completo del contacto</label>
+                                <input id="txtNameContact" type="text" class="form-control"
+                                    placeholder="Nombre completo del contacto" name="contactName"
+                                    value="{{contactName}}" required>
+                                <label for="txtMailContact" class="col-form-label">Correo electrónico</label>
+                                <input id="txtMailContact" type="email" class="form-control"
+                                    placeholder="Correo electrónico" name="contactMail" value="{{contactMail}}"
+                                    required>
+                                <label for="txtPhoneContact" class="col-form-label">Número de teléfono</label>
+                                <input id="txtPhoneContact" type="text" class="form-control"
+                                    placeholder="Número de teléfono" name="contactPhone" value="{{contactPhone}}"
+                                    required>
+                                <button class="buttonSolid btn btn-outline-success btn-wide btnMargin"
+                                    type="submit">Guardar</button>
+                            </form>
+                        </div>
+                    </div>
                     <p id="companyName">{{companyName}}</p>
                     <p id="companyDescription">{{mainRole}}</p>
                     <hr class="companySectionDivider">
@@ -65,32 +97,8 @@
                 </a>
                 <!--</form>-->
                 {{/vacantData}}
-                {{!-- <table id="tableExport">
-                    <thead id="tableHead">
-                        <tr class="table filters" style="background-color: #3067A0">
-                            <th class="center">
-                                <input type="checkbox" onClick="toggle(this)" class="text-center" />
-                            </th>
-                            <th style="color: #FFFFFF" scope="col">Nombre</th>
-                            <th style="color: #FFFFFF" scope="col">Salario</th>
-                            <th style="color: #FFFFFF" scope="col">Detalles</th>
-                            <th style="color: #FFFFFF" scope="col">Horario</th>
-                        </tr>
-                    </thead>
-                    <tbody id="myTable">
-
-                        {{#vacantData}}
-                        <tr>
-                            <td><input type="checkbox" name="check" class="check"></td>
-                            <td onclick="window.location='/mainAdmin/aspirante/{{_id}}';">{{name}}</td>
-                            <td onclick="window.location='/mainAdmin/aspirante/{{_id}}';">${{salary}}</td>
-                            <td onclick="window.location='/mainAdmin/aspirante/{{_id}}';">{{details}}</td>
-                            <td onclick="window.location='/mainAdmin/aspirante/{{_id}}';">{{schedule}}</td>
-                        </tr>
-                        {{/vacantData}}
-                    </tbody>
-                </table> --}}
             </div>
         </div>
     </div>
 </div>
+<script src="/js/popup.js"></script>

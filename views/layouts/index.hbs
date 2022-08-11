@@ -9,7 +9,11 @@
 
     </head>
     <body>
+        {{#if adminLogged}}
+        {{>sidebar_Admin}}
+        {{else}}
         {{>navbar}}
+        {{/if}}
 
         {{{body}}}
 

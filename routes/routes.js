@@ -20,6 +20,7 @@ const companyVacant = require('../models/vacants');
 const Company = require('../models/companies');
 const postulations = require('../models/postulations');
 const usersInfo = require('../models/user');
+const adminInfo = require('../models/adminUsers');
 
 
 //CONTROLLERS
@@ -28,11 +29,13 @@ const logoutController = require('../controllers/logout');
 const loginController = require('../controllers/login');
 const loginUserController = require('../controllers/loginUser');
 const newUser = require('../controllers/newUser');
+const newUserAdmin = require('../controllers/newUserAdmin');
 const deleteVacant = require('../controllers/deleteVacant');
-const {singleFileUpload, multiFileUpload} = require('../controllers/fileuploaderController');
+const {singleFileUpload} = require('../controllers/fileuploaderController');
 //const newUserController = require('../controllers/storeUser');
 const storeVacantController = require('../controllers/storeVacant');
-const newCompanyController = require('../controllers/storeCompany');
+// const {singleFileUploadCompany} = require('../controllers/storeCompany');
+const storeCompanyController = require('../controllers/storeCompany');
 const newAdminController = require('../controllers/storeAdmin');
 const postulateStudent = require('../controllers/storePostulation');
 const userPostulations = require('../controllers/userPostulations');
@@ -40,6 +43,7 @@ const searchVacants = require('../controllers/searchVacants');
 const searchCompanies = require('../controllers/searchCompanies');
 //const getActualDate = require ('../controllers/getDateRegister');
 const {upload} = require('../helpers/filehelper');
+const { userInfo } = require('os');
 //Crear objeto router
 const router = express.Router();
 
@@ -71,7 +75,7 @@ router.use(methodOverride('_method'));
 //Página home
 router.get('/', (req, res) => {
     console.log(req.session);
-    res.render('home', { vacants: undefined, companies: undefined });
+    res.render('home', {vacants: undefined, companies: undefined });
 });
 
 //Metodo GET para logout
@@ -82,6 +86,9 @@ router.get('/auth/login', redirectIfAuth, loginController);
 
 //Pagina para registro de usuarios
 router.get('/users/register', redirectIfAuth, newUser);
+
+//Pagina para registro de administradores
+router.get('/register/Admin', newUserAdmin);
 
 //Nueva Vacante
 router.get('/nuevaVacante', (req, res) => {
@@ -284,7 +291,18 @@ router.get('/mainAdmin/reporte', (req, res) => {
 });
 
 
-
+router.get('/', authAdmin, (req, res) => {
+    let adminID = req.session;
+    adminInfo.find(adminID, (err, userData) => {
+        if (err) return res.status(500).send({
+            message: `Error al realizar la petición ${err}`
+        });
+        if (!userData) return res.status(404).send({
+            message: `El usuario ${idUser} no existe`
+        });
+        res.render('applicantProfile', { userProfile: userData });
+    }).lean();
+});
 //Perfil de Alumno
 router.get('/perfilAspirante', authAccount, (req, res) => {
     let idUser = req.session;
@@ -317,6 +335,7 @@ router.put('/perfilAspirante/:userID', (req, res) => {
     });
 });
 
+//Modificación del perfil del alumno (Administrador)
 router.put('/mainAdmin/aspirante/:userID', (req, res) => {
     let userID = req.params.userID;
     let update = req.body;
@@ -333,25 +352,60 @@ router.put('/mainAdmin/aspirante/:userID', (req, res) => {
     });
 });
 
-//Modificación de datos de la empresa (administrador)
-router.put('/mainAdmin/empresa/:companyID', (req, res) => {
+//Modificación del perfil de la empresa por la empresa
+
+router.put('/perfilEmpresa/:companyID', (req, res) => {
     let companyID = req.params.companyID;
     let update = req.body;
-    Company.findByIdAndUpdate(companyID, update, (err, users) => {
+    Company.findByIdAndUpdate(companyID, update, (err, company) => {
         if (err) return res.status(500).send({
             message: `Error al actualizar el usuario ${err}`
         });
 
-        if (!users) return res.status(404).send({
+        if (!company) return res.status(404).send({
             message: 'El usuario no existe'
+        });
+
+        res.redirect('/perfilEmpresa');
+    });
+});
+
+//Modificación de datos de la empresa (administrador)
+router.put('/mainAdmin/empresa/:companyID', (req, res) => {
+    let companyID = req.params.companyID;
+    let update = req.body;
+    Company.findByIdAndUpdate(companyID, update, (err, company) => {
+        if (err) return res.status(500).send({
+            message: `Error al actualizar la empresa ${err}`
+        });
+
+        if (!company) return res.status(404).send({
+            message: 'La empresa no existe'
         });
 
         res.redirect('/mainAdmin/empresas');
     });
 });
 
+//Modificación de datos de la vacante (Administrador)
+router.put('/mainAdmin/vacante/:vacantID', (req, res) => {
+    let vacantID = req.params.vacantID;
+    let update = req.body;
+    companyVacant.findByIdAndUpdate(vacantID, update, (err, vacant) => {
+        if (err) return res.status(500).send({
+            message: `Error al actualizar la vacante ${err}`
+        });
 
-//Prefil de Empresa visto desde alumno
+        if (!vacant) return res.status(404).send({
+            message: 'La vacante no existe'
+        });
+
+        res.redirect('/mainAdmin/vacantes');
+    });
+});
+
+
+//Perfil de Empresa visto desde alumno
 router.get('/empresa/:companyId', authAccount, (req, res) => {
     let companyId = req.params.companyId;
     Company.findById(companyId, (err, datosPerfil) => {
@@ -370,6 +424,21 @@ router.get('/empresa/:companyId', authAccount, (req, res) => {
             });
             res.render('companyProfile', { datosPerfil, vacantData });
         }).lean();
+    }).lean();
+});
+
+
+//Perfil del alumno visto desde la empresa
+router.get('/perfilAspirante/:userID', authCompany, (req, res) => {
+    let userID = req.params.userID;
+    usersInfo.findById(userID, (err, userData) => {
+        if (err) return res.status(500).send({
+            message: `Error al realizar la petición ${err}`
+        });
+        if (!userData) return res.status(404).send({
+            message: `El aspirante ${userID} no existe`
+        });
+            res.render('applicantProfile-CompanyView', { userProfile: userData });
     }).lean();
 });
 
@@ -557,7 +626,7 @@ router.post('/admin/register', authAdmin, newAdminController);
 router.post('/vacants/register', authCompany, storeVacantController);
 
 //POST REGISTER COMPANY
-router.post('/company/register', redirectIfAuth, newCompanyController);
+router.post('/company/register', redirectIfAuth, storeCompanyController);
 
 // -------------------------------------------------- ROUTER.DELETE SECTION ------------------------------------------------------------
 

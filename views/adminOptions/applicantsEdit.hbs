@@ -1,3 +1,4 @@
+{{#if adminLogged}}
 <br><br>
 <div class="container" style="margin-left:20%; width: 75%">
     {{#datosAspirante}}
@@ -31,7 +32,7 @@
                 <div class="col">
                     <label class="col-form-label">Nivel de inglés</label>
                     <label for="en">Nivel de inglés</label>
-                    <select class="form-control" id="en" name="lvlEnglish">
+                    <select class="form-select" id="en" name="lvlEnglish">
                         <option value="A1">A1</option>
                         <option value="A2">A2</option>
                         <option value="B1">B1</option>
@@ -60,7 +61,7 @@
                 </div>
             </div>
             <label class="col-form-label">Unidad</label>
-            <select class="form-control" id="Uni" name="campus">
+            <select class="form-select" id="Uni" name="campus">
                 <option selected disabled hidden>Selecciona una unidad</option>
                 <option value="Tomás Aquino">Tomás Aquino</option>
                 <option value="Otay">Otay</option>
@@ -112,6 +113,19 @@
             </tbody>
         </table>
     </div>
+    <br><br>
+    {{#datosAspirante}}
+    <div>
+        <p class="formSubtitle">Curriculum</p>
+        <hr id="formDivider" class="contentDivider">
+        <embed src="/uploads/{{curriculumName}}" type="application/pdf" style="width:100%; height:700px;"/>
+    </div>
+    {{/datosAspirante}}
 </div>
 <br>
 <br>
+{{else}}
+    <script>
+      window.location.href = "/";
+    </script>
+    {{/if}}
